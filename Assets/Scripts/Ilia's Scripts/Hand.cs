@@ -17,6 +17,9 @@ public class Hand : MonoBehaviour
     private LayerMask ropeLayer;
 
     [SerializeField]
+    private LayerMask starterHandleLayer;
+
+    [SerializeField]
     private Transform handPrefab;
 
     [SerializeField]
@@ -101,6 +104,8 @@ public class Hand : MonoBehaviour
                 {
                     CalculateTheMoveDistance();
                 }
+
+                IsGrabbingTheStarterHandle();
             }
             else
             {
@@ -118,6 +123,21 @@ public class Hand : MonoBehaviour
 
     }
 
+    private void IsGrabbingTheStarterHandle()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius, starterHandleLayer);
+
+        if (colliders.Length > 0)
+        {
+            SetTheHandlePosition(colliders[0]);
+        }
+    }
+
+    private void SetTheHandlePosition(Collider collider)
+    {
+        //collider.transform.position = handPrefab.position;
+        collider.GetComponent<LightStarter>().BeingGrabbed(handPrefab.position);
+    }
     private void CalculateTheMoveDistance()
     {
         Vector3 ropeDirection = ropeTransform.up;
