@@ -30,6 +30,9 @@ public class Hand : MonoBehaviour
     [SerializeField]
     private LightBehaviour lightBehaviour;
 
+    [SerializeField]
+    private Transform playerParentTransform;
+
     private bool isSnappedToRope = false;
     private bool isGrabbingTheStarterHandle = false;
 
@@ -108,14 +111,6 @@ public class Hand : MonoBehaviour
                     CalculateTheMoveDistance();
                 }
 
-                if (!isGrabbingTheStarterHandle)
-                {
-                    IsGrabbingTheStarterHandle();
-                }
-                else if(isGrabbingTheStarterHandle)
-                {
-                    CalculateTheStarterHandleVelocity();
-                }
                 
             }
             else
@@ -148,17 +143,9 @@ public class Hand : MonoBehaviour
         collider.transform.parent = handPrefab;
         collider.transform.localPosition = new Vector3(0, 0, 0);
         isGrabbingTheStarterHandle = true;
-
-        lightBehaviour.isStarterBeingGrabbed = true;
     }
 
-    private void CalculateTheStarterHandleVelocity()
-    {
-        lightBehaviour.handVelocity = ((transform.position - previousPosition) / Time.deltaTime).magnitude;
-        previousPosition = transform.position;
-
-    }
-    private void CalculateTheMoveDistance()
+    /*private void CalculateTheMoveDistance()
     {
         Vector3 ropeDirection = ropeTransform.up;
 
@@ -167,11 +154,50 @@ public class Hand : MonoBehaviour
         // Project the movement vector onto the direction of the rope
         float distanceAlongRope = -Vector3.Dot(controllerMovement, ropeDirection);
 
-        Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+        if (distanceAlongRope > 0)
+        {
+
+            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+
+            // Apply the force to the platform's Rigidbody
+            cartRigidBody.AddForce(force, ForceMode.Force);
+        }
+
+        *//*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
 
         // Apply the force to the platform's Rigidbody
-        cartRigidBody.AddForce(force, ForceMode.Force);
+        cartRigidBody.AddForce(force, ForceMode.Force);*//*
+
+    }*/
+
+
+    private void CalculateTheMoveDistance()
+    {
+        Vector3 ropeDirection = ropeTransform.up;
+
+        Vector3 controllerMovement = CalculateLocalPositionRelativeToParent(playerParentTransform, transform) - grabPosition;
+
+        Debug.Log(controllerMovement);
+
+        // Project the movement vector onto the direction of the rope
+        float distanceAlongRope = -Vector3.Dot(controllerMovement, ropeDirection);
+
+        if (distanceAlongRope > 0)
+        {
+
+            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+
+            // Apply the force to the platform's Rigidbody
+            cartRigidBody.AddForce(force, ForceMode.Force);
+        }
+
+        /*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+
+        // Apply the force to the platform's Rigidbody
+        cartRigidBody.AddForce(force, ForceMode.Force);*/
+
     }
+
     private void IsGrabbingTheRope()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius, ropeLayer);
@@ -187,7 +213,7 @@ public class Hand : MonoBehaviour
 
     private void SnapToTheRope(Collider collider)
     {
-        if (!isSnappedToRope) // Only snap if not already snapped
+        /*if (!isSnappedToRope) // Only snap if not already snapped
         {
             grabPosition = transform.parent.position;
 
@@ -201,7 +227,37 @@ public class Hand : MonoBehaviour
 
             // Set the flag to true when snapped to rope
             isSnappedToRope = true;
+        }*/
+
+
+        if (!isSnappedToRope) // Only snap if not already snapped
+        {
+            grabPosition = CalculateLocalPositionRelativeToParent(playerParentTransform, transform);
+
+            ropeTransform = collider.transform;
+            /*// Detach the handPrefab from its parent (the controller)
+            handPrefab.parent = null;
+
+            // Get the closest point on the rope collider to the hand position
+            Vector3 closestPoint = collider.ClosestPoint(transform.position);
+            handPrefab.position = closestPoint;
+
+            // Set the flag to true when snapped to rope*/
+            isSnappedToRope = true;
         }
+
+    }
+
+
+    Vector3 CalculateLocalPositionRelativeToParent(Transform parent, Transform child)
+    {
+        // Step 1: Get the world position of the Camera offset
+        Vector3 worldPosition = child.position;
+
+        // Step 2: Convert the world position to the local position relative to PLAYER CART
+        Vector3 localPosition = parent.InverseTransformPoint(worldPosition);
+
+        return localPosition;
     }
 
 

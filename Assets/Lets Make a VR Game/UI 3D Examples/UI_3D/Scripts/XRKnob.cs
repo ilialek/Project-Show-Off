@@ -135,6 +135,8 @@ namespace UnityEngine.XR.Content.Interaction
         private float cumulativeYRotation = 0f;
         private float previousYRotation = 0f;
 
+        public LightBehaviour lightBehaviour;
+
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -277,7 +279,8 @@ namespace UnityEngine.XR.Content.Interaction
 
         private void Update()
         {
-            textMeshPro.text = GetTheYRotationInDegrees().ToString();
+            
+            
 
             if (m_Interactor == null)
             {
@@ -285,7 +288,7 @@ namespace UnityEngine.XR.Content.Interaction
 
                 if (m_ClampedMotion)
                 {
-                    float newYRotation = GetTheYRotationInDegrees() - 40 * Time.deltaTime;
+                    float newYRotation = GetTheYRotationInDegrees() - 80 * Time.deltaTime;
 
                     
 
@@ -303,10 +306,14 @@ namespace UnityEngine.XR.Content.Interaction
 
                     var knobValue = (newYRotation - m_MinAngle) / (m_MaxAngle - m_MinAngle);
                     SetValue(knobValue);
+
+                    lightBehaviour.ReceiveTheRotationValue(knobValue);
                 }
 
 
             }
+
+            textMeshPro.text = GetTheYRotationInDegrees().ToString();
         }
         void UpdateRotation(bool freshCheck = false)
         {
@@ -395,6 +402,8 @@ namespace UnityEngine.XR.Content.Interaction
             // Reverse to get value
             var knobValue = (knobRotation - m_MinAngle) / (m_MaxAngle - m_MinAngle);
             SetValue(knobValue);
+
+            lightBehaviour.ReceiveTheRotationValue(knobValue);
         }
 
         void SetKnobRotation(float angle)
@@ -423,6 +432,7 @@ namespace UnityEngine.XR.Content.Interaction
             }
 
             m_Value = value;
+
             m_OnValueChange.Invoke(m_Value);
         }
 
