@@ -33,9 +33,8 @@ public class LightStarter : MonoBehaviour
 
     }
 
-    public void BeingGrabbed(Vector3 handPosition)
+    public void BeingGrabbed()
     {
-        transform.position = handPosition;
 
         Velocity = (transform.position - previousPosition) / Time.deltaTime;
         previousPosition = transform.position;

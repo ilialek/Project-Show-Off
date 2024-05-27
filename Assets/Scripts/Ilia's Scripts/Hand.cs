@@ -9,10 +9,6 @@ using UnityEngine.XR;
 public class Hand : MonoBehaviour
 {
 
-
-    [SerializeField]
-    private TextMeshPro textToDebug;
-
     [SerializeField]
     private LayerMask ropeLayer;
 
@@ -29,9 +25,13 @@ public class Hand : MonoBehaviour
     private Rigidbody cartRigidBody;
 
     [SerializeField]
-    private float moveForce; 
+    private float moveForce;
+
+    [SerializeField]
+    private LightBehaviour lightBehaviour;
 
     private bool isSnappedToRope = false;
+    private bool isGrabbingTheStarterHandle = false;
 
     private Vector3 handPrefabInitialPosition;
     private Quaternion handPrefabInitialRotation;
@@ -42,6 +42,9 @@ public class Hand : MonoBehaviour
 
     private Vector3 grabPosition;
     private Vector3 currentPosition;
+
+    private Vector3 previousPosition;
+
 
     private Transform ropeTransform;
 
@@ -100,22 +103,29 @@ public class Hand : MonoBehaviour
                 {
                     IsGrabbingTheRope();
                 }
-                else 
+                else if (isSnappedToRope)
                 {
                     CalculateTheMoveDistance();
                 }
 
-                IsGrabbingTheStarterHandle();
+                if (!isGrabbingTheStarterHandle)
+                {
+                    IsGrabbingTheStarterHandle();
+                }
+                else if(isGrabbingTheStarterHandle)
+                {
+                    CalculateTheStarterHandleVelocity();
+                }
+                
             }
             else
             {
                 if (isSnappedToRope)
                 {
-                    // Reattach the handPrefab to its parent (the controller)
                     handPrefab.parent = transform.parent;
                     handPrefab.localPosition = handPrefabInitialPosition;
                     handPrefab.localRotation = handPrefabInitialRotation;
-                    isSnappedToRope = false; // Reset the flag
+                    isSnappedToRope = false;
                 }
             }
 
@@ -135,8 +145,18 @@ public class Hand : MonoBehaviour
 
     private void SetTheHandlePosition(Collider collider)
     {
-        //collider.transform.position = handPrefab.position;
-        collider.GetComponent<LightStarter>().BeingGrabbed(handPrefab.position);
+        collider.transform.parent = handPrefab;
+        collider.transform.localPosition = new Vector3(0, 0, 0);
+        isGrabbingTheStarterHandle = true;
+
+        lightBehaviour.isStarterBeingGrabbed = true;
+    }
+
+    private void CalculateTheStarterHandleVelocity()
+    {
+        lightBehaviour.handVelocity = ((transform.position - previousPosition) / Time.deltaTime).magnitude;
+        previousPosition = transform.position;
+
     }
     private void CalculateTheMoveDistance()
     {
@@ -151,8 +171,6 @@ public class Hand : MonoBehaviour
 
         // Apply the force to the platform's Rigidbody
         cartRigidBody.AddForce(force, ForceMode.Force);
-
-        textToDebug.text = distanceAlongRope.ToString();
     }
     private void IsGrabbingTheRope()
     {
@@ -162,7 +180,7 @@ public class Hand : MonoBehaviour
         {
             SnapToTheRope(colliders[0]);
         }
-
+        
     }
 
 

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;
 
 namespace UnityEngine.XR.Content.Interaction
 {
@@ -129,6 +130,11 @@ namespace UnityEngine.XR.Content.Interaction
 
         float m_BaseKnobRotation = 0.0f;
 
+        public TextMeshPro textMeshPro;
+
+        private float cumulativeYRotation = 0f;
+        private float previousYRotation = 0f;
+
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -194,6 +200,7 @@ namespace UnityEngine.XR.Content.Interaction
 
         void Start()
         {
+
             SetValue(m_Value);
             SetKnobRotation(ValueToRotation());
         }
@@ -242,6 +249,65 @@ namespace UnityEngine.XR.Content.Interaction
             }
         }
 
+        private float GetTheYRotationInDegrees()
+        {
+            float currentYRotation = m_Handle.localEulerAngles.y;
+
+            // Calculate the difference in rotation since the last frame
+            float deltaYRotation = currentYRotation - previousYRotation;
+
+            // Correct for crossing the 360-degree boundary
+            if (deltaYRotation > 180f)
+            {
+                deltaYRotation -= 360f;
+            }
+            else if (deltaYRotation < -180f)
+            {
+                deltaYRotation += 360f;
+            }
+
+            // Accumulate the total rotation
+            cumulativeYRotation += deltaYRotation;
+
+            // Update the previous rotation for the next frame
+            previousYRotation = currentYRotation;
+
+            return cumulativeYRotation;
+        }
+
+        private void Update()
+        {
+            textMeshPro.text = GetTheYRotationInDegrees().ToString();
+
+            if (m_Interactor == null)
+            {
+
+
+                if (m_ClampedMotion)
+                {
+                    float newYRotation = GetTheYRotationInDegrees() - 40 * Time.deltaTime;
+
+                    
+
+                    // Convert the rotation to a range of -180 to 180 for clamping
+
+                    
+
+                    
+                    //newYRotation = Mathf.Max(newYRotation, m_MinAngle);
+
+                    newYRotation = Mathf.Clamp(newYRotation, m_MinAngle, m_MaxAngle);
+
+                    // Apply the clamped rotation value
+                    m_Handle.localEulerAngles = new Vector3(0, newYRotation, 0);
+
+                    var knobValue = (newYRotation - m_MinAngle) / (m_MaxAngle - m_MinAngle);
+                    SetValue(knobValue);
+                }
+
+
+            }
+        }
         void UpdateRotation(bool freshCheck = false)
         {
             // Are we in position offset or direction rotation mode?
@@ -321,6 +387,8 @@ namespace UnityEngine.XR.Content.Interaction
             // Clamp to range
             if (m_ClampedMotion)
                 knobRotation = Mathf.Clamp(knobRotation, m_MinAngle, m_MaxAngle);
+
+           
 
             SetKnobRotation(knobRotation);
 
