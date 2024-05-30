@@ -22,7 +22,7 @@ public class EventBus : MonoBehaviour
             return instance;
         }
     }
-    
+
     private List<IEventListener> listeners = new List<IEventListener>();
 
     public void Emit(Event e)

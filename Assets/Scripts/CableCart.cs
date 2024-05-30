@@ -6,13 +6,16 @@ using UnityEngine.InputSystem;
 public class CableCart : MonoBehaviour, IEventListener
 {
     [Tooltip("time to complete ride, in seconds")]
-    [SerializeField] private float rideTime = 10.0f;
+    [SerializeField] private float rideTime = 1000.0f;
 
-    private float speed = 2f;
+    private float speed = 1f;
     private bool isEnabled = false;
     private float movementInput;
     private Keyboard keyboard;
-    private Renderer cartRenderer; 
+    private Renderer cartRenderer;
+
+    public Vector3 cartStartPoint = new Vector3(-2,3,4);
+    public Vector3 cartEndPoint = new Vector3(2, 3, 4);
 
     void Start()
     {
@@ -43,11 +46,8 @@ public class CableCart : MonoBehaviour, IEventListener
         if (!isEnabled) return;
 
         movementInput = keyboard[Key.W].ReadValue() - keyboard[Key.S].ReadValue();
-        transform.Translate(Vector3.right * speed * movementInput * Time.deltaTime);
+        transform.Translate((cartEndPoint - cartStartPoint).normalized * speed * movementInput * Time.deltaTime);
 
-        Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -2f, 2f);
-        transform.position = clampedPosition;
     }
 
     public void OnEvent(Event e)
@@ -64,4 +64,4 @@ public class CableCart : MonoBehaviour, IEventListener
     }
 }
 
-public class EventCableCartStarted : Event { }
+public class EventCableCartStarted : Event {}
