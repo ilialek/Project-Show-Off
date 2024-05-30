@@ -46,10 +46,15 @@ public class Hand : MonoBehaviour
     private Vector3 grabPosition;
     private Vector3 currentPosition;
 
+    private Vector3 initialPosition;                                                                                                              
     private Vector3 previousPosition;
+    private Vector3 velocity;
 
+    public float resetThreshold = 0.1f;
 
     private Transform ropeTransform;
+
+    private float netForwardDistance = 0f;
 
     private void Start()
     {
@@ -108,7 +113,7 @@ public class Hand : MonoBehaviour
                 }
                 else if (isSnappedToRope)
                 {
-                    CalculateTheMoveDistance();
+                    //CalculateTheMoveDistance();
                 }
 
                 
@@ -171,32 +176,66 @@ public class Hand : MonoBehaviour
     }*/
 
 
-    private void CalculateTheMoveDistance()
+    /*private void CalculateTheMoveDistance()
     {
         Vector3 ropeDirection = ropeTransform.up;
 
         Vector3 controllerMovement = CalculateLocalPositionRelativeToParent(playerParentTransform, transform) - grabPosition;
 
-        Debug.Log(controllerMovement);
+        *//*velocity = (transform.position - previousPosition) / Time.deltaTime;
+
+        previousPosition = transform.position;*//*
 
         // Project the movement vector onto the direction of the rope
-        float distanceAlongRope = -Vector3.Dot(controllerMovement, ropeDirection);
+        float distanceAlongRope = Vector3.Dot(controllerMovement, ropeDirection);
+
+        //Debug.Log(velocity);
 
         if (distanceAlongRope > 0)
         {
+            //Debug.Log(controllerMovement);
 
             Vector3 force = ropeDirection * distanceAlongRope * moveForce;
 
+            //Debug.Log(force);
             // Apply the force to the platform's Rigidbody
             cartRigidBody.AddForce(force, ForceMode.Force);
         }
 
-        /*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+        *//*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
 
         // Apply the force to the platform's Rigidbody
-        cartRigidBody.AddForce(force, ForceMode.Force);*/
+        cartRigidBody.AddForce(force, ForceMode.Force);*//*
 
-    }
+    }*/
+
+    /*private void CalculateTheMoveDistance()
+    {
+        Vector3 ropeDirection = ropeTransform.up;
+
+        Vector3 velocity = (transform.position - previousPosition) / Time.deltaTime;
+        previousPosition = currentPosition;
+
+        // Calculate the distance moved along the rope from the initial position
+        float distanceAlongRope = Vector3.Dot(currentPosition - initialPosition, ropeDirection);
+
+
+        // Apply force if the movement is forward along the rope
+        if (distanceAlongRope > 0)
+        {
+            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+
+            cartRigidBody.AddForce(force, ForceMode.Acceleration);
+
+            // Reset initial position to prevent repeated force application
+            initialPosition = currentPosition;
+        }
+        else if (distanceAlongRope < -resetThreshold)
+        {
+            // Significant backward movement detected, reset the initial position
+            initialPosition = currentPosition;
+        }
+    }*/
 
     private void IsGrabbingTheRope()
     {
@@ -234,6 +273,10 @@ public class Hand : MonoBehaviour
         {
             grabPosition = CalculateLocalPositionRelativeToParent(playerParentTransform, transform);
 
+            initialPosition = transform.position;
+            previousPosition = transform.position;
+            //netForwardDistance = 0f;
+
             ropeTransform = collider.transform;
             /*// Detach the handPrefab from its parent (the controller)
             handPrefab.parent = null;
@@ -262,3 +305,65 @@ public class Hand : MonoBehaviour
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SMOOTHER MOVEMENT
+
+
+
+/*private Vector3 smoothedVelocity;
+private float smoothingFactor = 0.1f;
+
+private void CalculateTheMoveDistance()
+{
+    // Calculate the direction along the rope
+    Vector3 ropeDirection = ropeTransform.up;
+
+    // Calculate the velocity of the hand controller
+    velocity = (transform.position - previousPosition) / Time.deltaTime;
+    previousPosition = transform.position;
+
+    // Smooth the velocity
+    smoothedVelocity = Vector3.Lerp(smoothedVelocity, velocity, smoothingFactor);
+
+    // Project the velocity onto the rope direction to get the component along the rope
+    float distanceAlongRope = -Vector3.Dot(smoothedVelocity, ropeDirection);
+
+    // Debug the velocity for monitoring
+    Debug.Log(smoothedVelocity);
+
+    // If there's movement along the rope, apply the force to the cart
+    if (distanceAlongRope > 0)
+    {
+        // Calculate the force to apply
+        Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+
+        // Apply the force to the cart
+        cartRigidBody.AddForce(force, ForceMode.Acceleration);
+    }
+}
+
+// Ensure this method is called in FixedUpdate for consistent physics calculations
+void FixedUpdate()
+{
+    CalculateTheMoveDistance();
+}*/
