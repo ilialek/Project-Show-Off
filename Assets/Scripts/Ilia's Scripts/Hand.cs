@@ -34,7 +34,12 @@ public class Hand : MonoBehaviour
     private Transform playerParentTransform;
 
     private bool isSnappedToRope = false;
-    private bool isGrabbingTheStarterHandle = false;
+    public bool didPullTheRope = false;
+    public float treshold;
+
+    private enum ChangeState { Unchanged, Increasing, Decreasing }
+    private ChangeState lastState;
+    private float changeOccurredAtValue = 0;
 
     private Vector3 handPrefabInitialPosition;
     private Quaternion handPrefabInitialRotation;
@@ -48,7 +53,7 @@ public class Hand : MonoBehaviour
 
     private Vector3 initialPosition;                                                                                                              
     private Vector3 previousPosition;
-    private Vector3 velocity;
+    private Vector3 deviceSpeed;
 
     public float resetThreshold = 0.1f;
 
@@ -56,12 +61,20 @@ public class Hand : MonoBehaviour
 
     private float netForwardDistance = 0f;
 
+    private float previousDistanceValue = 0;
+
+    public string test;
+
+    public float velocityThreshold = 0.1f;
+
     private void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
         handPrefabInitialPosition = handPrefab.localPosition;
         handPrefabInitialRotation = handPrefab.localRotation;
         InitializeHand();
+
+        lastState = ChangeState.Unchanged;
     }
 
     private void InitializeHand()
@@ -80,6 +93,7 @@ public class Hand : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        test = lastState.ToString();
 
         if (!_targetDevice.isValid)
         {
@@ -99,8 +113,13 @@ public class Hand : MonoBehaviour
             if(triggerText != null)
             triggerText.text = "Trigger value:" + triggerValue;
         }*/
-        
+
         //This will get the value for our grip from the target device and output a flaot into gripValue
+
+        _targetDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out deviceSpeed);
+
+        //Debug.lo
+
         if (_targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue))
         {
             
@@ -113,7 +132,11 @@ public class Hand : MonoBehaviour
                 }
                 else if (isSnappedToRope)
                 {
-                    //CalculateTheMoveDistance();
+                    if (!didPullTheRope)
+                    {
+                        CalculateTheMoveDistance();
+                    }
+                    
                 }
 
                 
@@ -125,6 +148,8 @@ public class Hand : MonoBehaviour
                     handPrefab.parent = transform.parent;
                     handPrefab.localPosition = handPrefabInitialPosition;
                     handPrefab.localRotation = handPrefabInitialRotation;
+                    didPullTheRope = false;
+                    changeOccurredAtValue = 0;
                     isSnappedToRope = false;
                 }
             }
@@ -147,95 +172,104 @@ public class Hand : MonoBehaviour
     {
         collider.transform.parent = handPrefab;
         collider.transform.localPosition = new Vector3(0, 0, 0);
-        isGrabbingTheStarterHandle = true;
     }
 
     /*private void CalculateTheMoveDistance()
     {
         Vector3 ropeDirection = ropeTransform.up;
 
-        Vector3 controllerMovement = transform.parent.position - grabPosition;
+        Vector3 controllerMovement = CalculateLocalPositionRelativeToParent(playerParentTransform, transform) - grabPosition;
+        float distanceAlongRope = Vector3.Dot(controllerMovement, ropeDirection);
 
-        // Project the movement vector onto the direction of the rope
-        float distanceAlongRope = -Vector3.Dot(controllerMovement, ropeDirection);
+        //float distanceAlongRope = Vector3.Dot(deviceSpeed, ropeDirection);
 
-        if (distanceAlongRope > 0)
+        Debug.Log(distanceAlongRope);
+
+
+
+        if (distanceAlongRope < 0)
         {
 
-            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
+            if (distanceAlongRope > previousDistanceValue)
+            {
+                if (lastState == ChangeState.Decreasing || lastState == ChangeState.Unchanged)
+                {
+                    changeOccurredAtValue = previousDistanceValue; // Store the value where the increase started
+                    //Debug.Log("Started increasing at: " + changeOccurredAtValue);
 
-            // Apply the force to the platform's Rigidbody
-            cartRigidBody.AddForce(force, ForceMode.Force);
+                    //Debug.Log(changeOccurredAtValue - distanceAlongRope);
+
+                    if (changeOccurredAtValue - distanceAlongRope >= -treshold)
+                    {
+                        didPullTheRope = true;
+                    }
+
+                    //lastState = ChangeState.Increasing;
+
+                }
+                else
+                {
+                    lastState = ChangeState.Increasing;
+                }
+                //lastState = ChangeState.Increasing;
+                //Debug.Log("The value is increasing.");
+            }
+            else if (distanceAlongRope < previousDistanceValue)
+            {
+                if (lastState == ChangeState.Increasing || lastState == ChangeState.Unchanged)
+                {
+                    changeOccurredAtValue = previousDistanceValue; // Store the value where the decrease started
+                                                                   // Debug.Log("Started decreasing at: " + changeOccurredAtValue);
+                }
+
+                Vector3 force = ropeDirection * (previousDistanceValue - distanceAlongRope) * moveForce;
+                cartRigidBody.AddForce(force, ForceMode.Force);
+
+                lastState = ChangeState.Decreasing;
+                //Debug.Log("The value is decreasing.");
+            }
+            else
+            {
+                lastState = ChangeState.Unchanged;
+                Debug.Log("The value is unchanged.");
+            }
+
+            previousDistanceValue = distanceAlongRope;
+
+
         }
 
-        *//*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
-
-        // Apply the force to the platform's Rigidbody
-        cartRigidBody.AddForce(force, ForceMode.Force);*//*
 
     }*/
 
-
-    /*private void CalculateTheMoveDistance()
+    private void CalculateTheMoveDistance()
     {
         Vector3 ropeDirection = ropeTransform.up;
 
         Vector3 controllerMovement = CalculateLocalPositionRelativeToParent(playerParentTransform, transform) - grabPosition;
+        //float velocityAlongRope = Vector3.Dot(controllerMovement, ropeDirection);
 
-        *//*velocity = (transform.position - previousPosition) / Time.deltaTime;
+        float velocityAlongRope = -Vector3.Dot(deviceSpeed, ropeDirection);
 
-        previousPosition = transform.position;*//*
+        Debug.Log(velocityAlongRope);
 
-        // Project the movement vector onto the direction of the rope
-        float distanceAlongRope = Vector3.Dot(controllerMovement, ropeDirection);
-
-        //Debug.Log(velocity);
-
-        if (distanceAlongRope > 0)
+        if (velocityAlongRope > 0)
         {
-            //Debug.Log(controllerMovement);
+            // Calculate the force to apply
+            Vector3 forceToAdd = ropeDirection * velocityAlongRope * moveForce;
 
-            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
-
-            //Debug.Log(force);
-            // Apply the force to the platform's Rigidbody
-            cartRigidBody.AddForce(force, ForceMode.Force);
+            // Apply the force to the cart's rigidbody
+            cartRigidBody.AddForce(forceToAdd, ForceMode.Force);
+        }
+        else if (velocityAlongRope < -velocityThreshold)
+        {
+            // Disable the function once velocityAlongRope > velocityThreshold
+            didPullTheRope = true;
         }
 
-        *//*Vector3 force = ropeDirection * distanceAlongRope * moveForce;
 
-        // Apply the force to the platform's Rigidbody
-        cartRigidBody.AddForce(force, ForceMode.Force);*//*
+    }
 
-    }*/
-
-    /*private void CalculateTheMoveDistance()
-    {
-        Vector3 ropeDirection = ropeTransform.up;
-
-        Vector3 velocity = (transform.position - previousPosition) / Time.deltaTime;
-        previousPosition = currentPosition;
-
-        // Calculate the distance moved along the rope from the initial position
-        float distanceAlongRope = Vector3.Dot(currentPosition - initialPosition, ropeDirection);
-
-
-        // Apply force if the movement is forward along the rope
-        if (distanceAlongRope > 0)
-        {
-            Vector3 force = ropeDirection * distanceAlongRope * moveForce;
-
-            cartRigidBody.AddForce(force, ForceMode.Acceleration);
-
-            // Reset initial position to prevent repeated force application
-            initialPosition = currentPosition;
-        }
-        else if (distanceAlongRope < -resetThreshold)
-        {
-            // Significant backward movement detected, reset the initial position
-            initialPosition = currentPosition;
-        }
-    }*/
 
     private void IsGrabbingTheRope()
     {
