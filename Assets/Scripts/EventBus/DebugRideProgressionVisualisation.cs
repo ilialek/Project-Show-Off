@@ -42,7 +42,7 @@ public class DebugRideProgressionVisualisation : MonoBehaviour
                 Quaternion.identity
             );
 
-            cubeInstance.transform.localScale = new Vector3(threshold.deadzone * 2, 1f, 1f);
+            cubeInstance.transform.localScale = new Vector3(2f, 1f, threshold.deadzone * 2);
             //cubeInstance.transform.parent = transform;
             //cubeInstance.SetActive(cubesVisible);
         }

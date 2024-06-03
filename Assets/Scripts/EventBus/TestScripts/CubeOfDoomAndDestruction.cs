@@ -7,11 +7,16 @@ public class CubeOfDoomAndDestruction : MonoBehaviour, IEventListener
     void Start()
     {
         EventBus.Instance.Register(this);
+        RideTimer.Instance.AddThreshold(5);
     }
 
     public void OnEvent(Event e)
     {
         if (e is EventLanternGoneOut)
+        {
+            DoDoomAndDeathAndStuff();
+        }
+        if (e is EventTimerThresholdReached)
         {
             DoDoomAndDeathAndStuff();
         }

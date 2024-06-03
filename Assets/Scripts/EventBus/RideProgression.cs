@@ -15,7 +15,7 @@ public class RideProgression : MonoBehaviour
     private float totalDistance;
     private float currentDistance;
 
-    CableCart cableCart;
+    CartBehaviour cableCart;
 
     //private float maxDistance;
     public static RideProgression Instance
@@ -42,9 +42,9 @@ public class RideProgression : MonoBehaviour
 
     void Start()
     {
-        cableCart = FindObjectOfType<CableCart>();
-        rideStartPoint = cableCart.cartStartPoint;
-        rideEndPoint = cableCart.cartEndPoint;
+        cableCart = FindObjectOfType<CartBehaviour>();
+        rideStartPoint = cableCart.CartStartPoint;
+        rideEndPoint = cableCart.CartEndPoint;
         totalDistance = (rideEndPoint - rideStartPoint).magnitude;
     }
 

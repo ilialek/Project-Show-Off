@@ -27,6 +27,7 @@ public class RideTimer : MonoBehaviour, IEventListener
     void Start()
     {
         EventBus.Instance.Register(this);
+        TimerStart(); // this should start on some event or something
     }   
 
     private ArrayList thresholds = new ArrayList();
@@ -78,11 +79,11 @@ public class RideTimer : MonoBehaviour, IEventListener
 
     public void OnEvent(Event e)
     {
-        if (e is EventCableCartStarted)
-        {
-            TimerStart();
-            Debug.Log("Timer Started");
-        }
+        //if (e is EventCableCartStarted)
+        //{
+        //    TimerStart();
+        //    Debug.Log("Timer Started");
+        //}
     }
 }
 
