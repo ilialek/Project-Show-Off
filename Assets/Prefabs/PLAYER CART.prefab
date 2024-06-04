@@ -23,16 +23,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130946297872863379}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1176, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.29345635, z: -0, w: 0.95597255}
+  m_LocalPosition: {x: -34.399414, y: 94.95993, z: 2.0751953}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6158283541529803125}
   - {fileID: 6952038498185709969}
   - {fileID: 856344394981802753}
   - {fileID: 8633790730704239457}
-  m_Father: {fileID: 326882577025732567}
+  m_Father: {fileID: 7416299621050085884}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &770561445454926807
@@ -147,57 +147,25 @@ MonoBehaviour:
   m_PositionInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Position
+      m_Name: 
       m_Type: 0
-      m_ExpectedControlType: Vector3
-      m_Id: 7d6956bb-3776-43df-b96c-da7df57bd5bf
+      m_ExpectedControlType: 
+      m_Id: 
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 70c56797-67a4-4acd-b707-57bdb46b6ac5
-        m_Path: <XRHMD>/centerEyePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Position
-        m_Flags: 0
-      - m_Name: 
-        m_Id: 2a924aa5-32ed-4b7d-8862-ee12548c9325
-        m_Path: <HandheldARInputDevice>/devicePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Position
-        m_Flags: 0
+      m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_RotationInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Rotation
+      m_Name: 
       m_Type: 0
-      m_ExpectedControlType: Quaternion
-      m_Id: 74b2c9c5-238c-4251-8bf2-e3d49f06a6c3
+      m_ExpectedControlType: 
+      m_Id: 
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 07e80915-6cd9-4de6-b2bc-70fd5d206755
-        m_Path: <XRHMD>/centerEyeRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Rotation
-        m_Flags: 0
-      - m_Name: 
-        m_Id: ded3e1b5-61b0-485f-8dbc-8f1bad96581a
-        m_Path: <HandheldARInputDevice>/deviceRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Rotation
-        m_Flags: 0
+      m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_TrackingStateInput:
@@ -687,8 +655,9 @@ Transform:
   - {fileID: 326882577025732567}
   - {fileID: 8425774015989898955}
   - {fileID: 7501083750189311467}
+  - {fileID: 6422453243422502555}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3139069620438605303
 MeshFilter:
@@ -1073,8 +1042,7 @@ Transform:
   m_LocalPosition: {x: -34.4, y: -16.8, z: 2.0751953}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6422453243422502555}
+  m_Children: []
   m_Father: {fileID: 7416299621050085884}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 34.13, z: 0}
