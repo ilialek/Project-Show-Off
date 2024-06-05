@@ -1760,7 +1760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3625,6 +3625,7 @@ MonoBehaviour:
   distance: 0.2
   outlined:
   - {fileID: 14104789}
+  isRope: 0
 --- !u!1 &1246976255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3982,9 +3983,10 @@ MonoBehaviour:
   hands:
   - {fileID: 805305760}
   - {fileID: 1399466249}
-  distance: 2000000
+  distance: 0.2
   outlined:
   - {fileID: 1345359283}
+  isRope: 1
 --- !u!1 &1372151316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 954591851760057252, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
@@ -4009,6 +4011,7 @@ MonoBehaviour:
   outlined:
   - {fileID: 122724632}
   - {fileID: 510234513}
+  isRope: 0
 --- !u!1 &1399466249
 GameObject:
   m_ObjectHideFlags: 0

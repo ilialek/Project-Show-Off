@@ -8,6 +8,7 @@ public class InteractableOutline : MonoBehaviour
     [SerializeField] GameObject[] hands;
     [SerializeField] float distance = .2f;
     [SerializeField] GameObject[] outlined;
+    [SerializeField] bool isRope = false;
 
     void Start()
     {
@@ -17,7 +18,12 @@ public class InteractableOutline : MonoBehaviour
     {
         foreach (GameObject hand in hands)
         {
-            if ((hand.transform.position - transform.position).magnitude <= distance)
+            if ((hand.transform.position - transform.position).magnitude <= distance ||
+                (isRope && (
+                    new Vector2(hand.transform.position.x, hand.transform.position.y) - 
+                    new Vector2(transform.position.x, transform.position.y
+                    )).magnitude <= distance)
+                )
             {
                 ChangeLayer(10);
                 break;
