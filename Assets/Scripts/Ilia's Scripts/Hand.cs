@@ -253,7 +253,7 @@ public class Hand : MonoBehaviour
 
         Debug.Log(velocityAlongRope);
 
-        if (velocityAlongRope > 0)
+        if (velocityAlongRope < 0)
         {
             // Calculate the force to apply
             Vector3 forceToAdd = ropeDirection * velocityAlongRope * moveForce;
@@ -261,7 +261,7 @@ public class Hand : MonoBehaviour
             // Apply the force to the cart's rigidbody
             cartRigidBody.AddForce(forceToAdd, ForceMode.Force);
         }
-        else if (velocityAlongRope < -velocityThreshold)
+        else if (velocityAlongRope > -velocityThreshold)
         {
             // Disable the function once velocityAlongRope > velocityThreshold
             didPullTheRope = true;

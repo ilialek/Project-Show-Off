@@ -18,7 +18,7 @@ public class CartBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z > -510)
+        if (transform.position.z > -496)
         {
             if (particleSystem != null)
             {
