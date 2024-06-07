@@ -64,4 +64,7 @@ public class PlayerProgression : MonoBehaviour
         Ambiance.set3DAttributes(attributes);
     }
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

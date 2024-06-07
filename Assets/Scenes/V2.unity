@@ -16630,8 +16630,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840e4c209b8948b428064ab0f1421f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   startPoint: {fileID: 1850126370}
   endPoint: {fileID: 1484640051}
+=======
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &1849413265
 GameObject:
   m_ObjectHideFlags: 0
