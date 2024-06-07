@@ -16544,6 +16544,7 @@ MonoBehaviour:
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &1833767971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16563,6 +16564,8 @@ MonoBehaviour:
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 1e56d21 (Chnages)
 =======
 >>>>>>> parent of 1e56d21 (Chnages)
 --- !u!1 &1849413265
