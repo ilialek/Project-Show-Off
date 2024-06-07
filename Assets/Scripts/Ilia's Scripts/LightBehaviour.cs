@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class LightBehaviour : MonoBehaviour
 {
     [SerializeField] private float lightingDuration;
+    [SerializeField] private LayerMask detectableLayer;
 
     private bool lightIsSet = false;
     private bool coroutineStarted = false;
@@ -29,6 +31,8 @@ public class LightBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textMeshPro.text = "Not";
+        DetectObjects();
 
         if (!lightIsSet)
         {
@@ -61,6 +65,8 @@ public class LightBehaviour : MonoBehaviour
 
     IEnumerator LightingCoroutine()
     {
+        
+
         yield return new WaitForSeconds(lightingDuration);
 
         StartCoroutine(EndBlinkCoroutine());
@@ -104,6 +110,28 @@ public class LightBehaviour : MonoBehaviour
         }
 
         
+    }
+
+    void DetectObjects()
+    {
+        // Get all colliders within the spotlight's range
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range, detectableLayer);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            Vector3 directionToTarget = hitCollider.transform.position - transform.position;
+            float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+            if (angleToTarget < lightComponent.spotAngle / 2)
+            {
+                // Object is within the spotlight's cone
+
+                textMeshPro.text = "Detected";
+                Debug.Log("Detected object: " + hitCollider.name);
+                // Add your custom logic here (e.g., triggering events, applying effects, etc.)
+            }
+            
+        }
     }
 
     public void IsLightSet(bool _value)
