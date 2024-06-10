@@ -15,6 +15,8 @@ public class RideProgression : MonoBehaviour
     private float totalDistance;
     private float currentDistance;
 
+    public float progressionPercentage;
+
     CartBehaviour cableCart;
 
     //private float maxDistance;
@@ -66,6 +68,7 @@ public class RideProgression : MonoBehaviour
     {
         // I assume the cart is moving in a stright line always
         currentDistance = (cableCart.transform.position - rideStartPoint).magnitude;
+        progressionPercentage = currentDistance / totalDistance * 100f;
 
         for (int i = 0; i < thresholds.Count; i++)
         {
