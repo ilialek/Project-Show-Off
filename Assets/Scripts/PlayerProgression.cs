@@ -4,10 +4,10 @@ using FMODUnity;
 public class PlayerProgression : MonoBehaviour
 {
     [SerializeField]
-    private Transform startPoint;
+    public Transform startPoint;
 
     [SerializeField]
-    private Transform endPoint;
+    public Transform endPoint;
 
     private FMOD.Studio.EventInstance Ambiance;
     private float totalDistance;

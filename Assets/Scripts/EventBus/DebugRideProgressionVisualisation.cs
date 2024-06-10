@@ -37,7 +37,8 @@ public class DebugRideProgressionVisualisation : MonoBehaviour
             GameObject cubeInstance = Instantiate(
                 cubePrefab,
                 RideProgression.Instance.rideStartPoint + 
-                    (RideProgression.Instance.rideEndPoint - RideProgression.Instance.rideStartPoint).normalized * threshold.threshold,
+                    (RideProgression.Instance.rideEndPoint - RideProgression.Instance.rideStartPoint).normalized * threshold.threshold +
+                    Vector3.down * 2f,
                 //new Vector3(10,10,50),
                 Quaternion.identity
             );

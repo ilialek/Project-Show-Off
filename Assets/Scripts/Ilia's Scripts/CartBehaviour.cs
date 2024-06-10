@@ -6,8 +6,8 @@ public class CartBehaviour : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] private Vector3 cartStartPoint = new Vector3(-2, 3, 4);
-    [SerializeField] private Vector3 cartEndPoint = new Vector3(2, 3, 4);
+    [SerializeField] private Vector3 cartStartPoint;
+    [SerializeField] private Vector3 cartEndPoint;
 
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem particleSystem;

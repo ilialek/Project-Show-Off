@@ -45,8 +45,10 @@ public class RideProgression : MonoBehaviour
     void Start()
     {
         cableCart = FindObjectOfType<CartBehaviour>();
-        rideStartPoint = cableCart.CartStartPoint;
-        rideEndPoint = cableCart.CartEndPoint;
+
+        PlayerProgression playerProgression = FindObjectOfType<PlayerProgression>();
+        rideStartPoint = playerProgression.startPoint.position;
+        rideEndPoint = playerProgression.endPoint.position;
         totalDistance = (rideEndPoint - rideStartPoint).magnitude;
     }
 
