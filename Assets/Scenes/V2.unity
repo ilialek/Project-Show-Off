@@ -2598,7 +2598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &222567042
 Transform:
   m_ObjectHideFlags: 0
@@ -4383,7 +4383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &569461070
 Transform:
   m_ObjectHideFlags: 0
@@ -5252,7 +5252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &805305761
 Transform:
   m_ObjectHideFlags: 0
@@ -9059,7 +9059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1399466250
 Transform:
   m_ObjectHideFlags: 0
@@ -15845,7 +15845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1653458060
 Transform:
   m_ObjectHideFlags: 0
@@ -33035,6 +33035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7594e620a852104b93d03b09845745c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cartStartPoint: {x: -2, y: 3, z: 4}
+  cartEndPoint: {x: 2, y: 3, z: 4}
   force: 1
   particleSystem: {fileID: 1507770614}
 --- !u!1 &6838473833612663878
