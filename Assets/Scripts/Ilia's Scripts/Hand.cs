@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.XR;
+using FMODUnity;
 
 //Hand is used to help animate
 public class Hand : MonoBehaviour
@@ -33,11 +34,16 @@ public class Hand : MonoBehaviour
     [SerializeField]
     private Transform playerParentTransform;
 
+    [SerializeField] 
+    private HandDirection direction;
+
     private bool isSnappedToRope = false;
     public bool didPullTheRope = false;
     public float treshold;
 
     private enum ChangeState { Unchanged, Increasing, Decreasing }
+    public enum HandDirection { Left, Right }
+    private AudioManager audioManager;
     private ChangeState lastState;
     private float changeOccurredAtValue = 0;
 
@@ -67,14 +73,85 @@ public class Hand : MonoBehaviour
 
     public float velocityThreshold = 0.1f;
 
+    private FMOD.Studio.EventInstance HandSFX;
+    float handDirectionValue;
+
+    [SerializeField]
+    StudioEventEmitter emitter;
+
+
     private void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
         handPrefabInitialPosition = handPrefab.localPosition;
         handPrefabInitialRotation = handPrefab.localRotation;
         InitializeHand();
-
+        InitializeSound();
         lastState = ChangeState.Unchanged;
+
+    }
+
+    private void InitializeSound()
+    {
+        HandSFX = RuntimeManager.CreateInstance("event:/Hand");
+        if (HandSFX.isValid())
+        {
+            Debug.Log("FMOD Event created successfully.");
+
+            // Set the initial 3D attributes of the sound
+            audioManager = AudioManager.instance;
+            if (audioManager == null)
+            {
+                Debug.LogError("AudioManager instance is not found in the scene.");
+                return;
+            }
+            FMOD.ATTRIBUTES_3D attributes = RuntimeUtils.To3DAttributes(transform.position);
+            HandSFX.set3DAttributes(attributes);
+            SetHandDirectionParameter();
+        }
+        else
+        {
+            Debug.LogError("Failed to create FMOD Event.");
+        }
+    }
+
+    private void SetHandDirectionParameter()
+    {
+        if (direction == HandDirection.Left)
+        {
+            HandSFX.setParameterByName("HandDirection", 0.9f);
+            emitter.SetParameter("HandDirection", 0.9f);
+        }
+        else
+        {
+            HandSFX.setParameterByName("HandDirection", 0.2f);
+            emitter.SetParameter("HandDirection", 0.2f);
+        }
+    }
+
+    private void PlayHandSFX()
+    {
+        // Ensure FMODEvents instance is present
+        if (FMODEvents.instance == null)
+        {
+            Debug.LogError("FMODEvents instance is not found in the scene.");
+            return;
+        }
+        SetHandDirectionParameter();
+        HandSFX.getParameterByName("HandDirection", out handDirectionValue);
+        Debug.Log($"HandDirection: {handDirectionValue}");
+        // Play the Ambience1 event at the current position
+        //audioManager.PlayOneShot(FMODEvents.instance.Hand, grabPosition);
+        if (emitter.IsPlaying())
+        {
+            emitter.Stop();
+            emitter.Play();
+        }
+        else
+        {
+            emitter.Play();
+        }
+        
     }
 
     private void InitializeHand()
@@ -102,6 +179,7 @@ public class Hand : MonoBehaviour
         else
         {
             UpdateHand();
+            SetHandDirectionParameter();
         }
     }
 
@@ -133,7 +211,7 @@ public class Hand : MonoBehaviour
                 else if (isSnappedToRope)
                 {
                     if (!didPullTheRope)
-                    {
+                    {              
                         CalculateTheMoveDistance();
                     }
                     
@@ -145,6 +223,7 @@ public class Hand : MonoBehaviour
             {
                 if (isSnappedToRope)
                 {
+                    
                     handPrefab.parent = transform.parent;
                     handPrefab.localPosition = handPrefabInitialPosition;
                     handPrefab.localRotation = handPrefabInitialRotation;
@@ -244,6 +323,7 @@ public class Hand : MonoBehaviour
 
     private void CalculateTheMoveDistance()
     {
+        PlayHandSFX();
         Vector3 ropeDirection = ropeTransform.up;
 
         Vector3 controllerMovement = CalculateLocalPositionRelativeToParent(playerParentTransform, transform) - grabPosition;
@@ -253,7 +333,7 @@ public class Hand : MonoBehaviour
 
         Debug.Log(velocityAlongRope);
 
-        if (velocityAlongRope < 0)
+        if (velocityAlongRope > 0)
         {
             // Calculate the force to apply
             Vector3 forceToAdd = ropeDirection * velocityAlongRope * moveForce;

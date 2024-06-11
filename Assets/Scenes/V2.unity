@@ -1775,6 +1775,69 @@ Transform:
   m_Father: {fileID: 2060555186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &166515631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166515633}
+  - component: {fileID: 166515632}
+  m_Layer: 0
+  m_Name: WaterfallSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &166515632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166515631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -962532682
+      Data2: 1137943799
+      Data3: -1660454235
+      Data4: 1641592649
+    Path: event:/Waterfall
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 16.77
+  OverrideMaxDistance: 29.3
+--- !u!4 &166515633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166515631}
+  m_LocalRotation: {x: 0.00068107335, y: -0.99924994, z: 0.01979657, w: 0.033276092}
+  m_LocalPosition: {x: -141.01848, y: 16.579163, z: -488.9182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &216336342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &222567042
 Transform:
   m_ObjectHideFlags: 0
@@ -4215,10 +4278,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Ambience1>k__BackingField:
     Guid:
-      Data1: 1956322784
-      Data2: 1334321364
-      Data3: -729577816
-      Data4: -217939339
+      Data1: -1882094340
+      Data2: 1167488714
+      Data3: 1477436836
+      Data4: 232865289
     Path: event:/Ambience_cave
   <Scary>k__BackingField:
     Guid:
@@ -4234,6 +4297,69 @@ MonoBehaviour:
       Data3: 1555344806
       Data4: -1738280614
     Path: event:/Test
+  <Cart>k__BackingField:
+    Guid:
+      Data1: 1937923348
+      Data2: 1293243145
+      Data3: -23447635
+      Data4: 994830250
+    Path: event:/Cart
+  <Hand>k__BackingField:
+    Guid:
+      Data1: 1918902040
+      Data2: 1081037154
+      Data3: -526989664
+      Data4: -1715516837
+    Path: event:/Hand
+  <LightOff>k__BackingField:
+    Guid:
+      Data1: 470804169
+      Data2: 1328361173
+      Data3: -1919240775
+      Data4: 169178233
+    Path: event:/LightOff
+  <LightWarning>k__BackingField:
+    Guid:
+      Data1: -1642714621
+      Data2: 1263723545
+      Data3: -2029005165
+      Data4: 1816937231
+    Path: event:/LightWarning
+  <LightCharge>k__BackingField:
+    Guid:
+      Data1: 752826423
+      Data2: 1274556945
+      Data3: 1812961170
+      Data4: 671765471
+    Path: event:/LightCharging
+  <LightOn>k__BackingField:
+    Guid:
+      Data1: -928506327
+      Data2: 1229548686
+      Data3: 1076464780
+      Data4: 1636647774
+    Path: event:/LightOn
+  <WheelRotation>k__BackingField:
+    Guid:
+      Data1: -2021817901
+      Data2: 1075567744
+      Data3: 2081400739
+      Data4: 491501956
+    Path: event:/WheelRotation
+  <WheelFull>k__BackingField:
+    Guid:
+      Data1: -147330391
+      Data2: 1189637284
+      Data3: 1942560916
+      Data4: 1970391904
+    Path: event:/WheelFull
+  <Backspin>k__BackingField:
+    Guid:
+      Data1: 1883207143
+      Data2: 1291340743
+      Data3: 1843821984
+      Data4: 69769719
+    Path: event:/Backspin
 --- !u!1 &805305760
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,7 +4377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &805305761
 Transform:
   m_ObjectHideFlags: 0
@@ -4582,6 +4708,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 813758700}
+    - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 813758703}
   m_SourcePrefab: {fileID: 100100000, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
 --- !u!4 &813758698 stripped
 Transform:
@@ -4614,14 +4743,47 @@ MonoBehaviour:
   handPrefab: {fileID: 1293303780}
   inputDeviceCharacteristics: 256
   cartRigidBody: {fileID: 6835908547699515252}
-  moveForce: -2
+  moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
+  direction: 0
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
+  emitter: {fileID: 813758703}
+--- !u!114 &813758703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813758699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1918902040
+      Data2: 1081037154
+      Data3: -526989664
+      Data4: -1715516837
+    Path: event:/Hand
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &859065109
 GameObject:
   m_ObjectHideFlags: 0
@@ -5575,69 +5737,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1196936296
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_Name
-      value: XR Device Simulator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
 --- !u!1 &1198845563
 GameObject:
   m_ObjectHideFlags: 0
@@ -7170,7 +7271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1399466250
 Transform:
   m_ObjectHideFlags: 0
@@ -13795,7 +13896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1653458060
 Transform:
   m_ObjectHideFlags: 0
@@ -14024,7 +14125,7 @@ MonoBehaviour:
   lightingDuration: 15
   detectableLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   textMeshPro: {fileID: 1987542077}
 --- !u!1 &1704233276
 GameObject:
@@ -14258,7 +14359,6 @@ GameObject:
   - component: {fileID: 1833767968}
   - component: {fileID: 1833767967}
   - component: {fileID: 1833767969}
-  - component: {fileID: 1833767970}
   - component: {fileID: 1833767971}
   m_Layer: 0
   m_Name: Player
@@ -14274,8 +14374,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833767965}
-  m_LocalRotation: {x: 0, y: 0.0008726948, z: 0, w: 0.99999964}
-  m_LocalPosition: {x: -34.4, y: -16.8, z: -118.49}
+  m_LocalRotation: {x: 0, y: 0.19936788, z: 0, w: 0.97992474}
+  m_LocalPosition: {x: -5.23, y: 31.2, z: 141.5}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14283,7 +14383,7 @@ Transform:
   - {fileID: 420074429}
   m_Father: {fileID: 317479228524808144}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0.1, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 23, z: 0}
 --- !u!114 &1833767967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14327,37 +14427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef62a6f138cd1c4ebd8d008244ba35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1833767970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833767965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1882094340
-      Data2: 1167488714
-      Data3: 1477436836
-      Data4: 232865289
-    Path: event:/Ambience_cave
-  Event: 
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &1833767971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15486,6 +15555,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2139886121}
+    - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2139886124}
   m_SourcePrefab: {fileID: 100100000, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
 --- !u!4 &2139886119 stripped
 Transform:
@@ -15518,14 +15590,49 @@ MonoBehaviour:
   handPrefab: {fileID: 984715566}
   inputDeviceCharacteristics: 512
   cartRigidBody: {fileID: 6835908547699515252}
-  moveForce: -2
+  moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
+  direction: 1
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
+  emitter: {fileID: 2139886124}
+--- !u!114 &2139886124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139886120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1918902040
+      Data2: 1081037154
+      Data3: -526989664
+      Data4: -1715516837
+    Path: event:/Hand
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params:
+  - Name: HandDirection
+    Value: 1
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!210 &2939256142648692
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -30538,6 +30645,7 @@ GameObject:
   - component: {fileID: 6835908547699515252}
   - component: {fileID: 6835908547699515251}
   - component: {fileID: 6835908547699515253}
+  - component: {fileID: 6835908547699515254}
   m_Layer: 0
   m_Name: PLAYER CART
   m_TagString: Untagged
@@ -30607,8 +30715,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cartStartPoint: {x: -2, y: 3, z: 4}
   cartEndPoint: {x: 2, y: 3, z: 4}
-  force: 1
+  force: 0.22
   particleSystem: {fileID: 1507770614}
+  smoothSpeedFactor: 0.1
+--- !u!114 &6835908547699515254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6835908547699515250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1937923348
+      Data2: 1293243145
+      Data3: -23447635
+      Data4: 994830250
+    Path: event:/Cart
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6838473833612663878
 GameObject:
   m_ObjectHideFlags: 0

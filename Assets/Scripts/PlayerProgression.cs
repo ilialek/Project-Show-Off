@@ -49,7 +49,7 @@ public class PlayerProgression : MonoBehaviour
         // Update the 3D attributes of the sound
         Set3DAttributes();
 
-        Debug.Log($"Progression: {progression}");
+        //Debug.Log($"Progression: {progression}");
     }
 
     void OnDestroy()

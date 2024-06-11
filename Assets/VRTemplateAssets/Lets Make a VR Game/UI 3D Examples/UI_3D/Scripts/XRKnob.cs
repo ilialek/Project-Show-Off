@@ -2,6 +2,10 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using FMODUnity;
+using System.Collections;
+using System.Collections.Generic;
+using FMOD.Studio;
 
 namespace UnityEngine.XR.Content.Interaction
 {
@@ -137,6 +141,15 @@ namespace UnityEngine.XR.Content.Interaction
 
         public LightBehaviour lightBehaviour;
 
+        private AudioManager audioManager;
+
+        private float lastRotationValue = 0f;
+
+
+        private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
+        private bool isSoundPlaying = false;
+        private bool isUserInteracting = false;
+
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -205,6 +218,34 @@ namespace UnityEngine.XR.Content.Interaction
 
             SetValue(m_Value);
             SetKnobRotation(ValueToRotation());
+
+            audioManager = AudioManager.instance;
+
+            if (audioManager == null)
+            {
+                Debug.LogError("AudioManager instance is not found in the scene.");
+            }
+            backspinInstance = RuntimeManager.CreateInstance(FMODEvents.instance.Backspin);
+            wheelChargeInstance = RuntimeManager.CreateInstance(FMODEvents.instance.WheelRotation);
+        }
+
+       
+
+
+        public void PlayOneShotSound(EventReference sound, Vector3 worldPos)
+        {
+            if (!soundInstances.ContainsKey(sound) || !soundInstances[sound])
+            {
+                soundInstances[sound] = true;
+                audioManager.PlayOneShot(sound, worldPos);
+                StartCoroutine(ResetSoundState(sound));
+            }
+        }
+
+        private IEnumerator ResetSoundState(EventReference sound)
+        {
+            yield return new WaitForSeconds(2f);
+            soundInstances[sound] = false;
         }
 
         protected override void OnEnable()
@@ -230,12 +271,18 @@ namespace UnityEngine.XR.Content.Interaction
             m_ForwardVectorAngles.Reset();
 
             UpdateBaseKnobRotation();
+            isUserInteracting = true;
             UpdateRotation(true);
+            
+
         }
 
         void EndGrab(SelectExitEventArgs args)
         {
+            
             m_Interactor = null;
+            isUserInteracting = false;
+           
         }
 
         public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -271,6 +318,8 @@ namespace UnityEngine.XR.Content.Interaction
             // Accumulate the total rotation
             cumulativeYRotation += deltaYRotation;
 
+           
+
             // Update the previous rotation for the next frame
             previousYRotation = currentYRotation;
 
@@ -278,13 +327,10 @@ namespace UnityEngine.XR.Content.Interaction
         }
 
         private void Update()
-        {
-            
-            
-
+        {         
             if (m_Interactor == null)
             {
-
+    
 
                 if (m_ClampedMotion)
                 {
@@ -308,17 +354,94 @@ namespace UnityEngine.XR.Content.Interaction
                     SetValue(knobValue);
 
                     lightBehaviour.ReceiveTheRotationValue(knobValue);
-                }
+                  
 
+                }
 
             }
 
             textMeshPro.text = GetTheYRotationInDegrees().ToString();
+
+            HandleSoundLogic();
+          
+
         }
+        private FMOD.Studio.EventInstance wheelChargeInstance;
+        private FMOD.Studio.EventInstance backspinInstance;
+
+        private bool isWheelChargePlaying = false;
+        private bool isBackspinPlaying = false;
+
+        // Method to play the wheel charge sound
+        private void PlayWheelChargeSound()
+        {
+            if (!isWheelChargePlaying && wheelChargeInstance.isValid())
+            {
+                wheelChargeInstance.start();
+                isWheelChargePlaying = true;
+            }
+        }
+
+        // Method to play the backspin sound
+        private void PlayBackspinSound()
+        {
+            if (!isBackspinPlaying && backspinInstance.isValid())
+            {
+                backspinInstance.start();
+                isBackspinPlaying = true;
+            }
+        }
+
+        // Method to stop and release the wheel charge sound
+        private void StopAndReleaseWheelChargeSound()
+        {
+            if (isWheelChargePlaying && wheelChargeInstance.isValid())
+            {
+                wheelChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                isWheelChargePlaying = false;
+            }
+        }
+
+        // Method to stop and release the backspin sound
+        private void StopAndReleaseBackspinSound()
+        {
+            if (isBackspinPlaying && backspinInstance.isValid())
+            {
+                backspinInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                isBackspinPlaying = false;
+            }
+        }
+
+        // Revised sound logic to handle sound instances without overlap
+        private void HandleSoundLogic()
+        {
+            float rotation = GetTheYRotationInDegrees();
+
+            // Check rotation angle and user interaction to determine which sound to play
+            if (rotation > 0.1f && isUserInteracting)
+            {
+                PlayWheelChargeSound();
+                StopAndReleaseBackspinSound();
+            }
+            else if (rotation >0.1f)
+            {
+                PlayBackspinSound();
+                StopAndReleaseWheelChargeSound();
+            }
+            else
+            {
+                StopAndReleaseWheelChargeSound();
+                StopAndReleaseBackspinSound();
+            }
+        }
+
+
+
+
         void UpdateRotation(bool freshCheck = false)
         {
-            // Are we in position offset or direction rotation mode?
-            var interactorTransform = m_Interactor.GetAttachTransform(this);
+        // Are we in position offset or direction rotation mode?
+        var interactorTransform = m_Interactor.GetAttachTransform(this);
 
             // We cache the three potential sources of rotation - the position offset, the forward vector of the controller, and up vector of the controller
             // We store any data used for determining which rotation to use, then flatten the vectors to the local xz plane
@@ -404,6 +527,8 @@ namespace UnityEngine.XR.Content.Interaction
             SetValue(knobValue);
 
             lightBehaviour.ReceiveTheRotationValue(knobValue);
+
+          
         }
 
         void SetKnobRotation(float angle)
