@@ -62,9 +62,6 @@ public class LightBehaviour : MonoBehaviour
     {
         textMeshPro.text = "Not";
         DetectObjects();
-
-        
-
         if (!lightIsSet)
         {
             if (knobValue > 0 && knobValue < 1)
@@ -90,13 +87,9 @@ public class LightBehaviour : MonoBehaviour
             if (!coroutineStarted)
             {
                 StartCoroutine(LightingCoroutine());
-                
                 coroutineStarted = true;
             }
         }
-
-
-
     }
 
     IEnumerator LightingCoroutine()
@@ -105,8 +98,8 @@ public class LightBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(lightingDuration);
         PlayOneShotSound(FMODEvents.instance.LightWarning, transform.position);
-        yield return new WaitForSeconds(preSoundDelay);
 
+        yield return new WaitForSeconds(preSoundDelay);
         StartCoroutine(EndBlinkCoroutine());
     }
 
@@ -116,10 +109,8 @@ public class LightBehaviour : MonoBehaviour
         float blinkInterval = 0.05f; // Interval between blinks in seconds
         float blinkDuration = 1.6f; // Total duration of blinking in seconds
 
-
-
-        PlayOneShotSound(FMODEvents.instance.LightOff, transform.position);
         // Play the one-shot sound before starting the blinking
+        PlayOneShotSound(FMODEvents.instance.LightOff, transform.position);
 
         while (totalTime < blinkDuration)
         {
@@ -170,9 +161,7 @@ public class LightBehaviour : MonoBehaviour
             isOn = !isOn; // Toggle the light on/off
             lightComponent.enabled = isOn; // Set the light's enabled state
             timer = 0f; // Reset the timer
-        }
-
-        
+        }      
     }
 
     void DetectObjects()

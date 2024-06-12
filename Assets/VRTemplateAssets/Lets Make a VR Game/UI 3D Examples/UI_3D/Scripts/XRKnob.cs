@@ -143,11 +143,9 @@ namespace UnityEngine.XR.Content.Interaction
 
         private AudioManager audioManager;
 
-        private float lastRotationValue = 0f;
-
 
         private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
-        private bool isSoundPlaying = false;
+
         private bool isUserInteracting = false;
 
         /// <summary>
@@ -354,20 +352,14 @@ namespace UnityEngine.XR.Content.Interaction
                     SetValue(knobValue);
 
                     lightBehaviour.ReceiveTheRotationValue(knobValue);
-                  
-
                 }
-
             }
-
             textMeshPro.text = GetTheYRotationInDegrees().ToString();
 
             HandleSoundLogic();
-          
-
         }
-        private FMOD.Studio.EventInstance wheelChargeInstance;
-        private FMOD.Studio.EventInstance backspinInstance;
+        private EventInstance wheelChargeInstance;
+        private EventInstance backspinInstance;
 
         private bool isWheelChargePlaying = false;
         private bool isBackspinPlaying = false;
@@ -434,9 +426,6 @@ namespace UnityEngine.XR.Content.Interaction
                 StopAndReleaseBackspinSound();
             }
         }
-
-
-
 
         void UpdateRotation(bool freshCheck = false)
         {

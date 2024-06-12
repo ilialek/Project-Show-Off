@@ -150,8 +150,7 @@ public class Hand : MonoBehaviour
         else
         {
             emitter.Play();
-        }
-        
+        } 
     }
 
     private void InitializeHand()
@@ -200,8 +199,6 @@ public class Hand : MonoBehaviour
 
         if (_targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue))
         {
-            
-
             if (gripValue)
             {
                 if (!isSnappedToRope)
@@ -213,10 +210,8 @@ public class Hand : MonoBehaviour
                     if (!didPullTheRope)
                     {              
                         CalculateTheMoveDistance();
-                    }
-                    
+                    }             
                 }
-
                 
             }
             else

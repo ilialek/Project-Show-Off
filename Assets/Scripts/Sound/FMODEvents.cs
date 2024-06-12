@@ -21,6 +21,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference WheelRotation { get; private set; }
     [field: SerializeField] public EventReference WheelFull { get; private set; }
     [field: SerializeField] public EventReference Backspin { get; private set; }
+    [field: SerializeField] public EventReference Bats { get; private set; }
     public static FMODEvents instance {get; private set;}
 
   
