@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using System.Runtime.CompilerServices;
 
 public class CartBehaviour : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class CartBehaviour : MonoBehaviour
 
     private float speed;
     private float smoothedSpeed;
+    private float rattle;
+    private bool isUnderWaterfall;
     [SerializeField, Range(0.01f, 1f)] private float smoothSpeedFactor = 0.1f;
+
+    private PlayerProgression playerProgression;
 
     public Vector3 CartStartPoint
     {
@@ -50,6 +55,12 @@ public class CartBehaviour : MonoBehaviour
         {
             Debug.LogError("Failed to create FMOD Event.");
         }
+        playerProgression = FindObjectOfType<PlayerProgression>();
+
+        if (playerProgression == null)
+        {
+            Debug.LogError("PlayerProgression script not found.");
+        }
     }
 
     private void Update()
@@ -77,17 +88,60 @@ public class CartBehaviour : MonoBehaviour
             transform.Translate(Vector3.back * 50 * Time.deltaTime);
         }
         //Debug.Log("Smoothed Speed: " + smoothedSpeed);
-        Cart.setParameterByName("Cart speed", smoothedSpeed);
+        //Cart.setParameterByName("Cart speed", smoothedSpeed);
+        //Debug.Log(playerProgression.GetProgression());
+        //Cart.setParameterByName("Rattle", rattle);
+        //Debug.Log($"Update - Smoothed Speed: {smoothedSpeed}, Rattle: {rattle}, Is Under Waterfall: {isUnderWaterfall}");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb.AddForce(Vector3.forward * force);
+        SoundLogic();
+    }
+
+    private void SoundLogic()
+    {
         speed = Mathf.Max(0, rb.velocity.magnitude);
         speed = Mathf.Clamp(speed, 0, 1);
         smoothedSpeed = Mathf.Lerp(smoothedSpeed, speed, smoothSpeedFactor);
+
+        
+
+        // Determine the target rattle based on conditions
+        float speedThreshold = 0.2f; // Adjust this threshold to control when rattle starts
+        float targetRattle = 0f;
+        float progression = playerProgression.GetProgression();
+
+        if (progression > 13 && progression < 18)
+        {
+            // If under waterfall, set maximum rattle
+            targetRattle = 1f;
+        }
+        else
+        {
+            // Otherwise, calculate rattle based on smoothedSpeed and speedThreshold
+            if (smoothedSpeed >= speedThreshold)
+            {
+                targetRattle = Mathf.Lerp(0f, 0.5f, (smoothedSpeed - speedThreshold) / (1f - speedThreshold));
+            }
+        }
+
+        rattle = Mathf.Lerp(rattle, targetRattle, smoothSpeedFactor);
+
+        // Apply a small tolerance check to avoid extremely small rattle values
+        if (Mathf.Abs(rattle) < 0.0001f)
+        {
+            rattle = 0f;
+        }
+
+        // Update FMOD parameters
+        Cart.setParameterByName("Rattle", rattle);
+        Cart.setParameterByName("Cart Speed", smoothedSpeed);
+        Debug.Log($"SoundLogic - Speed: {speed}, Smoothed Speed: {smoothedSpeed}, Target Rattle: {targetRattle}, Rattle: {rattle}, Progression: {progression}");
     }
+
 
 
     void OnDestroy()
