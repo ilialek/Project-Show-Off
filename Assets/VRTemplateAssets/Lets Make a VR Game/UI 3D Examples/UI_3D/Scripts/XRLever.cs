@@ -15,12 +15,13 @@ namespace UnityEngine.XR.Content.Interaction
         Transform m_Handle = null;
 
         [SerializeField]
-        [Tooltip("The value of the lever")]
-        bool m_Value = false;
-
-        [SerializeField]
         [Tooltip("If enabled, the lever will snap to the value position when released")]
         bool m_LockToValue;
+
+        [SerializeField]
+        [Tooltip("The value of the knob")]
+        [Range(0.0f, 1.0f)]
+        float m_Value;
 
         [SerializeField]
         [Tooltip("Angle of the lever in the 'on' position")]
@@ -42,6 +43,10 @@ namespace UnityEngine.XR.Content.Interaction
 
         IXRSelectInteractor m_Interactor;
 
+        [SerializeField]
+        private CartBehaviour cartBehaviourScript;
+
+
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -54,11 +59,12 @@ namespace UnityEngine.XR.Content.Interaction
         /// <summary>
         /// The value of the lever
         /// </summary>
-        public bool value
+        
+        /*public bool value
         {
             get => m_Value;
             set => SetValue(value, true);
-        }
+        }*/
 
         /// <summary>
         /// If enabled, the lever will snap to the value position when released
@@ -95,7 +101,7 @@ namespace UnityEngine.XR.Content.Interaction
 
         void Start()
         {
-            SetValue(m_Value, true);
+            SetValue(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
         }
 
         protected override void OnEnable()
@@ -119,7 +125,7 @@ namespace UnityEngine.XR.Content.Interaction
 
         void EndGrab(SelectExitEventArgs args)
         {
-            SetValue(m_Value, true);
+            //SetValue(m_Value, true);
             m_Interactor = null;
         }
 
@@ -158,19 +164,39 @@ namespace UnityEngine.XR.Content.Interaction
             var maxAngleDistance = Mathf.Abs(m_MaxAngle - lookAngle);
             var minAngleDistance = Mathf.Abs(m_MinAngle - lookAngle);
 
-            if (m_Value)
+            /*if (m_Value)
                 maxAngleDistance *= (1.0f - k_LeverDeadZone);
             else
                 minAngleDistance *= (1.0f - k_LeverDeadZone);
 
-            var newValue = (maxAngleDistance < minAngleDistance);
+            var newValue = (maxAngleDistance < minAngleDistance);*/
 
             SetHandleAngle(lookAngle);
 
-            SetValue(newValue);
+            SetValue(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
+
+            //Debug.Log(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
         }
 
-        void SetValue(bool isOn, bool forceRotation = false)
+        private float GetTheYRotationInDegrees(float _rotation)
+        {
+
+            float rotation = _rotation;
+
+            // Correct for crossing the 360-degree boundary
+            if (_rotation > 180f)
+            {
+                rotation -= 360f;
+            }
+            else if (_rotation < -180f)
+            {
+                rotation += 360f;
+            }
+
+            return rotation;
+        }
+
+        /*void SetValue(bool isOn, bool forceRotation = false)
         {
             if (m_Value == isOn)
             {
@@ -193,6 +219,20 @@ namespace UnityEngine.XR.Content.Interaction
 
             if (!isSelected && (m_LockToValue || forceRotation))
                 SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+        }*/
+
+
+        void SetValue(float _currentRotation)
+        {
+            float fullRange = maxAngle - minAngle;
+            float differenceFromMinAngle = _currentRotation - minAngle;
+            float value = differenceFromMinAngle / fullRange;
+            m_Value = value;
+        }
+
+        private void Update()
+        {
+            cartBehaviourScript.leverValue = m_Value;
         }
 
         void SetHandleAngle(float angle)
@@ -220,9 +260,9 @@ namespace UnityEngine.XR.Content.Interaction
             Gizmos.DrawLine(angleStartPoint, angleMinPoint);
         }
 
-        void OnValidate()
+        /*void OnValidate()
         {
             SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
-        }
+        }*/
     }
 }

@@ -23,9 +23,6 @@ public class Hand : MonoBehaviour
     private InputDeviceCharacteristics inputDeviceCharacteristics;
 
     [SerializeField]
-    private Rigidbody cartRigidBody;
-
-    [SerializeField]
     private float moveForce;
 
     [SerializeField]
@@ -177,19 +174,19 @@ public class Hand : MonoBehaviour
         }
         else
         {
-            UpdateHand();
+            //UpdateHand();
             SetHandDirectionParameter();
         }
     }
 
-    private void UpdateHand()
+    /*private void UpdateHand()
     {
         //This will get the value for our trigger from the target device and output a flaot into triggerValue
-        /*if (_targetDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
+        *//*if (_targetDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
         {
             if(triggerText != null)
             triggerText.text = "Trigger value:" + triggerValue;
-        }*/
+        }*//*
 
         //This will get the value for our grip from the target device and output a flaot into gripValue
 
@@ -230,7 +227,7 @@ public class Hand : MonoBehaviour
 
         }
 
-    }
+    }*/
 
     private void IsGrabbingTheStarterHandle()
     {
@@ -316,7 +313,7 @@ public class Hand : MonoBehaviour
 
     }*/
 
-    private void CalculateTheMoveDistance()
+    /*private void CalculateTheMoveDistance()
     {
         PlayHandSFX();
         Vector3 ropeDirection = ropeTransform.up;
@@ -343,10 +340,10 @@ public class Hand : MonoBehaviour
         }
 
 
-    }
+    }*/
 
 
-    private void IsGrabbingTheRope()
+   /* private void IsGrabbingTheRope()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, sphereCollider.radius, ropeLayer);
 
@@ -355,7 +352,7 @@ public class Hand : MonoBehaviour
             SnapToTheRope(colliders[0]);
         }
         
-    }
+    }*/
 
 
 

@@ -10,6 +10,8 @@ public class CartBehaviour : MonoBehaviour
     [SerializeField] private Vector3 cartStartPoint;
     [SerializeField] private Vector3 cartEndPoint;
 
+    public float leverValue = 0;
+
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem particleSystem;
 
@@ -68,14 +70,14 @@ public class CartBehaviour : MonoBehaviour
             }
         }
 
-        if (UnityEngine.InputSystem.Keyboard.current.uKey.isPressed)
+       /* if (UnityEngine.InputSystem.Keyboard.current.uKey.isPressed)
         {
             transform.Translate(Vector3.forward * 50 * Time.deltaTime);
         }
         if (UnityEngine.InputSystem.Keyboard.current.jKey.isPressed)
         {
             transform.Translate(Vector3.back * 50 * Time.deltaTime);
-        }
+        }*/
         //Debug.Log("Smoothed Speed: " + smoothedSpeed);
         Cart.setParameterByName("Cart speed", smoothedSpeed);
     }
@@ -83,7 +85,7 @@ public class CartBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.forward * force);
+        rb.AddForce(Vector3.forward * force * leverValue);
         speed = Mathf.Max(0, rb.velocity.magnitude);
         speed = Mathf.Clamp(speed, 0, 1);
         smoothedSpeed = Mathf.Lerp(smoothedSpeed, speed, smoothSpeedFactor);
