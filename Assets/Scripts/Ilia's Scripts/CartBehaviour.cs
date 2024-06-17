@@ -20,6 +20,7 @@ public class CartBehaviour : MonoBehaviour
 
     private float speed;
     private float smoothedSpeed;
+    private float waterfallFade;
     private float rattle;
     private bool isUnderWaterfall;
     [SerializeField, Range(0.01f, 1f)] private float smoothSpeedFactor = 0.1f;
@@ -112,6 +113,7 @@ public class CartBehaviour : MonoBehaviour
         // Determine the target rattle based on conditions
         float speedThreshold = 0.2f; // Adjust this threshold to control when rattle starts
         float targetRattle = 0f;
+        waterfallFade = 1f;
         float progression = playerProgression.GetProgression();
 
         if (progression > 13 && progression < 18)
@@ -128,7 +130,7 @@ public class CartBehaviour : MonoBehaviour
             }
         }
 
-        rattle = Mathf.Lerp(rattle, targetRattle, smoothSpeedFactor);
+        rattle = Mathf.Lerp(rattle, targetRattle, waterfallFade);
 
         // Apply a small tolerance check to avoid extremely small rattle values
         if (Mathf.Abs(rattle) < 0.0001f)
