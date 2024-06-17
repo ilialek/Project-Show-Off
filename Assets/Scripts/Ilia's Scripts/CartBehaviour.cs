@@ -30,6 +30,9 @@ public class CartBehaviour : MonoBehaviour
     private PlayerProgression playerProgression;
     private StudioEventEmitter Cartemitter;
 
+
+    public float leverValue = 0;
+
     public Vector3 CartStartPoint
     {
         get { return cartStartPoint; }
@@ -79,7 +82,7 @@ public class CartBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.forward * force);
+        rb.AddForce(Vector3.forward * force * leverValue);
         SoundLogic();
     }
 

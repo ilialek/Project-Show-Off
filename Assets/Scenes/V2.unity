@@ -1951,7 +1951,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &212127975
 GameObject:
@@ -5680,6 +5680,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5283898766228162098, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283898766228162098, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_LockToValue
       value: 0
       objectReference: {fileID: 0}
@@ -6196,7 +6200,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1166184277
 GameObject:
@@ -31788,10 +31792,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cartStartPoint: {x: -2, y: 3, z: 4}
   cartEndPoint: {x: 2, y: 3, z: 4}
-  leverValue: 0
   force: 3
   particleSystem: {fileID: 1507770614}
   smoothSpeedFactor: 0.1
+  leverValue: 0
 --- !u!114 &6835908547699515254
 MonoBehaviour:
   m_ObjectHideFlags: 0
