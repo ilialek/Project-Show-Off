@@ -18,7 +18,7 @@ public class TestMonsterOrBatOrSomething : MonoBehaviour, IEventListener
         renderer = GetComponent<Renderer>();
 
         // Initialize the audioManager instance
-        audioManager = AudioManager.instance;
+        audioManager = AudioManager.instance;       
         if (audioManager == null)
         {
             Debug.LogError("AudioManager instance is not found in the scene.");
