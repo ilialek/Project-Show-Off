@@ -334,15 +334,6 @@ namespace UnityEngine.XR.Content.Interaction
                 {
                     float newYRotation = GetTheYRotationInDegrees() - 80 * Time.deltaTime;
 
-                    
-
-                    // Convert the rotation to a range of -180 to 180 for clamping
-
-                    
-
-                    
-                    //newYRotation = Mathf.Max(newYRotation, m_MinAngle);
-
                     newYRotation = Mathf.Clamp(newYRotation, m_MinAngle, m_MaxAngle);
 
                     // Apply the clamped rotation value

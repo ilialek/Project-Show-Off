@@ -21,7 +21,7 @@ namespace UnityEngine.XR.Content.Interaction
         [SerializeField]
         [Tooltip("The value of the knob")]
         [Range(0.0f, 1.0f)]
-        float m_Value;
+        public float m_Value;
 
         [SerializeField]
         [Tooltip("Angle of the lever in the 'on' position")]
@@ -101,7 +101,7 @@ namespace UnityEngine.XR.Content.Interaction
 
         void Start()
         {
-            SetValue(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
+            SetValue(GetTheRotationInDegrees(m_Handle.localEulerAngles.x));
         }
 
         protected override void OnEnable()
@@ -173,12 +173,12 @@ namespace UnityEngine.XR.Content.Interaction
 
             SetHandleAngle(lookAngle);
 
-            SetValue(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
+            SetValue(GetTheRotationInDegrees(m_Handle.localEulerAngles.x));
 
             //Debug.Log(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
         }
 
-        private float GetTheYRotationInDegrees(float _rotation)
+        private float GetTheRotationInDegrees(float _rotation)
         {
 
             float rotation = _rotation;
