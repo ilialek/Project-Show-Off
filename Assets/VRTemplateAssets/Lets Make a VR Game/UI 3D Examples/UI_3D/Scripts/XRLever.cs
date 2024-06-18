@@ -118,15 +118,27 @@ namespace UnityEngine.XR.Content.Interaction
             base.OnDisable();
         }
 
+        private bool isUserInteractingLever = false;
+
         void StartGrab(SelectEnterEventArgs args)
         {
+            isUserInteractingLever = true;
             m_Interactor = args.interactorObject;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Grab, transform.position);
+            
         }
 
         void EndGrab(SelectExitEventArgs args)
         {
+            isUserInteractingLever = false;
             //SetValue(m_Value, true);
             m_Interactor = null;
+            
+        }
+
+        public bool GetLeverInteracting()
+        {
+            return isUserInteractingLever;
         }
 
         public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -142,8 +154,14 @@ namespace UnityEngine.XR.Content.Interaction
             }
         }
 
-        Vector3 GetLookDirection()
+        public Vector3 GetLookDirection()
         {
+            if (m_Interactor == null || m_Handle == null)
+            {
+                Debug.LogWarning("Interactor or Handle is not assigned.");
+                return Vector3.zero; // or an appropriate default value
+            }
+
             Vector3 direction = m_Interactor.GetAttachTransform(this).position - m_Handle.position;
             direction = transform.InverseTransformDirection(direction);
             direction.x = 0;
@@ -178,7 +196,7 @@ namespace UnityEngine.XR.Content.Interaction
             //Debug.Log(GetTheYRotationInDegrees(m_Handle.localEulerAngles.x));
         }
 
-        private float GetTheRotationInDegrees(float _rotation)
+        public float GetTheRotationInDegrees(float _rotation)
         {
 
             float rotation = _rotation;
@@ -186,7 +204,7 @@ namespace UnityEngine.XR.Content.Interaction
             // Correct for crossing the 360-degree boundary
             if (_rotation > 180f)
             {
-                rotation -= 360f;
+                rotation -= 360f; 
             }
             else if (_rotation < -180f)
             {
@@ -233,6 +251,11 @@ namespace UnityEngine.XR.Content.Interaction
         private void Update()
         {
             cartBehaviourScript.leverValue = m_Value;
+        }
+
+        public float GetLeverValue()
+        {
+            return m_Value;
         }
 
         void SetHandleAngle(float angle)

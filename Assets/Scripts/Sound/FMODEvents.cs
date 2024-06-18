@@ -15,13 +15,20 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Cart { get; private set; }
     [field: SerializeField] public EventReference Hand { get; private set; }
     [field: SerializeField] public EventReference LightOff { get; private set; }
+    [field: SerializeField] public EventReference LightOffclick { get; private set; }
     [field: SerializeField] public EventReference LightWarning { get; private set; }
     [field: SerializeField] public EventReference LightCharge { get; private set; }
     [field: SerializeField] public EventReference LightOn { get; private set; }
     [field: SerializeField] public EventReference WheelRotation { get; private set; }
     [field: SerializeField] public EventReference WheelFull { get; private set; }
+    [field: SerializeField] public EventReference WheelNull { get; private set; }
+    [field: SerializeField] public EventReference Grab { get; private set; }
     [field: SerializeField] public EventReference Backspin { get; private set; }
     [field: SerializeField] public EventReference Bats { get; private set; }
+    [field: SerializeField] public EventReference Blink { get; private set; }
+    [field: SerializeField] public EventReference Lever { get; private set; }
+    [field: SerializeField] public EventReference Brake { get; private set; }
+    [field: SerializeField] public EventReference EngineHeat { get; private set; }
     public static FMODEvents instance {get; private set;}
 
   

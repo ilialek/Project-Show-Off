@@ -9,6 +9,7 @@ using FMOD.Studio;
 public class LightBehaviour : MonoBehaviour
 {
     [SerializeField] private float lightingDuration;
+    [SerializeField] private float preSoundDelay;
     [SerializeField] private LayerMask detectableLayer;
 
     private bool lightIsSet = false;
@@ -24,39 +25,12 @@ public class LightBehaviour : MonoBehaviour
 
     public TextMeshPro textMeshPro;
 
-    private AudioManager audioManager;
-    private bool isSoundPlaying = false;
-    private EventInstance lightChargeInstance;
-
     void Start()
     {
         lightComponent = GetComponent<Light>();
         lightComponent.enabled = false;
-
-        audioManager = AudioManager.instance;
-
-        if (audioManager == null)
-        {
-            Debug.LogError("AudioManager instance is not found in the scene.");
-        }
-    }
-    private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
-
-    public void PlayOneShotSound(EventReference sound, Vector3 worldPos)
-    {
-        if (!soundInstances.ContainsKey(sound) || !soundInstances[sound])
-        {
-            soundInstances[sound] = true;
-            audioManager.PlayOneShot(sound, worldPos);
-            StartCoroutine(ResetSoundState(sound));
-        }
     }
 
-    private IEnumerator ResetSoundState(EventReference sound)
-    {
-        yield return new WaitForSeconds(2f);
-        soundInstances[sound] = false;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -66,14 +40,10 @@ public class LightBehaviour : MonoBehaviour
         {
             if (knobValue > 0 && knobValue < 1)
             {
-                
                 BlinkingBehaviour();
             }
             else if (knobValue == 1)
             {
-                //Debug.Log("worked");
-                PlayOneShotSound(FMODEvents.instance.LightOn, transform.position);
-                PlayOneShotSound(FMODEvents.instance.WheelFull, transform.position);
                 lightComponent.enabled = true;
                 lightIsSet = true;
             }
@@ -94,11 +64,7 @@ public class LightBehaviour : MonoBehaviour
 
     IEnumerator LightingCoroutine()
     {
-        float preSoundDelay = 1.5f; // Delay before playing the one-shot sound   
-
         yield return new WaitForSeconds(lightingDuration);
-        PlayOneShotSound(FMODEvents.instance.LightWarning, transform.position);
-
         yield return new WaitForSeconds(preSoundDelay);
         StartCoroutine(EndBlinkCoroutine());
     }
@@ -108,24 +74,16 @@ public class LightBehaviour : MonoBehaviour
         float totalTime = 0f;
         float blinkInterval = 0.05f; // Interval between blinks in seconds
         float blinkDuration = 1.6f; // Total duration of blinking in seconds
-
-        // Play the one-shot sound before starting the blinking
-        PlayOneShotSound(FMODEvents.instance.LightOff, transform.position);
-
         while (totalTime < blinkDuration)
         {
-            
             lightComponent.enabled = !lightComponent.enabled;
 
             yield return new WaitForSeconds(blinkInterval);
 
             totalTime += blinkInterval;
-        }
-        
+        }   
         // Ensure the light is on after the blinking is finished
         lightComponent.enabled = false;
-        
-
         lightIsSet = false;
         coroutineStarted = false;
     }
@@ -138,27 +96,12 @@ public class LightBehaviour : MonoBehaviour
             blinkInterval = 1 / (knobValue * 17);
             //Debug.Log(blinkInterval.ToString());
         }
-        bool wasSoundPlaying = isSoundPlaying;
-        isSoundPlaying = blinkInterval <1 && knobValue < 1;
-
-        if (isSoundPlaying && !wasSoundPlaying)
-        {
-            // Start playing the light charge sound
-            lightChargeInstance = RuntimeManager.CreateInstance(FMODEvents.instance.LightCharge);
-            lightChargeInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
-            lightChargeInstance.start();
-        }
-        else if (!isSoundPlaying && wasSoundPlaying)
-        {
-            // Stop playing the light charge sound
-            lightChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            lightChargeInstance.release();
-        }
         timer += Time.deltaTime; // Increment the timer
 
         if (timer >= blinkInterval)
         {
             isOn = !isOn; // Toggle the light on/off
+            //Debug.Log(timer);
             lightComponent.enabled = isOn; // Set the light's enabled state
             timer = 0f; // Reset the timer
         }      
@@ -194,4 +137,20 @@ public class LightBehaviour : MonoBehaviour
     {
         knobValue = _value;
     }
+
+    public float GetKnobValue() => knobValue;
+
+    public bool GetLightState() => lightIsSet;
+
+    public float GetBlinkInterval() => blinkInterval;
+
+    public bool GetCoroutineState() => coroutineStarted;
+
+    public float GetLightDuration() => lightingDuration;
+
+    public float GetPreDelay() => preSoundDelay;
+
+    public bool GetOnState() => isOn;
+
+
 }

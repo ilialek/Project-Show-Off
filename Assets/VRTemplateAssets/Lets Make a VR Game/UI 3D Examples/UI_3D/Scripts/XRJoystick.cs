@@ -152,6 +152,7 @@ namespace UnityEngine.XR.Content.Interaction
         private void StartGrab(SelectEnterEventArgs args)
         {
             m_Interactor = args.interactorObject;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Grab, transform.position);
         }
 
         private void EndGrab(SelectExitEventArgs arts)

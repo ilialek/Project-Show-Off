@@ -39,22 +39,28 @@ public class EngineTemperature : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GetTheRotationInDegrees(transformToRotate.localEulerAngles.y));
+        //Debug.Log(GetTheRotationInDegrees(transformToRotate.localEulerAngles.y));
 
         ManageTheRotation();
     }
+    private float newYRotation;
 
     void ManageTheRotation()
     {
         float testLeverValue = leverScript.m_Value;
 
-        float newYRotation = testLeverValue == 0 ?
+        newYRotation = testLeverValue == 0 ?
     GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime :
     GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * testLeverValue * Time.deltaTime;
 
         newYRotation = Mathf.Clamp(newYRotation, minAngle, maxAngle);
 
         transformToRotate.localEulerAngles = new Vector3(0, newYRotation, 0);
+    }
+
+    public float GetEngineTemperature()
+    {
+        return newYRotation;
     }
 
 

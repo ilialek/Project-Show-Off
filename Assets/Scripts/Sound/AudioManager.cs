@@ -82,6 +82,11 @@ public class AudioManager : MonoBehaviour
         ambienceEventInstance.setParameterByName(parameterName, parameterValue);
     }
 
+    public void SetInstanceParameter(EventInstance eventInstance, string parameterName, float parameterValue)
+    {
+        eventInstance.setParameterByName(parameterName, parameterValue);
+    }
+
 
     public void SetEmitterParameter(StudioEventEmitter emitter, string parameterName, float parameterValue)
     {

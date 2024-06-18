@@ -2,10 +2,6 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using FMODUnity;
-using System.Collections;
-using System.Collections.Generic;
-using FMOD.Studio;
 
 namespace UnityEngine.XR.Content.Interaction
 {
@@ -141,13 +137,6 @@ namespace UnityEngine.XR.Content.Interaction
 
         public LightBehaviour lightBehaviour;
 
-        private AudioManager audioManager;
-
-
-        private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
-
-        private bool isUserInteracting = false;
-
         /// <summary>
         /// The object that is visually grabbed and manipulated
         /// </summary>
@@ -216,34 +205,6 @@ namespace UnityEngine.XR.Content.Interaction
 
             SetValue(m_Value);
             SetKnobRotation(ValueToRotation());
-
-            audioManager = AudioManager.instance;
-
-            if (audioManager == null)
-            {
-                Debug.LogError("AudioManager instance is not found in the scene.");
-            }
-            backspinInstance = RuntimeManager.CreateInstance(FMODEvents.instance.Backspin);
-            wheelChargeInstance = RuntimeManager.CreateInstance(FMODEvents.instance.WheelRotation);
-        }
-
-       
-
-
-        public void PlayOneShotSound(EventReference sound, Vector3 worldPos)
-        {
-            if (!soundInstances.ContainsKey(sound) || !soundInstances[sound])
-            {
-                soundInstances[sound] = true;
-                audioManager.PlayOneShot(sound, worldPos);
-                StartCoroutine(ResetSoundState(sound));
-            }
-        }
-
-        private IEnumerator ResetSoundState(EventReference sound)
-        {
-            yield return new WaitForSeconds(2f);
-            soundInstances[sound] = false;
         }
 
         protected override void OnEnable()
@@ -259,7 +220,7 @@ namespace UnityEngine.XR.Content.Interaction
             selectExited.RemoveListener(EndGrab);
             base.OnDisable();
         }
-
+        public bool isUserInteracting = false;
         void StartGrab(SelectEnterEventArgs args)
         {
             m_Interactor = args.interactorObject;
@@ -267,20 +228,16 @@ namespace UnityEngine.XR.Content.Interaction
             m_PositionAngles.Reset();
             m_UpVectorAngles.Reset();
             m_ForwardVectorAngles.Reset();
-
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Grab, transform.position);
             UpdateBaseKnobRotation();
             isUserInteracting = true;
             UpdateRotation(true);
-            
-
         }
 
         void EndGrab(SelectExitEventArgs args)
         {
-            
             m_Interactor = null;
             isUserInteracting = false;
-           
         }
 
         public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -296,7 +253,12 @@ namespace UnityEngine.XR.Content.Interaction
             }
         }
 
-        private float GetTheYRotationInDegrees()
+        public bool GetUserState()
+        {
+            return isUserInteracting;
+        }
+
+        public float GetTheYRotationInDegrees()
         {
             float currentYRotation = m_Handle.localEulerAngles.y;
 
@@ -328,8 +290,6 @@ namespace UnityEngine.XR.Content.Interaction
         {         
             if (m_Interactor == null)
             {
-    
-
                 if (m_ClampedMotion)
                 {
                     float newYRotation = GetTheYRotationInDegrees() - 80 * Time.deltaTime;
@@ -346,77 +306,8 @@ namespace UnityEngine.XR.Content.Interaction
                 }
             }
             textMeshPro.text = GetTheYRotationInDegrees().ToString();
-
-            HandleSoundLogic();
         }
-        private EventInstance wheelChargeInstance;
-        private EventInstance backspinInstance;
-
-        private bool isWheelChargePlaying = false;
-        private bool isBackspinPlaying = false;
-
-        // Method to play the wheel charge sound
-        private void PlayWheelChargeSound()
-        {
-            if (!isWheelChargePlaying && wheelChargeInstance.isValid())
-            {
-                wheelChargeInstance.start();
-                isWheelChargePlaying = true;
-            }
-        }
-
-        // Method to play the backspin sound
-        private void PlayBackspinSound()
-        {
-            if (!isBackspinPlaying && backspinInstance.isValid())
-            {
-                backspinInstance.start();
-                isBackspinPlaying = true;
-            }
-        }
-
-        // Method to stop and release the wheel charge sound
-        private void StopAndReleaseWheelChargeSound()
-        {
-            if (isWheelChargePlaying && wheelChargeInstance.isValid())
-            {
-                wheelChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                isWheelChargePlaying = false;
-            }
-        }
-
-        // Method to stop and release the backspin sound
-        private void StopAndReleaseBackspinSound()
-        {
-            if (isBackspinPlaying && backspinInstance.isValid())
-            {
-                backspinInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                isBackspinPlaying = false;
-            }
-        }
-
-        // Revised sound logic to handle sound instances without overlap
-        private void HandleSoundLogic()
-        {
-            float rotation = GetTheYRotationInDegrees();
-
-            // Check rotation angle and user interaction to determine which sound to play
-            if (rotation > 0.1f && isUserInteracting)
-            {
-                PlayWheelChargeSound();
-                StopAndReleaseBackspinSound();
-            }
-            else if (rotation >0.1f)
-            {
-                PlayBackspinSound();
-                StopAndReleaseWheelChargeSound();
-            }
-            else
-            {
-                StopAndReleaseWheelChargeSound();
-                StopAndReleaseBackspinSound();
-            }
-        }
+        
 
         void UpdateRotation(bool freshCheck = false)
         {
