@@ -1,23 +1,18 @@
 using FMOD.Studio;
 using FMODUnity;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Tayx.Graphy.Audio;
 using UnityEngine;
 
 public class LightSound : MonoBehaviour
 {
     private bool isSoundPlaying = false;
     private EventInstance lightChargeInstance;
-    private EventInstance Blink;
     private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
 
     private LightBehaviour LightBehaviour;
 
     private float knobValue;
-    private float previousKnobValue;
     private bool lightIsSet;
     private float blinkInterval;
     private bool coroutineStarted;
@@ -30,9 +25,7 @@ public class LightSound : MonoBehaviour
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
-        previousKnobValue = LightBehaviour.GetKnobValue();
         lightChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.LightCharge);
-        Blink = AudioManager.instance.CreateInstance(FMODEvents.instance.Blink);
         lightChargeInstance.start(); lightChargeInstance.release(); lightChargeInstance.setPaused(true);
     }
 
@@ -44,10 +37,7 @@ public class LightSound : MonoBehaviour
         blinkInterval = LightBehaviour.GetBlinkInterval();
         coroutineStarted = LightBehaviour.GetCoroutineState();
         LightDuration = LightBehaviour.GetLightDuration();
-        preDelay = LightBehaviour.GetPreDelay();
-        
-
-        float currentTime = Time.time;
+        preDelay = LightBehaviour.GetPreDelay();       
 
         if (!lightIsSet)
         {  
@@ -77,7 +67,6 @@ public class LightSound : MonoBehaviour
         }
     }
 
-
     IEnumerator LightingCoroutine()
     {
         yield return new WaitForSeconds(LightDuration);
@@ -101,11 +90,9 @@ public class LightSound : MonoBehaviour
             totalTime += blinkInterval;
         }
     }
-    private bool isChargePlaying;
 
     private void BlinkingBehaviour()
     {
-        
         isOn = LightBehaviour.GetOnState();
         if (blinkInterval < 0.1f)
         {
@@ -119,21 +106,18 @@ public class LightSound : MonoBehaviour
             AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
             AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 1);
         } 
+
         isSoundPlaying = blinkInterval < 1;
-        // Determine if the blink sound should be played
         bool shouldPlayBlinkSound = !isOn && isSoundPlaying && !hasPlayedBlinkSound;
 
         if (shouldPlayBlinkSound)
         {
-            // Start playing the blink sound
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position); 
+            hasPlayedBlinkSound = true;
             //Debug.Log("Blink");
-
-            hasPlayedBlinkSound = true; // Mark that the blink sound has been played
         }
         else if (isOn || blinkInterval >= 1)
         {
-            // Reset the flag when the light is on or the blink interval is >= 1
             hasPlayedBlinkSound = false;
         }   
     }

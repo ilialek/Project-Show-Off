@@ -1,13 +1,9 @@
 using FMOD.Studio;
 using FMODUnity;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.XR.Content.Interaction;
-using UnityEngine.Events;
+
 
 public class CartSound : MonoBehaviour
 {
@@ -23,7 +19,6 @@ public class CartSound : MonoBehaviour
     private StudioEventEmitter cartEmitter;
 
     private EventInstance leverInstance;
-    private EventInstance brakeInstance;
     private EventInstance engineHeatInstance;
     private float rotationStrength;
     private bool isPlaying;
@@ -33,7 +28,6 @@ public class CartSound : MonoBehaviour
     private float previousValue;
     private bool hasSignificantChange;
     private bool isAtDefaultPosition = true;
-    private Vector3 lookDirection;
     bool isUserInteracting;
 
     private float leverPosition;
@@ -59,21 +53,16 @@ public class CartSound : MonoBehaviour
         xrLever = FindObjectOfType<XRLever>();
         engineTemperature = FindObjectOfType<EngineTemperature>();
         initialLeverValue = xrLever.GetLeverValue();
-        Debug.Log("Initial Look Direction: " + xrLever.GetLookDirection());
         previousValue = initialLeverValue;
     }
 
     private void InitializeAudioInstances()
     {
         leverInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Lever);
-        brakeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Brake);
         engineHeatInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.EngineHeat);
-        engineHeatInstance.start();
-        cartEmitter.Play();
-        engineHeatInstance.release();
-        cartEmitter.EventInstance.release();
+        engineHeatInstance.start(); engineHeatInstance.release();
+        cartEmitter.Play(); cartEmitter.EventInstance.release();
         leverInstance.start(); leverInstance.release(); leverInstance.setPaused(true);
-        brakeInstance.start(); brakeInstance.release(); brakeInstance.setPaused(true);
     }
 
     private void UpdateSoundLogic()
@@ -107,14 +96,13 @@ public class CartSound : MonoBehaviour
         {
             StopLeverSound();
         }
-
         previousValue = leverPosition;
     }
 
     private void HandleLeverInteraction(float input)
     {
         hasSignificantChange = Mathf.Abs(rotationStrength) > threshold;
-        
+
         if (hasSignificantChange && !isPlaying)
         {
             
@@ -145,7 +133,6 @@ public class CartSound : MonoBehaviour
 
         if (isUserInteracting && !isAtDefaultPosition)
         {
-            lookDirection = xrLever.GetLookDirection();
             HandleBrakeInteraction();
         }
         else if (leverPosition != initialLeverValue)
@@ -156,15 +143,13 @@ public class CartSound : MonoBehaviour
 
     private void HandleBrakeInteraction()
     {
-        if (lookDirection.z < 0 && !brakeOn && lookDirection.y < 0.4f)
+        if (leverPosition == 0 && !brakeOn)
         {
-            brakeInstance.setPaused(false);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Brake, transform.position);
             brakeOn = true;
-        }
-        else if ((lookDirection.z >= 0 || !brakeOn) && brakeOn)
+        }else if (leverPosition > 0.4f)
         {
-            brakeInstance.setPaused(true);
-            brakeOn = false;
+            brakeOn=false;
         }
     }
 
@@ -203,12 +188,9 @@ public class CartSound : MonoBehaviour
         float tempAngle = engineTemperature.GetEngineTemperature();
         float minValue = -90f;
         float maxValue = 90f;
-
         float normalizedValue = (tempAngle - minValue) / (maxValue - minValue);
-        AudioManager.instance.SetInstanceParameter(engineHeatInstance, "EngineHeatVal", normalizedValue);
-        engineHeatInstance.getParameterByName("EngineHeatVal", out float changedParamValue);
 
-        //Debug.Log($"ChangedParamValue: {changedParamValue}");
+        AudioManager.instance.SetInstanceParameter(engineHeatInstance, "EngineHeatVal", normalizedValue);
     }
 
     void OnDestroy()
@@ -216,6 +198,5 @@ public class CartSound : MonoBehaviour
         cartEmitter.Stop();
         engineHeatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         leverInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        brakeInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
