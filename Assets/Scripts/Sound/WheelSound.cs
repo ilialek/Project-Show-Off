@@ -33,6 +33,10 @@ public class WheelSound : MonoBehaviour
         wheelChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.WheelRotation);
 
         XRKnob = FindObjectOfType<XRKnob>();
+
+        wheelChargeInstance.start(); wheelChargeInstance.release(); wheelChargeInstance.setPaused(true);
+        backspinInstance.start(); backspinInstance.release(); backspinInstance.setPaused(true);
+
     }
 
     private void FixedUpdate()
@@ -45,7 +49,7 @@ public class WheelSound : MonoBehaviour
     {
         if (!isWheelChargePlaying && wheelChargeInstance.isValid())
         {
-            wheelChargeInstance.start();
+            wheelChargeInstance.setPaused(false);
             isWheelChargePlaying = true;
         }
     }
@@ -55,7 +59,7 @@ public class WheelSound : MonoBehaviour
     {
         if (!isBackspinPlaying && backspinInstance.isValid())
         {
-            backspinInstance.start();
+            backspinInstance.setPaused(false);
             isBackspinPlaying = true;
         }
     }
@@ -65,7 +69,7 @@ public class WheelSound : MonoBehaviour
     {
         if (isWheelChargePlaying && wheelChargeInstance.isValid())
         {
-            wheelChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            wheelChargeInstance.setPaused(true);
             isWheelChargePlaying = false;
         }
     }
@@ -75,7 +79,7 @@ public class WheelSound : MonoBehaviour
     {
         if (isBackspinPlaying && backspinInstance.isValid())
         {
-            backspinInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            backspinInstance.setPaused(true);
             isBackspinPlaying = false;
         }
     }

@@ -64,6 +64,10 @@ public class CartSound : MonoBehaviour
         engineHeatInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.EngineHeat);
         engineHeatInstance.start();
         cartEmitter.Play();
+        engineHeatInstance.release();
+        cartEmitter.EventInstance.release();
+        leverInstance.start(); leverInstance.release(); leverInstance.setPaused(true);
+        brakeInstance.start(); brakeInstance.release(); brakeInstance.setPaused(true);
     }
 
     private void UpdateSoundLogic()
@@ -107,7 +111,7 @@ public class CartSound : MonoBehaviour
         {
             hasSignificantChange = Mathf.Abs(rotationStrength - previousValue) > threshold;
             AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", rotationStrength);
-            leverInstance.start();
+            leverInstance.setPaused(false);
             isPlaying = true;
             //Debug.Log("startsound");
         }
@@ -123,7 +127,7 @@ public class CartSound : MonoBehaviour
     {
         if (isPlaying)
         {
-            leverInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            leverInstance.setPaused(true);
             isPlaying = false;
             //Debug.Log("stop");
         }
@@ -150,12 +154,12 @@ public class CartSound : MonoBehaviour
     {
         if (lookDirection.z < 0 && !brakeOn && lookDirection.y < 0.4f)
         {
-            brakeInstance.start();
+            brakeInstance.setPaused(false);
             brakeOn = true;
         }
         else if ((lookDirection.z >= 0 || !brakeOn) && brakeOn)
         {
-            brakeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            brakeInstance.setPaused(true);
             brakeOn = false;
         }
     }
@@ -206,5 +210,8 @@ public class CartSound : MonoBehaviour
     void OnDestroy()
     {
         cartEmitter.Stop();
+        engineHeatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        leverInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        brakeInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }

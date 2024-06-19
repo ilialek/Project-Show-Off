@@ -6398,6 +6398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25c14420ee37104db4f467ca2485152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  CartSFXVolume: 1
+  ambienceVolume: 1
+  SFXVolume: 1
 --- !u!4 &1168930002
 Transform:
   m_ObjectHideFlags: 0
@@ -17651,7 +17655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6835908547699515250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -140.6895, y: 15.308236, z: -516.1}
+  m_LocalPosition: {x: -140.6895, y: 15.308236, z: -519.39}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:

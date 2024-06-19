@@ -1,5 +1,6 @@
 using FMOD.Studio;
 using FMODUnity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -29,25 +30,10 @@ public class LightSound : MonoBehaviour
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
+        previousKnobValue = LightBehaviour.GetKnobValue();
         lightChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.LightCharge);
         Blink = AudioManager.instance.CreateInstance(FMODEvents.instance.Blink);
-        previousKnobValue = LightBehaviour.GetKnobValue();
-    }
-
-    public void PlayOneShotSound(EventReference sound, Vector3 worldPos)
-    {
-        if (!soundInstances.ContainsKey(sound) || !soundInstances[sound])
-        {
-            soundInstances[sound] = true;
-            AudioManager.instance.PlayOneShot(sound, worldPos);
-            StartCoroutine(ResetSoundState(sound));
-        }
-    }
-
-    private IEnumerator ResetSoundState(EventReference sound)
-    {
-        yield return new WaitForSeconds(2f);
-        soundInstances[sound] = false;
+        lightChargeInstance.start(); lightChargeInstance.release(); lightChargeInstance.setPaused(true);
     }
 
     // Update is called once per frame
@@ -59,70 +45,43 @@ public class LightSound : MonoBehaviour
         coroutineStarted = LightBehaviour.GetCoroutineState();
         LightDuration = LightBehaviour.GetLightDuration();
         preDelay = LightBehaviour.GetPreDelay();
-        isOn = LightBehaviour.GetOnState();
+        
 
         float currentTime = Time.time;
 
         if (!lightIsSet)
-        {
+        {  
             if (knobValue > 0 && knobValue < 1)
             {
                 BlinkingBehaviour();
+                lightChargeInstance.setPaused(false);
+
             }
-            else if (knobValue == 1)
-            {
-                lightChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                Debug.Log("Light On/Wheel full");
+            else if (knobValue == 0) {
+                AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
+                AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
+                lightChargeInstance.setPaused(true);
             }
         }
         else
         {
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
+            lightChargeInstance.setPaused(true);
             if (!coroutineStarted)
             {
-                //PlayOneShotSound(FMODEvents.instance.LightOn, transform.position);
-                //PlayOneShotSound(FMODEvents.instance.WheelFull, transform.position);
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.LightOn, transform.position);
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.WheelFull, transform.position);
-                lightChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 StartCoroutine(LightingCoroutine());
             }
         }
-        /*
-        bool wasSoundPlaying = isSoundPlaying;
-        isSoundPlaying = blinkInterval < 1;
-        //Debug.Log($"Blink Interval: {blinkInterval}, IsSoundPlaying: {isSoundPlaying}");
-
-        //Debug.Log(isOn);
-
-        bool shouldPlayBlinkSound = !isOn && !hasPlayedBlinkSound && isSoundPlaying;
-
-        if (shouldPlayBlinkSound)
-        {
-            // Start playing the blink sound
-            Blink.start();
-            //AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position);
-            hasPlayedBlinkSound = true; // Mark that the blink sound has been played
-            isSoundPlaying = false;
-            Debug.Log("Blink");
-        }
-
-        if (!isSoundPlaying && wasSoundPlaying)
-        {
-            // Stop playing the light charge sound
-            //Blink.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            lightChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            PlayOneShotSound(FMODEvents.instance.LightOffclick, transform.position);
-            hasPlayedBlinkSound = false; // Reset flag when blink stops
-            Debug.Log("No Blink");
-        }
-        */
     }
 
 
     IEnumerator LightingCoroutine()
     {
         yield return new WaitForSeconds(LightDuration);
-        PlayOneShotSound(FMODEvents.instance.LightWarning, transform.position);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.LightWarning, transform.position);
 
         yield return new WaitForSeconds(preDelay);
         StartCoroutine(EndBlinkCoroutine());
@@ -134,8 +93,6 @@ public class LightSound : MonoBehaviour
         float blinkInterval = 0.05f; // Interval between blinks in seconds
         float blinkDuration = 1.6f; // Total duration of blinking in seconds
 
-        // Play the one-shot sound before starting the blinking
-        //PlayOneShotSound(FMODEvents.instance.LightOff, transform.position);
         AudioManager.instance.PlayOneShot(FMODEvents.instance.LightOff, transform.position);
 
         while (totalTime < blinkDuration)
@@ -144,32 +101,12 @@ public class LightSound : MonoBehaviour
             totalTime += blinkInterval;
         }
     }
+    private bool isChargePlaying;
 
     private void BlinkingBehaviour()
     {
-
-
-        bool wasSoundPlaying = isSoundPlaying;
-
-        // Determine if a new blink sound should play
-        bool shouldPlayBlinkSound = isOn && isSoundPlaying;
-        AudioManager.instance.SetInstanceParameter(Blink, "BlinkCharge", blinkInterval);
-        if (shouldPlayBlinkSound)
-        {
-            // Start playing the blink sound
-            Blink.start();
-            hasPlayedBlinkSound = true; // Mark that the blink sound has been played
-            isSoundPlaying = false;
-            //Debug.Log("Blink");
-        }
-        hasPlayedBlinkSound = false; // Reset flag when blink stops
-        isSoundPlaying = true;
-
-        isSoundPlaying = blinkInterval < 1;
-        //Debug.Log($"Blink Interval: {blinkInterval}, IsSoundPlaying: {isSoundPlaying}");
-
-        //Debug.Log(isOn);
-
+        
+        isOn = LightBehaviour.GetOnState();
         if (blinkInterval < 0.1f)
         {
             //Debug.Log("FastBlink");
@@ -181,24 +118,23 @@ public class LightSound : MonoBehaviour
             //Debug.Log("SlowBlink");
             AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
             AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 1);
-        }
+        } 
+        isSoundPlaying = blinkInterval < 1;
+        // Determine if the blink sound should be played
+        bool shouldPlayBlinkSound = !isOn && isSoundPlaying && !hasPlayedBlinkSound;
 
-        if (isSoundPlaying && !wasSoundPlaying)
+        if (shouldPlayBlinkSound)
         {
-            // Start playing the light charge sound
-            lightChargeInstance.start();
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 1);
-            
-            Debug.Log("Light charge started");
+            // Start playing the blink sound
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position);
+            //Debug.Log("Blink");
+
+            hasPlayedBlinkSound = true; // Mark that the blink sound has been played
         }
-        else if (!isSoundPlaying && wasSoundPlaying)
+        else if (isOn || blinkInterval >= 1)
         {
-            Blink.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            lightChargeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.LightOffclick, transform.position);
-            Debug.Log("Light charge stopped");
-        }
-     
+            // Reset the flag when the light is on or the blink interval is >= 1
+            hasPlayedBlinkSound = false;
+        }   
     }
 }
