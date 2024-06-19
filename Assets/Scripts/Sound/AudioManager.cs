@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     private List<StudioEventEmitter> eventEmitters;
     public static AudioManager instance { get; private set; }
 
+
+    private EventInstance ambienceEventInstance;
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -26,13 +29,26 @@ public class AudioManager : MonoBehaviour
         eventEmitters = new List<StudioEventEmitter>();
     }
 
+    private void Start()
+    {
+        InitializeAmbience(FMODEvents.instance.Ambience1);
+    }
+
+    private void InitializeAmbience(EventReference ambienceEventReference)
+    {
+        ambienceEventInstance = CreateInstance(ambienceEventReference);
+        ambienceEventInstance.start();
+    }
+
+
+
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
 
-    public StudioEventEmitter InitializeEventEmmiter(EventReference eventReference, GameObject emitterGameObject)
+    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
     {
         StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
         emitter.EventReference = eventReference;
@@ -58,6 +74,21 @@ public class AudioManager : MonoBehaviour
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
         return eventInstance;
+    }
+
+
+    public void SetAmbienceParameter(string parameterName, float parameterValue)
+    {
+        ambienceEventInstance.setParameterByName(parameterName, parameterValue);
+    }
+
+
+    public void SetEmitterParameter(StudioEventEmitter emitter, string parameterName, float parameterValue)
+    {
+        if (emitter != null)
+        {
+            emitter.EventInstance.setParameterByName(parameterName, parameterValue);
+        }
     }
 
     private void OnDestroy()
