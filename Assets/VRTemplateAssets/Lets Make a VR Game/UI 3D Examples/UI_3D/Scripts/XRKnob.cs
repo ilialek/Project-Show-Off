@@ -450,8 +450,9 @@ namespace UnityEngine.XR.Content.Interaction
             angleDelta = Math.Abs(angleDelta) % max;
             if (angleDelta > (max * 0.5f))
                 angleDelta = -(max - angleDelta);
-
             return angleDelta * angleSign;
+
+           
         }
 
         void OnDrawGizmosSelected()

@@ -26,6 +26,16 @@ public class WheelSound : MonoBehaviour
     private bool isRotationChanging = false;
     private bool hasPlayedWheelNull = true;
 
+
+
+    // Previous value and time
+    private float previousValue;
+    private float previousTime;
+
+    // Current rate of change
+    public float rateOfChange;
+    private float smoothedRateOfChange;
+
     private XRKnob XRKnob;
     void Start()
     {
@@ -37,12 +47,63 @@ public class WheelSound : MonoBehaviour
         wheelChargeInstance.start(); wheelChargeInstance.release(); wheelChargeInstance.setPaused(true);
         backspinInstance.start(); backspinInstance.release(); backspinInstance.setPaused(true);
 
+        previousValue = Mathf.Clamp(XRKnob.GetTheYRotationInDegrees(), 0f, 1f);
+        previousTime = Time.time;
+
+    }
+
+    void Update()
+    {
+        
     }
 
     private void FixedUpdate()
-    {      
+    {
+        rotation = XRKnob.GetTheYRotationInDegrees();
+        float normalizedRotation = NormalizeRotation(rotation);
+
         HandleSoundLogic();
+
+        // Clamp rotation for rate of change calculation
+        float rotationspeed = Mathf.Clamp(normalizedRotation, 0f, 1f);
+
+        // Calculate the current time and value
+        float currentTime = Time.time;
+        float currentValue = rotationspeed;
+
+        // Calculate the change in value and time
+        float deltaValue = currentValue - previousValue;
+        float deltaTime = currentTime - previousTime;
+
+        // Calculate the rate of change (deltaValue / deltaTime)
+        if (deltaTime > 0) // Ensure we don't divide by zero
+        {
+            rateOfChange = deltaValue / deltaTime;
+        }
+
+        // Smooth the rate of change using a simple moving average
+        smoothedRateOfChange = Mathf.Lerp(smoothedRateOfChange, rateOfChange, 0.1f);
+
+        smoothedRateOfChange = Mathf.Clamp(smoothedRateOfChange, 0f, 1f);
+
+        // Update previous values for the next frame
+        previousValue = currentValue;
+        previousTime = currentTime;
+
+        // Debug log the rate of change
+        Debug.Log(smoothedRateOfChange);
+
+        AudioManager.instance.SetInstanceParameter(wheelChargeInstance,"WheelForce", smoothedRateOfChange);
     }
+
+    // Normalize rotation value to be between 0 and 1
+    private float NormalizeRotation(float rotation)
+    {
+        // Assuming rotation is in degrees and ranges between 0 and 360
+        return Mathf.InverseLerp(0f, 360f, rotation);
+    }
+
+
 
     // Method to play the wheel charge sound
     private void PlayWheelChargeSound()
@@ -88,7 +149,7 @@ public class WheelSound : MonoBehaviour
     private void HandleSoundLogic()
     {
         isUserInteracting = XRKnob.GetUserState();
-        rotation = XRKnob.GetTheYRotationInDegrees();
+
 
         isRotationChanging = Mathf.Abs(rotation - previousRotation) > RotationTreshold;
         //Debug.Log($"Radical Change! Current: {rotation}, Previous: {previousRotation}, Difference: {Math.Abs(rotation - previousRotation)}");

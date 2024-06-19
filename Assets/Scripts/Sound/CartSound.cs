@@ -5,7 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.Content.Interaction;
+using UnityEngine.Events;
 
 public class CartSound : MonoBehaviour
 {
@@ -19,22 +21,25 @@ public class CartSound : MonoBehaviour
     private XRLever xrLever;
     private EngineTemperature engineTemperature;
     private StudioEventEmitter cartEmitter;
-    private float previousValue;
+
     private EventInstance leverInstance;
     private EventInstance brakeInstance;
     private EventInstance engineHeatInstance;
-
     private float rotationStrength;
     private bool isPlaying;
     private bool brakeOn = false;
 
     private float initialLeverValue;
+    private float previousValue;
+    private bool hasSignificantChange;
     private bool isAtDefaultPosition = true;
-
     private Vector3 lookDirection;
+    bool isUserInteracting;
 
-    [SerializeField, Range(0.01f, 1f)] private float threshold = 0.01f;
-    [SerializeField, Range(0.01f, 1f)] private float deadzone = 0.01f;
+    private float leverPosition;
+
+    [SerializeField, Range(0.001f, 1f)] private float threshold = 0.001f;
+    [SerializeField, Range(0.01f, 0.1f)] private float deadzone = 0.01f;
 
     void Start()
     {
@@ -55,6 +60,7 @@ public class CartSound : MonoBehaviour
         engineTemperature = FindObjectOfType<EngineTemperature>();
         initialLeverValue = xrLever.GetLeverValue();
         Debug.Log("Initial Look Direction: " + xrLever.GetLookDirection());
+        previousValue = initialLeverValue;
     }
 
     private void InitializeAudioInstances()
@@ -76,6 +82,9 @@ public class CartSound : MonoBehaviour
         UpdateBrakeSound();
         UpdateCartMovementSound();
         UpdateEngineHeatSound();
+
+        leverPosition = xrLever.GetLeverValue();
+        isUserInteracting = xrLever.GetLeverInteracting();
     }
 
     private float GetRotationStrength(float currentRotation, float previousRotation)
@@ -88,38 +97,36 @@ public class CartSound : MonoBehaviour
 
     private void UpdateThrottleSound()
     {
-        bool isUserInteracting = xrLever.GetLeverInteracting();
-        float rotationStrengthRaw = GetRotationStrength(lookDirection.y, previousValue);
-        rotationStrength = Math.Abs(rotationStrengthRaw);
+        rotationStrength = GetRotationStrength(leverPosition, previousValue);
 
         if (isUserInteracting)
         {
-            HandleLeverInteraction(rotationStrength);
+            HandleLeverInteraction(leverPosition);
         }
         else
         {
             StopLeverSound();
         }
 
-        previousValue = rotationStrength;
+        previousValue = leverPosition;
     }
 
-    private void HandleLeverInteraction(float rotationStrength)
+    private void HandleLeverInteraction(float input)
     {
-        bool hasSignificantChange = Mathf.Abs(rotationStrength - previousValue) > threshold;
+        hasSignificantChange = Mathf.Abs(rotationStrength) > threshold;
+        
         if (hasSignificantChange && !isPlaying)
         {
-            hasSignificantChange = Mathf.Abs(rotationStrength - previousValue) > threshold;
-            AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", rotationStrength);
+            
             leverInstance.setPaused(false);
             isPlaying = true;
-            //Debug.Log("startsound");
+            AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", leverPosition);
+            //Debug.Log("Start lever sound");
         }
-        else if (!hasSignificantChange)
+        else if (!hasSignificantChange && isPlaying)
         {
             StopLeverSound();
-            isPlaying = false;
-            //Debug.Log("stopwhileinteraction");
+            //Debug.Log("Stop lever sound while interacting");
         }
     }
 
@@ -129,22 +136,19 @@ public class CartSound : MonoBehaviour
         {
             leverInstance.setPaused(true);
             isPlaying = false;
-            //Debug.Log("stop");
+            //Debug.Log("Stop lever sound");
         }
-        previousValue = 0f;
     }
 
     private void UpdateBrakeSound()
     {
-        bool isUserInteracting = xrLever.GetLeverInteracting();
-        float leverValue = xrLever.GetLeverValue();
 
         if (isUserInteracting && !isAtDefaultPosition)
         {
             lookDirection = xrLever.GetLookDirection();
             HandleBrakeInteraction();
         }
-        else if (leverValue != initialLeverValue)
+        else if (leverPosition != initialLeverValue)
         {
             isAtDefaultPosition = false;
         }
@@ -171,7 +175,7 @@ public class CartSound : MonoBehaviour
         float targetRattle = 0f;
         float waterfallFade = 1f;
 
-        speed = xrLever.GetLeverValue();
+        speed = leverPosition;
         smoothedSpeed = Mathf.Lerp(smoothedSpeed, speed, smoothSpeedFactor);
 
         if (progression > 12 && progression < 17)
