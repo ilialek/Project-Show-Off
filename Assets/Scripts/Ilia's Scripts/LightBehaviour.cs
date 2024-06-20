@@ -130,7 +130,7 @@ public class LightBehaviour : MonoBehaviour, IEventListener
 
                 if (isAwaitingLight)
                 {
-                    EventBus.Instance.Emit(new EventMonsterLit());
+                    EventBus.Instance.Emit(new EventMonsterLit(hitCollider));
                     isAwaitingLight = false;
                 }
             }
@@ -170,4 +170,12 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     }
 }
 
-public class EventMonsterLit : Event { }
+public class EventMonsterLit : Event 
+{
+    Collider monsterCollider;
+
+    public EventMonsterLit(Collider _monsterCollider)
+    {
+        monsterCollider = _monsterCollider;
+    }
+}

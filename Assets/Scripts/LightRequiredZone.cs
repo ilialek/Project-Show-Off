@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class LightRequiredZone : MonoBehaviour, IEventListener
 {
+    [SerializeField] CartBehaviour cart;
+
     [SerializeField] ProgressionTrigger entry;
     [SerializeField] ProgressionTrigger exit;
 
     private bool hasLit = false;
+
+    void Start()
+    {
+        EventBus.Instance.Register(this);
+        RideProgression.Instance.AddThreshold(entry);
+        RideProgression.Instance.AddThreshold(exit);
+    }
 
     public void OnEvent(Event e)
     {
@@ -26,6 +35,7 @@ public class LightRequiredZone : MonoBehaviour, IEventListener
                 else
                 {
                     print("not ok");
+                    cart.OnGameOver();
                 }
             }
         }
@@ -35,12 +45,9 @@ public class LightRequiredZone : MonoBehaviour, IEventListener
         }
     }
 
-    void Start()
-    {
-        EventBus.Instance.Register(this);
-        RideProgression.Instance.AddThreshold(entry);
-        RideProgression.Instance.AddThreshold(exit);
-    }
+
 }
 
 public class EventLightRequiredZoneEntered : Event { }
+
+public class EventLightRequiredZoneFailed : Event { }
