@@ -1574,6 +1574,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7252025237873701082, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8320294453335888121, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1588,6 +1592,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 954591851760057252, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1054148970}
+    - targetCorrespondingSourceObject: {fileID: 7252025237873701082, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1274055872}
   m_SourcePrefab: {fileID: 100100000, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
 --- !u!4 &122724630 stripped
 Transform:
@@ -1662,11 +1669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38baa2d5f5100214aa194bdd25e8b1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold:
-    threshold: 7.82
-    deadzone: 2.24
-    oneShot: 0
-    passed: 0
 --- !u!65 &139116743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1753,6 +1755,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &142087552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2910029191845569514, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
+  m_PrefabInstance: {fileID: 742013472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &162268693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1860,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &207984562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7459442142708147920, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+  m_PrefabInstance: {fileID: 973290110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &210499213
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,6 +4736,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2910029191845569514, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910029191845569514, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4753,7 +4769,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5766835434376966388, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1687868100}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2910029191845569514, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 742013479}
   m_SourcePrefab: {fileID: 100100000, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
 --- !u!4 &742013473 stripped
 Transform:
@@ -4765,6 +4784,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5766835434376966388, guid: f987e56f5c36e264e888555e47dec1bc, type: 3}
   m_PrefabInstance: {fileID: 742013472}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &742013479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142087552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.2
+  outlined:
+  - {fileID: 142087552}
+  isRope: 1
 --- !u!1 &745602674
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,125 +4966,6 @@ MonoBehaviour:
       Data3: 1555344806
       Data4: -1738280614
     Path: event:/Test
-  <Cart>k__BackingField:
-    Guid:
-      Data1: 1937923348
-      Data2: 1293243145
-      Data3: -23447635
-      Data4: 994830250
-    Path: event:/Cart
-  <Hand>k__BackingField:
-    Guid:
-      Data1: 1918902040
-      Data2: 1081037154
-      Data3: -526989664
-      Data4: -1715516837
-    Path: event:/Hand
-  <LightOff>k__BackingField:
-    Guid:
-      Data1: 470804169
-      Data2: 1328361173
-      Data3: -1919240775
-      Data4: 169178233
-    Path: event:/LightOff
-  <LightOffclick>k__BackingField:
-    Guid:
-      Data1: -1361519216
-      Data2: 1215299465
-      Data3: 1148850102
-      Data4: 1309453612
-    Path: event:/LightOffclick
-  <LightWarning>k__BackingField:
-    Guid:
-      Data1: -1642714621
-      Data2: 1263723545
-      Data3: -2029005165
-      Data4: 1816937231
-    Path: event:/LightWarning
-  <LightCharge>k__BackingField:
-    Guid:
-      Data1: 752826423
-      Data2: 1274556945
-      Data3: 1812961170
-      Data4: 671765471
-    Path: event:/LightCharging
-  <LightOn>k__BackingField:
-    Guid:
-      Data1: -928506327
-      Data2: 1229548686
-      Data3: 1076464780
-      Data4: 1636647774
-    Path: event:/LightOn
-  <WheelRotation>k__BackingField:
-    Guid:
-      Data1: -2021817901
-      Data2: 1075567744
-      Data3: 2081400739
-      Data4: 491501956
-    Path: event:/WheelRotation
-  <WheelFull>k__BackingField:
-    Guid:
-      Data1: -147330391
-      Data2: 1189637284
-      Data3: 1942560916
-      Data4: 1970391904
-    Path: event:/WheelFull
-  <WheelNull>k__BackingField:
-    Guid:
-      Data1: -799873818
-      Data2: 1308934919
-      Data3: -34598230
-      Data4: -450024446
-    Path: event:/WheelNull
-  <Grab>k__BackingField:
-    Guid:
-      Data1: 1498323769
-      Data2: 1248604886
-      Data3: 452342419
-      Data4: 1559425306
-    Path: event:/Grab
-  <Backspin>k__BackingField:
-    Guid:
-      Data1: 1883207143
-      Data2: 1291340743
-      Data3: 1843821984
-      Data4: 69769719
-    Path: event:/Backspin
-  <Bats>k__BackingField:
-    Guid:
-      Data1: 1572099568
-      Data2: 1202558559
-      Data3: 1513816462
-      Data4: 407690120
-    Path: event:/Bats
-  <Blink>k__BackingField:
-    Guid:
-      Data1: 137952993
-      Data2: 1280185920
-      Data3: 885464738
-      Data4: -1534707032
-    Path: event:/Blink
-  <Lever>k__BackingField:
-    Guid:
-      Data1: 371964898
-      Data2: 1280802662
-      Data3: -2072109635
-      Data4: -1997671971
-    Path: event:/Lever
-  <Brake>k__BackingField:
-    Guid:
-      Data1: -1703345575
-      Data2: 1327062326
-      Data3: -570973512
-      Data4: -220436675
-    Path: event:/Brake
-  <EngineHeat>k__BackingField:
-    Guid:
-      Data1: 917669726
-      Data2: 1182169616
-      Data3: -1589292393
-      Data4: -431922285
-    Path: event:/EngineHeat
 --- !u!1 &805305760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5468,16 +5387,15 @@ MonoBehaviour:
     m_Bits: 256
   handPrefab: {fileID: 1293303780}
   inputDeviceCharacteristics: 256
+  cartRigidBody: {fileID: 0}
   moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
-  direction: 0
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
-  emitter: {fileID: 813758703}
 --- !u!114 &813758703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5521,12 +5439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144dfafa85f58e742b90a8a952027365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ropeLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  inputDeviceCharacteristics: 256
-  pullingForce: 5
-  rigidBodyToPull: {fileID: 656211721}
 --- !u!1 &859065109
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,11 +6035,27 @@ PrefabInstance:
     m_TransformParent: {fileID: 317479228524808144}
     m_Modifications:
     - target: {fileID: 181313968651555345, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181313968651555345, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 703244385185758329, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3983393910282126993, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085524165433171635, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787228807492158669, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4787228807492158669, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
@@ -6202,21 +6130,33 @@ PrefabInstance:
       propertyPath: cartBehaviourScript
       value: 
       objectReference: {fileID: 6835908547699515253}
+    - target: {fileID: 5433587972373598511, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7459442142708147920, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_Name
       value: Lever
       objectReference: {fileID: 0}
     - target: {fileID: 7459442142708147920, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459442142708147920, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7483610665172923651, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8042734651732729076, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9063079
+      value: 0.9063078
       objectReference: {fileID: 0}
     - target: {fileID: 8042734651732729076, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.42261827
+      value: -0.4226183
       objectReference: {fileID: 0}
     - target: {fileID: 8042734651732729076, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6225,7 +6165,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7459442142708147920, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1590098367}
   m_SourcePrefab: {fileID: 100100000, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
 --- !u!4 &973290111 stripped
 Transform:
@@ -6546,8 +6489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ce830dea85b51438f5997718a2d257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationTreshold: 0.1
-  rateOfChange: 0
 --- !u!1 &1060593582
 GameObject:
   m_ObjectHideFlags: 0
@@ -6819,10 +6760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25c14420ee37104db4f467ca2485152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 1
-  CartSFXVolume: 1
-  ambienceVolume: 1
-  SFXVolume: 1
 --- !u!4 &1168930002
 Transform:
   m_ObjectHideFlags: 0
@@ -7704,6 +7641,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268495675}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1274055867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7252025237873701082, guid: 04052c76cd8138f47bfc66ae8d456707, type: 3}
+  m_PrefabInstance: {fileID: 122724629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274055872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274055867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.3
+  outlined:
+  - {fileID: 1274055867}
+  - {fileID: 510234513}
+  isRope: 1
 --- !u!1001 &1293303779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15253,17 +15215,25 @@ Transform:
   m_Father: {fileID: 745602675}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1590098366 stripped
+--- !u!114 &1590098367
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5283898766228162098, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
-  m_PrefabInstance: {fileID: 973290110}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 207984562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e601cf28e9702c945abe3b90e7f51974, type: 3}
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.2
+  outlined:
+  - {fileID: 1657477817}
+  isRope: 1
 --- !u!1 &1591990611
 GameObject:
   m_ObjectHideFlags: 0
@@ -15370,13 +15340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd4550f6d8e4c34d91870be6cc124c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverScript: {fileID: 1590098366}
-  maxAngle: 90
-  minAngle: -90
-  transformToRotate: {fileID: 1886742997}
-  currentTemperature: 0
-  heatingMultiplier: 30
-  coolDownMultiplier: 20
 --- !u!136 &1645068683
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15578,6 +15541,11 @@ MonoBehaviour:
   - {fileID: 1547795878}
   - {fileID: 0}
   m_StartingInteractionOverridesMap: []
+--- !u!1 &1657477817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4787228807492158669, guid: 36eff8b49ecdca745894efb1d2ce5f8f, type: 3}
+  m_PrefabInstance: {fileID: 973290110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1687868099
 GameObject:
   m_ObjectHideFlags: 0
@@ -15711,7 +15679,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightingDuration: 15
-  preSoundDelay: 1.5
   detectableLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -16147,8 +16114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cba7e31a6b74b4f8fd2efed6756f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 582758591}
-  endPoint: {fileID: 1763963631}
 --- !u!1 &1849413265
 GameObject:
   m_ObjectHideFlags: 0
@@ -17439,16 +17404,15 @@ MonoBehaviour:
     m_Bits: 256
   handPrefab: {fileID: 984715566}
   inputDeviceCharacteristics: 512
+  cartRigidBody: {fileID: 0}
   moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
-  direction: 1
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
-  emitter: {fileID: 2139886124}
 --- !u!114 &2139886124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17494,12 +17458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144dfafa85f58e742b90a8a952027365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ropeLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  inputDeviceCharacteristics: 512
-  pullingForce: 5
-  rigidBodyToPull: {fileID: 656211721}
 --- !u!210 &2939256142648692
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -32589,7 +32547,6 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
-  leverValue: 0
 --- !u!114 &6835908547699515254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32633,9 +32590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ab2e4bc38601749b38101f0cea2f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeedFactor: 0.049
-  threshold: 0.001
-  deadzone: 0.01
 --- !u!1 &6838473833612663878
 GameObject:
   m_ObjectHideFlags: 0
