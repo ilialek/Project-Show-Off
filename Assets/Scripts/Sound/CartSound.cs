@@ -105,10 +105,9 @@ public class CartSound : MonoBehaviour
 
         if (hasSignificantChange && !isPlaying)
         {
-            
+            AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", leverPosition);
             leverInstance.setPaused(false);
             isPlaying = true;
-            AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", leverPosition);
             //Debug.Log("Start lever sound");
         }
         else if (!hasSignificantChange && isPlaying)
@@ -143,7 +142,7 @@ public class CartSound : MonoBehaviour
 
     private void HandleBrakeInteraction()
     {
-        if (leverPosition == 0 && !brakeOn)
+        if (leverPosition == 0 && !brakeOn && smoothedSpeed > 0.4f)
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.Brake, transform.position);
             brakeOn = true;
