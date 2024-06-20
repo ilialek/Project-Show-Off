@@ -1669,6 +1669,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38baa2d5f5100214aa194bdd25e8b1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  threshold:
+    threshold: 0
+    deadzone: 0
+    oneShot: 0
+    passed: 0
+    name: 
 --- !u!65 &139116743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4122,6 +4128,62 @@ Transform:
   m_Father: {fileID: 1345359287}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &594003309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594003310}
+  - component: {fileID: 594003311}
+  m_Layer: 0
+  m_Name: LightRequiredZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &594003310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594003309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594003311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594003309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf238b81c534d2049b8fe1575df6fee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entry:
+    threshold: 25
+    deadzone: 1
+    oneShot: 0
+    passed: 0
+    name: zone 1 start
+  exit:
+    threshold: 45
+    deadzone: 1
+    oneShot: 0
+    passed: 0
+    name: zone 1 end
 --- !u!1 &595044542
 GameObject:
   m_ObjectHideFlags: 0
@@ -4966,6 +5028,125 @@ MonoBehaviour:
       Data3: 1555344806
       Data4: -1738280614
     Path: event:/Test
+  <Cart>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Hand>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <LightOff>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <LightOffclick>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <LightWarning>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <LightCharge>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <LightOn>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <WheelRotation>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <WheelFull>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <WheelNull>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Grab>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Backspin>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Bats>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Blink>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Lever>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <Brake>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <EngineHeat>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &805305760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5387,15 +5568,16 @@ MonoBehaviour:
     m_Bits: 256
   handPrefab: {fileID: 1293303780}
   inputDeviceCharacteristics: 256
-  cartRigidBody: {fileID: 0}
   moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
+  direction: 0
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
+  emitter: {fileID: 0}
 --- !u!114 &813758703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5439,6 +5621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144dfafa85f58e742b90a8a952027365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ropeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  inputDeviceCharacteristics: 0
+  pullingForce: 0
+  rigidBodyToPull: {fileID: 0}
 --- !u!1 &859065109
 GameObject:
   m_ObjectHideFlags: 0
@@ -6489,6 +6677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ce830dea85b51438f5997718a2d257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotationTreshold: 0.1
+  rateOfChange: 0
 --- !u!1 &1060593582
 GameObject:
   m_ObjectHideFlags: 0
@@ -6760,6 +6950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25c14420ee37104db4f467ca2485152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  CartSFXVolume: 1
+  ambienceVolume: 1
+  SFXVolume: 1
 --- !u!4 &1168930002
 Transform:
   m_ObjectHideFlags: 0
@@ -6819,7 +7013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189024609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -140.65, y: 15.86, z: -505.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8024,89 +8218,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1345359287}
-  - component: {fileID: 1345359286}
-  - component: {fileID: 1345359285}
-  - component: {fileID: 1345359284}
   m_Layer: 6
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!136 &1345359284
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345359283}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!23 &1345359285
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345359283}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: e93ec5a3928b31a41a45fa2e4cb7ba93, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1345359286
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345359283}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_IsActive: 1
 --- !u!4 &1345359287
 Transform:
   m_ObjectHideFlags: 0
@@ -15340,6 +15458,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd4550f6d8e4c34d91870be6cc124c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leverScript: {fileID: 0}
+  maxAngle: 90
+  minAngle: -90
+  transformToRotate: {fileID: 0}
+  currentTemperature: 0
+  heatingMultiplier: 0
+  coolDownMultiplier: 0
 --- !u!136 &1645068683
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15679,6 +15804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightingDuration: 15
+  preSoundDelay: 0
   detectableLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -16114,6 +16240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cba7e31a6b74b4f8fd2efed6756f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint: {fileID: 582758591}
+  endPoint: {fileID: 1763963631}
 --- !u!1 &1849413265
 GameObject:
   m_ObjectHideFlags: 0
@@ -17404,15 +17532,16 @@ MonoBehaviour:
     m_Bits: 256
   handPrefab: {fileID: 984715566}
   inputDeviceCharacteristics: 512
-  cartRigidBody: {fileID: 0}
   moveForce: 10
   lightBehaviour: {fileID: 0}
   playerParentTransform: {fileID: 1833767966}
+  direction: 0
   didPullTheRope: 0
   treshold: 0.002
   resetThreshold: 0.1
   test: 
   velocityThreshold: 0.1
+  emitter: {fileID: 0}
 --- !u!114 &2139886124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17458,6 +17587,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144dfafa85f58e742b90a8a952027365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ropeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  inputDeviceCharacteristics: 0
+  pullingForce: 0
+  rigidBodyToPull: {fileID: 0}
 --- !u!210 &2939256142648692
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -32547,6 +32682,7 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
+  leverValue: 0
 --- !u!114 &6835908547699515254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32590,6 +32726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ab2e4bc38601749b38101f0cea2f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothSpeedFactor: 0.1
+  threshold: 0.001
+  deadzone: 0.01
 --- !u!1 &6838473833612663878
 GameObject:
   m_ObjectHideFlags: 0

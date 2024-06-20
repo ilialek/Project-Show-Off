@@ -11,23 +11,26 @@ public struct ProgressionTrigger
     [System.NonSerialized]
     public bool triggered;
     public bool passed;
+    public string name;
 
     // this assumes that the threshold is created in front of the cart. if not, set passed to true
-    public ProgressionTrigger(float threshold, float deadzone, bool oneShot, bool passed = false)
+    public ProgressionTrigger(float threshold, float deadzone, bool oneShot, bool passed = false, string name = "")
     {
         this.threshold = threshold;
         this.deadzone = Mathf.Max(deadzone, 0.01f);
         this.oneShot = oneShot;
         this.triggered = false;
         this.passed = passed;
+        this.name = name;
     }
-    public ProgressionTrigger(float threshold, float deadzone, bool oneShot, float currentDistance)
+    public ProgressionTrigger(float threshold, float deadzone, bool oneShot, float currentDistance, string name = "")
     {
         this.threshold = threshold;
         this.deadzone = Mathf.Max(deadzone, 0.01f);
         this.oneShot = oneShot;
         this.triggered = false;
         this.passed = currentDistance > threshold;
+        this.name = name;
     }
 
     public static bool operator ==(ProgressionTrigger t1, ProgressionTrigger t2)
