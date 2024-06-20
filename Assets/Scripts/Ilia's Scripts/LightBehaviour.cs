@@ -120,7 +120,7 @@ public class LightBehaviour : MonoBehaviour, IEventListener
             Vector3 directionToTarget = hitCollider.transform.position - transform.position;
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
-            if (angleToTarget < lightComponent.spotAngle / 2)
+            if (angleToTarget < lightComponent.spotAngle / 2 && lightIsSet)
             {
                 // Object is within the spotlight's cone
 

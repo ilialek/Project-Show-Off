@@ -21,7 +21,10 @@ public struct ProgressionTrigger
         this.oneShot = oneShot;
         this.triggered = false;
         this.passed = passed;
-        this.name = name;
+        if (name == "")
+            this.name = "Nameless Progression Trigger";
+        else
+            this.name = name;
     }
     public ProgressionTrigger(float threshold, float deadzone, bool oneShot, float currentDistance, string name = "")
     {
@@ -30,7 +33,10 @@ public struct ProgressionTrigger
         this.oneShot = oneShot;
         this.triggered = false;
         this.passed = currentDistance > threshold;
-        this.name = name;
+        if (name == "")
+            this.name = "Nameless Progression Trigger";
+        else
+            this.name = name;
     }
 
     public static bool operator ==(ProgressionTrigger t1, ProgressionTrigger t2)
