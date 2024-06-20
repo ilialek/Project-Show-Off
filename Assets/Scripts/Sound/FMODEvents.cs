@@ -29,6 +29,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Lever { get; private set; }
     [field: SerializeField] public EventReference Brake { get; private set; }
     [field: SerializeField] public EventReference EngineHeat { get; private set; }
+    [field: SerializeField] public EventReference LeverEnds { get; private set; }
     public static FMODEvents instance {get; private set;}
 
   
