@@ -79,5 +79,10 @@ public class CartBehaviour : MonoBehaviour
     {
         force = 0;
     }
+
+    public void PlayBreakAnimation()
+    {
+        // do it here
+    }
 }
 
