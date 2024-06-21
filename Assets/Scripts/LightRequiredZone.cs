@@ -9,7 +9,11 @@ public class LightRequiredZone : MonoBehaviour, IEventListener
     [SerializeField] ProgressionTrigger entry;
     [SerializeField] ProgressionTrigger exit;
 
+
+
     private bool hasLit = false;
+
+    Collider monsterCollider;
 
     void Start()
     {
@@ -39,9 +43,11 @@ public class LightRequiredZone : MonoBehaviour, IEventListener
                 }
             }
         }
-        if (e is EventMonsterLit)
+        if (e is EventMonsterLit __e)
         {
             hasLit = true;
+            this.monsterCollider = __e.monsterCollider;
+            monsterCollider.GetComponent<Animator>().SetBool("on_light_detected", true);
         }
     }
 

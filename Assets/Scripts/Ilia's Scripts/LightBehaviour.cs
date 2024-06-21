@@ -172,7 +172,7 @@ public class LightBehaviour : MonoBehaviour, IEventListener
 
 public class EventMonsterLit : Event 
 {
-    Collider monsterCollider;
+    public Collider monsterCollider;
 
     public EventMonsterLit(Collider _monsterCollider)
     {
