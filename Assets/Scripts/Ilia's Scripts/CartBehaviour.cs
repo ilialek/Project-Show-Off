@@ -52,17 +52,15 @@ public class CartBehaviour : MonoBehaviour
             }
         }
 
-        if (!isGameOver)
+        if (UnityEngine.InputSystem.Keyboard.current.uKey.isPressed)
         {
-            if (UnityEngine.InputSystem.Keyboard.current.uKey.isPressed)
-            {
-                transform.Translate(Vector3.forward * 50 * Time.deltaTime);
-            }
-            if (UnityEngine.InputSystem.Keyboard.current.jKey.isPressed)
-            {
-                transform.Translate(Vector3.back * 50 * Time.deltaTime);
-            }
+            transform.Translate(Vector3.forward * 50 * Time.deltaTime);
         }
+        if (UnityEngine.InputSystem.Keyboard.current.jKey.isPressed)
+        {
+            transform.Translate(Vector3.back * 50 * Time.deltaTime);
+        }
+        
     }
 
     // Update is called once per frame
