@@ -29,6 +29,7 @@ public class CartSound : MonoBehaviour
     private bool hasSignificantChange;
     private bool isAtDefaultPosition = true;
     bool isUserInteracting;
+    private bool hasEndPlayed;
 
     private float leverPosition;
 
@@ -87,7 +88,6 @@ public class CartSound : MonoBehaviour
     private void UpdateThrottleSound()
     {
         rotationStrength = GetRotationStrength(leverPosition, previousValue);
-
         if (isUserInteracting)
         {
             HandleLeverInteraction(leverPosition);
@@ -102,6 +102,19 @@ public class CartSound : MonoBehaviour
     private void HandleLeverInteraction(float input)
     {
         hasSignificantChange = Mathf.Abs(rotationStrength) > threshold;
+
+
+        if ((leverPosition == 0f || leverPosition == 1f) && !hasEndPlayed)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.LeverEnds, transform.position);
+            hasEndPlayed = true;
+            Debug.Log("Played LeverEnd sound at position: " + leverPosition);
+        }
+        else if (leverPosition != 0f || leverPosition != 1f && leverPosition > 0.9f)
+        {
+            hasEndPlayed = false;
+            Debug.Log("reset");
+        }
 
         if (hasSignificantChange && !isPlaying)
         {
@@ -146,9 +159,10 @@ public class CartSound : MonoBehaviour
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.Brake, transform.position);
             brakeOn = true;
-        }else if (leverPosition > 0.4f)
+        }
+        else if (leverPosition > 0.4f)
         {
-            brakeOn=false;
+            brakeOn = false;
         }
     }
 

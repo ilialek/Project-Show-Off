@@ -7,7 +7,7 @@ using UnityEngine;
 public class LightSound : MonoBehaviour
 {
     private bool isSoundPlaying = false;
-    private EventInstance lightChargeInstance;
+    private StudioEventEmitter lightChargeEmitter;
     private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
 
     private LightBehaviour LightBehaviour;
@@ -21,43 +21,49 @@ public class LightSound : MonoBehaviour
     private bool hasPlayedBlinkSound = false;
 
     private bool isOn;
+
     // Start is called before the first frame update
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
-        lightChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.LightCharge);
-        lightChargeInstance.start(); lightChargeInstance.release(); lightChargeInstance.setPaused(true);
+        lightChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
+        lightChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.LightCharge, gameObject);
+        lightChargeEmitter.PlayEvent = EmitterGameEvent.None;
+        lightChargeEmitter.StopEvent = EmitterGameEvent.None;
+
+        lightChargeEmitter.Play(); // Start playing the emitter but keep it paused initially
+        lightChargeEmitter.EventInstance.setPaused(true);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         knobValue = LightBehaviour.GetKnobValue();
         lightIsSet = LightBehaviour.GetLightState();
         blinkInterval = LightBehaviour.GetBlinkInterval();
         coroutineStarted = LightBehaviour.GetCoroutineState();
         LightDuration = LightBehaviour.GetLightDuration();
-        preDelay = LightBehaviour.GetPreDelay();       
+        preDelay = LightBehaviour.GetPreDelay();
 
         if (!lightIsSet)
-        {  
+        {
             if (knobValue > 0 && knobValue < 1)
             {
                 BlinkingBehaviour();
-                lightChargeInstance.setPaused(false);
-
+                lightChargeEmitter.EventInstance.setPaused(false);
             }
-            else if (knobValue == 0) {
-                AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
-                AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
-                lightChargeInstance.setPaused(true);
+            else if (knobValue == 0)
+            {
+                AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
+                AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
+                lightChargeEmitter.EventInstance.setPaused(true);
             }
         }
         else
         {
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
-            lightChargeInstance.setPaused(true);
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
+            lightChargeEmitter.EventInstance.setPaused(true);
             if (!coroutineStarted)
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.LightOn, transform.position);
@@ -67,7 +73,7 @@ public class LightSound : MonoBehaviour
         }
     }
 
-    IEnumerator LightingCoroutine()
+    private IEnumerator LightingCoroutine()
     {
         yield return new WaitForSeconds(LightDuration);
         AudioManager.instance.PlayOneShot(FMODEvents.instance.LightWarning, transform.position);
@@ -76,7 +82,7 @@ public class LightSound : MonoBehaviour
         StartCoroutine(EndBlinkCoroutine());
     }
 
-    IEnumerator EndBlinkCoroutine()
+    private IEnumerator EndBlinkCoroutine()
     {
         float totalTime = 0f;
         float blinkInterval = 0.05f; // Interval between blinks in seconds
@@ -96,29 +102,26 @@ public class LightSound : MonoBehaviour
         isOn = LightBehaviour.GetOnState();
         if (blinkInterval < 0.1f)
         {
-            //Debug.Log("FastBlink");
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 0);
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 1);
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 1);
         }
         else if (blinkInterval >= 0.1f)
         {
-            //Debug.Log("SlowBlink");
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0);
-            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightLoop", 1);
-        } 
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
+            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 1);
+        }
 
         isSoundPlaying = blinkInterval < 1;
         bool shouldPlayBlinkSound = !isOn && isSoundPlaying && !hasPlayedBlinkSound;
 
         if (shouldPlayBlinkSound)
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position); 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position);
             hasPlayedBlinkSound = true;
-            //Debug.Log("Blink");
         }
         else if (isOn || blinkInterval >= 1)
         {
             hasPlayedBlinkSound = false;
-        }   
+        }
     }
 }

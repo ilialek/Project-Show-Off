@@ -1,12 +1,12 @@
 using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using XRKnob = UnityEngine.XR.Content.Interaction.XRKnob;
 
-
 public class WheelSound : MonoBehaviour
 {
-    private EventInstance wheelChargeInstance;
     private EventInstance backspinInstance;
+    private StudioEventEmitter wheelChargeEmitter;
 
     private bool isWheelChargePlaying = false;
     private bool isBackspinPlaying = false;
@@ -15,7 +15,7 @@ public class WheelSound : MonoBehaviour
     private float previousRotation;
 
     [SerializeField]
-    private float RotationTreshold = 0.1f; 
+    private float RotationThreshold = 0.1f;
 
     private bool isRotationChanging = false;
     private bool hasPlayedWheelNull = true;
@@ -30,10 +30,20 @@ public class WheelSound : MonoBehaviour
     void Start()
     {
         backspinInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Backspin);
-        wheelChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.WheelRotation);
+        wheelChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
+
+        wheelChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.WheelRotation, gameObject);
+        wheelChargeEmitter.PlayEvent = EmitterGameEvent.None;
+        wheelChargeEmitter.StopEvent = EmitterGameEvent.None;
+
         XRKnob = FindObjectOfType<XRKnob>();
-        wheelChargeInstance.start(); wheelChargeInstance.release(); wheelChargeInstance.setPaused(true);
-        backspinInstance.start(); backspinInstance.release(); backspinInstance.setPaused(true);
+        wheelChargeEmitter.Play(); // Start playing the emitter but keep it paused initially
+        wheelChargeEmitter.EventInstance.setPaused(true);
+
+        backspinInstance.start();
+        backspinInstance.release();
+        backspinInstance.setPaused(true);
+
         previousValue = Mathf.Clamp(XRKnob.GetTheYRotationInDegrees(), 0f, 1f);
         previousTime = Time.time;
     }
@@ -41,7 +51,6 @@ public class WheelSound : MonoBehaviour
     private void FixedUpdate()
     {
         rotation = XRKnob.GetTheYRotationInDegrees();
-        
         HandleSoundLogic();
         WheelVelocity();
     }
@@ -49,9 +58,9 @@ public class WheelSound : MonoBehaviour
     void WheelVelocity()
     {
         float normalizedRotation = NormalizeRotation(rotation);
-        float rotationspeed = Mathf.Clamp(normalizedRotation, 0f, 1f);
+        float rotationSpeed = Mathf.Clamp(normalizedRotation, 0f, 1f);
         float currentTime = Time.time;
-        float currentValue = rotationspeed;
+        float currentValue = rotationSpeed;
         float deltaValue = currentValue - previousValue;
         float deltaTime = currentTime - previousTime;
 
@@ -65,7 +74,7 @@ public class WheelSound : MonoBehaviour
         previousValue = currentValue;
         previousTime = currentTime;
 
-        AudioManager.instance.SetInstanceParameter(wheelChargeInstance, "WheelForce", smoothedRateOfChange);
+        AudioManager.instance.SetEmitterParameter(wheelChargeEmitter, "WheelForce", smoothedRateOfChange);
     }
 
     private float NormalizeRotation(float rotation)
@@ -75,9 +84,9 @@ public class WheelSound : MonoBehaviour
 
     private void PlayWheelChargeSound()
     {
-        if (!isWheelChargePlaying && wheelChargeInstance.isValid())
+        if (!isWheelChargePlaying && wheelChargeEmitter.EventInstance.isValid())
         {
-            wheelChargeInstance.setPaused(false);
+            wheelChargeEmitter.EventInstance.setPaused(false);
             isWheelChargePlaying = true;
         }
     }
@@ -93,9 +102,9 @@ public class WheelSound : MonoBehaviour
 
     private void StopAndReleaseWheelChargeSound()
     {
-        if (isWheelChargePlaying && wheelChargeInstance.isValid())
+        if (isWheelChargePlaying && wheelChargeEmitter.EventInstance.isValid())
         {
-            wheelChargeInstance.setPaused(true);
+            wheelChargeEmitter.EventInstance.setPaused(true);
             isWheelChargePlaying = false;
         }
     }
@@ -112,11 +121,11 @@ public class WheelSound : MonoBehaviour
     private void HandleSoundLogic()
     {
         isUserInteracting = XRKnob.GetUserState();
-        isRotationChanging = Mathf.Abs(rotation - previousRotation) > RotationTreshold;
+        isRotationChanging = Mathf.Abs(rotation - previousRotation) > RotationThreshold;
         //Debug.Log($"Radical Change! Current: {rotation}, Previous: {previousRotation}, Difference: {Math.Abs(rotation - previousRotation)}");
 
         if (isUserInteracting && rotation > 0.1f && isRotationChanging)
-        {           
+        {
             PlayWheelChargeSound();
             StopAndReleaseBackspinSound();
             hasPlayedWheelNull = false;
