@@ -74,4 +74,10 @@ public class CartBehaviour : MonoBehaviour
         force = 0;
         isGameOver = true;
     }
+
+    public void OnTheEnd()
+    {
+        force = 0;
+    }
 }
+
