@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
 
-
 public class CartSound : MonoBehaviour
 {
     private float speed;
@@ -13,9 +12,11 @@ public class CartSound : MonoBehaviour
 
     [SerializeField, Range(0.01f, 1f)] private float smoothSpeedFactor = 0.1f;
 
+    [SerializeField] private EngineTemperature engineheat;
+
     private PlayerProgression playerProgression;
     private XRLever xrLever;
-    private EngineTemperature engineTemperature;
+    //private EngineTemperature engineTemperature;
     private StudioEventEmitter cartEmitter;
 
     private EventInstance leverInstance;
@@ -38,6 +39,7 @@ public class CartSound : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Start called");
         InitializeComponents();
         InitializeAudioInstances();
     }
@@ -49,25 +51,34 @@ public class CartSound : MonoBehaviour
 
     private void InitializeComponents()
     {
+        Debug.Log("InitializeComponents called");
         cartEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.Cart, gameObject);
         playerProgression = FindObjectOfType<PlayerProgression>();
         xrLever = FindObjectOfType<XRLever>();
-        engineTemperature = FindObjectOfType<EngineTemperature>();
+        //engineTemperature = FindObjectOfType<EngineTemperature>();
         initialLeverValue = xrLever.GetLeverValue();
         previousValue = initialLeverValue;
+        Debug.Log($"Initial Lever Value: {initialLeverValue}");
     }
 
     private void InitializeAudioInstances()
     {
+        Debug.Log("InitializeAudioInstances called");
         leverInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Lever);
         engineHeatInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.EngineHeat);
-        engineHeatInstance.start(); engineHeatInstance.release();
-        cartEmitter.Play(); cartEmitter.EventInstance.release();
-        leverInstance.start(); leverInstance.release(); leverInstance.setPaused(true);
+        engineHeatInstance.start();
+        engineHeatInstance.release();
+        cartEmitter.Play();
+        cartEmitter.EventInstance.release();
+        leverInstance.start();
+        leverInstance.release();
+        leverInstance.setPaused(true);
+        Debug.Log("Audio instances initialized and started");
     }
 
     private void UpdateSoundLogic()
     {
+        Debug.Log("UpdateSoundLogic called");
         UpdateThrottleSound();
         UpdateBrakeSound();
         UpdateCartMovementSound();
@@ -75,6 +86,8 @@ public class CartSound : MonoBehaviour
 
         leverPosition = xrLever.GetLeverValue();
         isUserInteracting = xrLever.GetLeverInteracting();
+
+        //Debug.Log($"Lever Position: {leverPosition}, Is User Interacting: {isUserInteracting}");
     }
 
     private float GetRotationStrength(float currentRotation, float previousRotation)
@@ -82,6 +95,7 @@ public class CartSound : MonoBehaviour
         float rotationDifference = Mathf.Abs(currentRotation - previousRotation);
         float maxRotationDifference = 1.0f - deadzone;
         float normalizedDifference = Mathf.Clamp01(rotationDifference / maxRotationDifference);
+        //Debug.Log($"Rotation Strength: {normalizedDifference * Mathf.Sign(currentRotation - previousRotation)}");
         return normalizedDifference * Mathf.Sign(currentRotation - previousRotation);
     }
 
@@ -103,17 +117,16 @@ public class CartSound : MonoBehaviour
     {
         hasSignificantChange = Mathf.Abs(rotationStrength) > threshold;
 
-
         if ((leverPosition == 0f || leverPosition == 1f) && !hasEndPlayed)
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.LeverEnds, transform.position);
             hasEndPlayed = true;
-            Debug.Log("Played LeverEnd sound at position: " + leverPosition);
+            Debug.Log($"Played LeverEnd sound at position: {leverPosition}");
         }
         else if (leverPosition != 0f || leverPosition != 1f && leverPosition > 0.9f)
         {
             hasEndPlayed = false;
-            Debug.Log("reset");
+            Debug.Log("Reset LeverEnd played state");
         }
 
         if (hasSignificantChange && !isPlaying)
@@ -126,7 +139,6 @@ public class CartSound : MonoBehaviour
         else if (!hasSignificantChange && isPlaying)
         {
             StopLeverSound();
-            //Debug.Log("Stop lever sound while interacting");
         }
     }
 
@@ -136,13 +148,12 @@ public class CartSound : MonoBehaviour
         {
             leverInstance.setPaused(true);
             isPlaying = false;
-            //Debug.Log("Stop lever sound");
+            Debug.Log("Stop lever sound");
         }
     }
 
     private void UpdateBrakeSound()
     {
-
         if (isUserInteracting && !isAtDefaultPosition)
         {
             HandleBrakeInteraction();
@@ -159,6 +170,7 @@ public class CartSound : MonoBehaviour
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.Brake, transform.position);
             brakeOn = true;
+            Debug.Log("Played brake sound");
         }
         else if (leverPosition > 0.4f)
         {
@@ -175,6 +187,7 @@ public class CartSound : MonoBehaviour
 
         speed = leverPosition;
         smoothedSpeed = Mathf.Lerp(smoothedSpeed, speed, smoothSpeedFactor);
+        Debug.Log($"Smoothed Speed: {smoothedSpeed} , leverpos: {leverPosition}");
 
         if (progression > 12 && progression < 17)
         {
@@ -186,6 +199,7 @@ public class CartSound : MonoBehaviour
         }
 
         rattle = Mathf.Lerp(rattle, targetRattle, Time.deltaTime * waterfallFade);
+        Debug.Log($"Rattle: {rattle}");
 
         if (Mathf.Abs(rattle) < 0.0001f)
         {
@@ -198,16 +212,18 @@ public class CartSound : MonoBehaviour
 
     private void UpdateEngineHeatSound()
     {
-        float tempAngle = engineTemperature.GetEngineTemperature();
+        float tempAngle = engineheat.GetEngineTemperature();
         float minValue = -90f;
         float maxValue = 90f;
         float normalizedValue = (tempAngle - minValue) / (maxValue - minValue);
 
         AudioManager.instance.SetInstanceParameter(engineHeatInstance, "EngineHeatVal", normalizedValue);
+        Debug.Log($"Engine Heat Value: {normalizedValue}");
     }
 
     void OnDestroy()
     {
+        Debug.Log("OnDestroy called");
         cartEmitter.Stop();
         engineHeatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         leverInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
