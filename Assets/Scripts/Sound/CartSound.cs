@@ -121,7 +121,7 @@ public class CartSound : MonoBehaviour
             AudioManager.instance.SetInstanceParameter(leverInstance, "LeverForce", leverPosition);
             leverInstance.setPaused(false);
             isPlaying = true;
-            //Debug.Log("Start lever sound");
+            Debug.Log("Start lever sound");
         }
         else if (!hasSignificantChange && isPlaying)
         {
