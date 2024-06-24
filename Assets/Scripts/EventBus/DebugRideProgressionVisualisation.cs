@@ -44,6 +44,7 @@ public class DebugRideProgressionVisualisation : MonoBehaviour
             );
 
             cubeInstance.transform.localScale = new Vector3(2f, 1f, threshold.deadzone * 2);
+            cubeInstance.name = threshold.name;
             //cubeInstance.transform.parent = transform;
             //cubeInstance.SetActive(cubesVisible);
         }

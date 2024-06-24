@@ -6,7 +6,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 using FMODUnity;
 using FMOD.Studio;
 
-public class LightBehaviour : MonoBehaviour
+public class LightBehaviour : MonoBehaviour, IEventListener
 {
     [SerializeField] private float lightingDuration;
     [SerializeField] private float preSoundDelay;
@@ -28,8 +28,11 @@ public class LightBehaviour : MonoBehaviour
 
     public TextMeshPro textMeshPro;
 
+    private bool isAwaitingLight = false;
+
     void Start()
     {
+        EventBus.Instance.Register(this);
         lightComponent = GetComponent<Light>();
         lightComponent.enabled = false;
     }
@@ -126,13 +129,19 @@ public class LightBehaviour : MonoBehaviour
             Vector3 directionToTarget = hitCollider.transform.position - transform.position;
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
-            if (angleToTarget < lightComponent.spotAngle / 2)
+            if (angleToTarget < lightComponent.spotAngle / 2 && lightIsSet)
             {
                 // Object is within the spotlight's cone
 
                 textMeshPro.text = "Detected";
                 Debug.Log("Detected object: " + hitCollider.name);
                 // Add your custom logic here (e.g., triggering events, applying effects, etc.)
+
+                if (isAwaitingLight)
+                {
+                    EventBus.Instance.Emit(new EventMonsterLit(hitCollider));
+                    isAwaitingLight = false;
+                }
             }
             
         }
@@ -161,5 +170,21 @@ public class LightBehaviour : MonoBehaviour
 
     public bool GetOnState() => isOn;
 
+    public void OnEvent(Event e)
+    {
+        if (e is EventLightRequiredZoneEntered)
+        {
+            isAwaitingLight = true;
+        }
+    }
+}
 
+public class EventMonsterLit : Event 
+{
+    public Collider monsterCollider;
+
+    public EventMonsterLit(Collider _monsterCollider)
+    {
+        monsterCollider = _monsterCollider;
+    }
 }

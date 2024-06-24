@@ -18,6 +18,8 @@ public class CartBehaviour : MonoBehaviour
     bool workonce = false;
     public float leverValue = 0;
 
+    private bool isGameOver = false;
+
     public Vector3 CartStartPoint
     {
         get { return cartStartPoint; }
@@ -35,6 +37,7 @@ public class CartBehaviour : MonoBehaviour
 
     private void Update()
     {
+     
         if (transform.position.z > -496)
         {
             if (particleSystem != null)
@@ -57,6 +60,7 @@ public class CartBehaviour : MonoBehaviour
         {
             transform.Translate(Vector3.back * 50 * Time.deltaTime);
         }
+        
     }
 
     // Update is called once per frame
@@ -64,4 +68,21 @@ public class CartBehaviour : MonoBehaviour
     {
         rb.AddForce(Vector3.forward * force * leverValue);
     }
+
+    public void OnGameOver()
+    {
+        force = 0;
+        isGameOver = true;
+    }
+
+    public void OnTheEnd()
+    {
+        force = 0;
+    }
+
+    public void PlayBreakAnimation()
+    {
+        // do it here
+    }
 }
+
