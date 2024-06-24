@@ -7,7 +7,8 @@ public class Restart : MonoBehaviour
 {
     void Update()
     {
-        if (UnityEngine.InputSystem.Keyboard.current.rKey.isPressed)
+        if (UnityEngine.InputSystem.Keyboard.current.rKey.isPressed &&
+            UnityEngine.InputSystem.Keyboard.current.leftCtrlKey.isPressed)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
