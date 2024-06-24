@@ -7109,6 +7109,7 @@ GameObject:
   - component: {fileID: 1102121804}
   - component: {fileID: 1102121806}
   - component: {fileID: 1102121807}
+  - component: {fileID: 1102121808}
   m_Layer: 0
   m_Name: Handle Pivot
   m_TagString: Untagged
@@ -7183,6 +7184,27 @@ CapsuleCollider:
   m_Height: 16.6
   m_Direction: 1
   m_Center: {x: 0, y: 21.67, z: 0}
+--- !u!114 &1102121808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102121803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.2
+  outlined:
+  - {fileID: 5891563574049838936}
+  - {fileID: 3453566454108625213}
+  - {fileID: 1102121803}
+  isRope: 0
 --- !u!1 &1125521110
 GameObject:
   m_ObjectHideFlags: 0
@@ -21069,6 +21091,7 @@ GameObject:
   - component: {fileID: 5730291426276676182}
   - component: {fileID: 5958231834991792840}
   - component: {fileID: 7086171512013179263}
+  - component: {fileID: 7086171512013179264}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -40715,6 +40738,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7086171512013179264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790194662171816953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.2
+  outlined:
+  - {fileID: 790194662171816953}
+  isRope: 0
 --- !u!114 &7098281713808141009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42244,6 +42286,7 @@ GameObject:
   - component: {fileID: 2777946753982463799}
   - component: {fileID: 8994444760268299522}
   - component: {fileID: 8994444760268299521}
+  - component: {fileID: 8994444760268299523}
   m_Layer: 0
   m_Name: Part To Rotate
   m_TagString: Untagged
@@ -52290,6 +52333,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8994444760268299523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605923952994223033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9955c4ce81436f408013a002de9a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 805305760}
+  - {fileID: 1399466249}
+  distance: 0.2
+  outlined:
+  - {fileID: 6775648163489917977}
+  - {fileID: 4425002488327336314}
+  - {fileID: 7605923952994223033}
+  isRope: 0
 --- !u!1 &9009312293883176649
 GameObject:
   m_ObjectHideFlags: 0
