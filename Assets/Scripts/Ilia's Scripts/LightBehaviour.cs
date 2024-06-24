@@ -12,6 +12,9 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     [SerializeField] private float preSoundDelay;
     [SerializeField] private LayerMask detectableLayer;
 
+    [SerializeField]
+    private Transform joystickTransform;
+
     private bool lightIsSet = false;
     private bool coroutineStarted = false;
 
@@ -37,6 +40,8 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     // Update is called once per frame
     void Update()
     {
+        SetTheRotation();
+
         textMeshPro.text = "Not";
         DetectObjects();
         if (!lightIsSet)
@@ -91,7 +96,11 @@ public class LightBehaviour : MonoBehaviour, IEventListener
         coroutineStarted = false;
     }
 
- 
+    private void SetTheRotation()
+    {
+        transform.localEulerAngles = new Vector3(joystickTransform.localEulerAngles.x, joystickTransform.localEulerAngles.z, 0);
+    }
+
     private void BlinkingBehaviour()
     {
         if (knobValue > 0)
