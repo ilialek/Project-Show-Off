@@ -15,11 +15,14 @@ public class AudioManager : MonoBehaviour
     public float ambienceVolume = 1;
     [Range(0, 1)]
     public float SFXVolume = 1;
+    [Range(0, 1)]
+    public float VOVolume = 1;
 
     private Bus masterBus;
     private Bus CartSFXBus;
     private Bus ambienceBus;
     private Bus sfxBus;
+    private Bus VOBus;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -50,6 +53,7 @@ public class AudioManager : MonoBehaviour
         CartSFXBus = RuntimeManager.GetBus("bus:/CartSFX");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        VOBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
@@ -64,6 +68,7 @@ public class AudioManager : MonoBehaviour
         CartSFXBus.setVolume(CartSFXVolume);
         ambienceBus.setVolume(ambienceVolume);
         sfxBus.setVolume(SFXVolume);
+        VOBus.setVolume(VOVolume);
 
         if (playerCart != null)
         {

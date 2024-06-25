@@ -1,9 +1,29 @@
 using FMOD.Studio;
-using FMODUnity;
 using UnityEngine;
 
 public class RadioSound : MonoBehaviour
 {
+    public EventInstance VO;
+
+    void Start()
+    {
+        VO = AudioManager.instance.CreateInstance(FMODEvents.instance.VO);
+        VO.start();
+    }
+
+    void Update()
+    {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(VO, GetComponent<Transform>(), GetComponent<Rigidbody>());
+
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        VO.getPlaybackState(out PbState);
+        if (PbState == FMOD.Studio.PLAYBACK_STATE.SUSTAINING) ;
+            //Debug.Log("voice is currently paused");
+    }
+}
+
+
+    /*
     private PlayerProgression playerProgression;
     private LeverSound LeverSound;
     private EventInstance VOStart;
@@ -53,4 +73,6 @@ public class RadioSound : MonoBehaviour
             VOEnd.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
         }
     }
-}
+    }
+    */
+
