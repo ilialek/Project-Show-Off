@@ -132,6 +132,8 @@ public class LightBehaviour : MonoBehaviour
 
                 textMeshPro.text = "Detected";
                 Debug.Log("Detected object: " + hitCollider.name);
+
+                hitCollider.GetComponent<Animator>().SetBool("Highlighted", true);
                 // Add your custom logic here (e.g., triggering events, applying effects, etc.)
             }
             

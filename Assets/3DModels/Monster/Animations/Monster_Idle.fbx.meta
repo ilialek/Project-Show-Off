@@ -1,0 +1,1251 @@
+fileFormatVersion: 2
+guid: 89f473b99930a19409d83308746e6591
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Rig:Spine_Joint1' has translation animation
+      that will be discarded.\n\t'Rig:Spine_Joint2' has translation animation that
+      will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 170
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Rig:Hip_Joint1
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thigh_Joint1
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Right_Thigh_Joint1
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Knee_Joint1
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Right_Knee_Joint1
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Foot_Joint1
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Right_Foot_Joint1
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Spine_Joint1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Spine_Joint2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Neck_Joint1
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Neck_Joint2
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint4
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint7
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint5
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint8
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint6
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:joint9
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Foot_Joint3
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Right_Foot_Joint3
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Outer_Jaw_Joint1
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Right_Outer_Jaw_Joint1
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Lower_Jaw_Joint1
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint3
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint2
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint3
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint1
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint2
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint3
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint1
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint2
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint3
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint5
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint6
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Thumb_Joint7
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint5
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint6
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Index_Finger_Joint7
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint5
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint6
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Middle_Finger_Joint7
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint5
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint6
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Ring_Finger_Joint7
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint5
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint6
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Left_Pinky_Finger_Joint7
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Rig:Center_Chest_Joint1
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Monster_Idle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Monster_low1
+      parentName: Monster_Idle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Body_low
+      parentName: Rig:Monster_low1
+      position: {x: 0.021482639, y: 0.85999995, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Eyes_low
+      parentName: Rig:Monster_low1
+      position: {x: -0.021401515, y: 1.3580246, z: 0.05491061}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:RightEye
+      parentName: Rig:Eyes_low
+      position: {x: 0.034826644, y: 0.4828964, z: 0.03964646}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Cornea_low
+      parentName: Rig:Eyes_low
+      position: {x: 0.057929333, y: 0.4640848, z: 0.03842348}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Sclera_low
+      parentName: Rig:Eyes_low
+      position: {x: 0.057929333, y: 0.4640848, z: 0.03842348}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:LeftEye
+      parentName: Rig:Eyes_low
+      position: {x: -0.015495276, y: 0.4828964, z: 0.03964646}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Cornea_low
+      parentName: Rig:LeftEye
+      position: {x: -0, y: -0.018811569, z: -0.0012229729}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Sclera_low
+      parentName: Rig:LeftEye
+      position: {x: -0, y: -0.018811569, z: -0.0012229729}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Fangs_low
+      parentName: Rig:Monster_low1
+      position: {x: 0.021494174, y: 1.475683, z: -0.0012237859}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Nails_low
+      parentName: Rig:Monster_low1
+      position: {x: 0.021948928, y: 1.4781982, z: -0.0025701723}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Jawteeth_low
+      parentName: Rig:Monster_low1
+      position: {x: 0.021056773, y: 1.4735446, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:MainJaw_low
+      parentName: Rig:Monster_low1
+      position: {x: -0, y: 1.7551204, z: 0.11432832}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.98803467, y: 0.98803467, z: 0.98803467}
+    - name: Rig:polySurface1
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform22
+      parentName: Rig:polySurface1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface2
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform21
+      parentName: Rig:polySurface2
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface3
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform20
+      parentName: Rig:polySurface3
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface4
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform19
+      parentName: Rig:polySurface4
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface5
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform18
+      parentName: Rig:polySurface5
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface6
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform17
+      parentName: Rig:polySurface6
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface7
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform16
+      parentName: Rig:polySurface7
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface8
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform15
+      parentName: Rig:polySurface8
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface9
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform14
+      parentName: Rig:polySurface9
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface10
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform13
+      parentName: Rig:polySurface10
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface11
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform12
+      parentName: Rig:polySurface11
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface12
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform11
+      parentName: Rig:polySurface12
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface13
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform10
+      parentName: Rig:polySurface13
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface15
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform9
+      parentName: Rig:polySurface15
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface16
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform8
+      parentName: Rig:polySurface16
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface17
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform7
+      parentName: Rig:polySurface17
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface18
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform6
+      parentName: Rig:polySurface18
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface19
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform5
+      parentName: Rig:polySurface19
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface20
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform4
+      parentName: Rig:polySurface20
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface21
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform3
+      parentName: Rig:polySurface21
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface22
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform2
+      parentName: Rig:polySurface22
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:transform1
+      parentName: Rig:MainJaw_low
+      position: {x: 0.023173522, y: -0.27943733, z: -0.11536085}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:polySurface23
+      parentName: Rig:MainJaw_low
+      position: {x: -0, y: -1.7766327, z: -0.11572962}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0121102, y: 1.0121102, z: 1.0121102}
+    - name: Rig:locator1
+      parentName: Monster_Idle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1.2, y: 1.2, z: 1.2}
+    - name: Rig:Full_Cntrl1
+      parentName: Rig:locator1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Cntrl_COG1
+      parentName: Rig:Full_Cntrl1
+      position: {x: -0.04180122, y: 0.7599964, z: 0.0043626437}
+      rotation: {x: -0.67245495, y: 0.72439283, z: 0.04437849, w: 0.14522363}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Cntrl_Hip
+      parentName: Rig:Full_Cntrl1
+      position: {x: -0.00041178573, y: 1.173914, z: 0.0043626437}
+      rotation: {x: 0.7031665, y: -0.69525045, z: -0.10471999, w: -0.10591231}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Hip_Joint1
+      parentName: Rig:locator1
+      position: {x: 0.0018840327, y: 1.0930068, z: 0.0043626437}
+      rotation: {x: -0.6778945, y: 0.7175234, z: -0.0022415465, w: -0.16004476}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Spine_Joint1
+      parentName: Rig:Hip_Joint1
+      position: {x: -0.092698485, y: 0.000067760324, z: -0.008580319}
+      rotation: {x: 0.13203828, y: -0.12950811, z: -0.012128779, w: 0.9826731}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Spine_Joint2
+      parentName: Rig:Spine_Joint1
+      position: {x: -0.1876551, y: 2.364775e-16, z: 6.217249e-17}
+      rotation: {x: 0.08888024, y: 0.10752947, z: -0.0532679, w: 0.9887873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Center_Chest_Joint1
+      parentName: Rig:Spine_Joint2
+      position: {x: -0.12760441, y: -0.00040286302, z: -0.031173412}
+      rotation: {x: -0.012718116, y: -0.3216187, z: 0.020259704, w: 0.9465671}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Neck_Joint1
+      parentName: Rig:Center_Chest_Joint1
+      position: {x: -0.0821358, y: 0.000067894136, z: -0.0013985673}
+      rotation: {x: -0.14657326, y: 0.19901659, z: 0.07486524, w: 0.96607655}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Neck_Joint2
+      parentName: Rig:Neck_Joint1
+      position: {x: -0.06516267, y: -2.0441105e-11, z: -0.000000033242703}
+      rotation: {x: 0.000044076638, y: 0.2485065, z: -0.00016929094, w: 0.9686302}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Head_End_Joint1
+      parentName: Rig:Neck_Joint2
+      position: {x: -0.18981452, y: -3.5527136e-17, z: 2.842171e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Mouth_Begin_Joint1
+      parentName: Rig:Neck_Joint2
+      position: {x: -0.00452443, y: -0.00019748628, z: -0.039120186}
+      rotation: {x: 0.0008737749, y: -0.84639466, z: -0.0005511575, w: 0.53255516}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Lower_Jaw_Joint1
+      parentName: Rig:Mouth_Begin_Joint1
+      position: {x: -0.08192111, y: -0.0000000012956417, z: 4.2632563e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Outer_Jaw_Joint1
+      parentName: Rig:Mouth_Begin_Joint1
+      position: {x: -0.026434878, y: -0.06877034, z: -0.0075244117}
+      rotation: {x: 0.01574382, y: -0.16201016, z: -0.09340202, w: 0.98223263}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Outer_Jaw_Joint2
+      parentName: Rig:Right_Outer_Jaw_Joint1
+      position: {x: -0.03648128, y: 1.901257e-17, z: 2.842171e-16}
+      rotation: {x: -0.023122713, y: 0.08986761, z: -0.059859086, w: 0.9938843}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Outer_Jaw_Joint3
+      parentName: Rig:Right_Outer_Jaw_Joint2
+      position: {x: -0.048377115, y: 5.3290704e-17, z: 2.842171e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Upper_Jaw_Joint1
+      parentName: Rig:Mouth_Begin_Joint1
+      position: {x: -0.06584354, y: 0.000033236225, z: 0.059014205}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Outer_Jaw_Joint1
+      parentName: Rig:Mouth_Begin_Joint1
+      position: {x: -0.026720108, y: 0.068999134, z: -0.007525389}
+      rotation: {x: -0.015405226, y: -0.16198607, z: 0.09544366, w: 0.9820457}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Outer_Jaw_Joint2
+      parentName: Rig:Left_Outer_Jaw_Joint1
+      position: {x: -0.036477413, y: -3.5318968e-17, z: 2.8754775e-16}
+      rotation: {x: 0.023105394, y: 0.089797966, z: 0.059844825, w: 0.9938919}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Outer_Jaw_Joint3
+      parentName: Rig:Left_Outer_Jaw_Joint2
+      position: {x: -0.048378076, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint3
+      parentName: Rig:Center_Chest_Joint1
+      position: {x: 0.027259063, y: 0.09214137, z: -0.022726456}
+      rotation: {x: -0.68788546, y: 0.70062923, z: 0.13526241, w: -0.1328021}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint4
+      parentName: Rig:joint3
+      position: {x: -0.06445401, y: 0.04155702, z: -0.015581613}
+      rotation: {x: 0.1754266, y: 0.065598, z: -0.07685401, w: 0.9792936}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint5
+      parentName: Rig:joint4
+      position: {x: -0.32641307, y: 0, z: 0}
+      rotation: {x: 0.4192369, y: 0.019383868, z: -0.018835897, w: 0.90747446}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint6
+      parentName: Rig:joint5
+      position: {x: -0.37556565, y: -0.0025769656, z: -0.0142635}
+      rotation: {x: -0.15951808, y: -0.16564204, z: -0.13819838, w: 0.96333694}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint1
+      parentName: Rig:joint6
+      position: {x: -0.0958761, y: 0.0068306015, z: 0.035503104}
+      rotation: {x: -0.4718728, y: 0.10042087, z: 0.022073602, w: 0.8756509}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint2
+      parentName: Rig:Left_Index_Finger_Joint1
+      position: {x: -0.07034309, y: -3.0411437e-14, z: -4.042766e-14}
+      rotation: {x: 0.022252576, y: -0.040448446, z: 0.0038920394, w: 0.9989263}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint3
+      parentName: Rig:Left_Index_Finger_Joint2
+      position: {x: -0.042343684, y: -4.2334625e-16, z: -7.4773517e-16}
+      rotation: {x: 0.006872713, y: -0.016010998, z: -0.035278603, w: 0.9992257}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint4
+      parentName: Rig:Left_Index_Finger_Joint3
+      position: {x: -0.02212809, y: 1.4210854e-16, z: -3.5527136e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint1
+      parentName: Rig:joint6
+      position: {x: -0.104253836, y: -0.009957188, z: 0.018784361}
+      rotation: {x: -0.44944865, y: 0.04011044, z: 0.004272442, w: 0.8923951}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint2
+      parentName: Rig:Left_Middle_Finger_Joint1
+      position: {x: -0.052756432, y: -3.794437e-14, z: -3.2436276e-14}
+      rotation: {x: 0.011492335, y: -0.01763555, z: 0.03641414, w: 0.9991151}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint3
+      parentName: Rig:Left_Middle_Finger_Joint2
+      position: {x: -0.047635112, y: -1.1326248e-15, z: -8.892887e-16}
+      rotation: {x: 0.0059913923, y: -0.010416167, z: -0.036200225, w: 0.9992723}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint4
+      parentName: Rig:Left_Middle_Finger_Joint3
+      position: {x: -0.026137048, y: 1.4210854e-16, z: -3.5527136e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint1
+      parentName: Rig:joint6
+      position: {x: -0.021451268, y: 0.0053470945, z: 0.040421408}
+      rotation: {x: -0.57696915, y: 0.39980713, z: -0.06633606, w: 0.70912653}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint2
+      parentName: Rig:Left_Thumb_Joint1
+      position: {x: -0.036829375, y: -2.1884404e-14, z: -6.381562e-14}
+      rotation: {x: 0.039430123, y: -0.018809875, z: -0.0351831, w: 0.9984256}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint3
+      parentName: Rig:Left_Thumb_Joint2
+      position: {x: -0.03714631, y: 2.2718978e-15, z: -3.037709e-15}
+      rotation: {x: 0.015846884, y: 0.008858245, z: 0.04008896, w: 0.99903125}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint4
+      parentName: Rig:Left_Thumb_Joint3
+      position: {x: -0.033116188, y: 1.4210854e-16, z: 5.3290704e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint1
+      parentName: Rig:joint6
+      position: {x: -0.09917454, y: -0.029332044, z: 0.0014408135}
+      rotation: {x: -0.4036643, y: 0.00664359, z: 0.024380684, w: 0.91455823}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint2
+      parentName: Rig:Left_Ring_Finger_Joint1
+      position: {x: -0.047558215, y: 4.2555991e-16, z: -7.105427e-17}
+      rotation: {x: 0.0017115162, y: -0.0016097352, z: 0.038924873, w: 0.99923944}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint3
+      parentName: Rig:Left_Ring_Finger_Joint2
+      position: {x: -0.042828154, y: -4.2703619e-16, z: -4.61714e-16}
+      rotation: {x: -0.0015901241, y: 0.0042686802, z: -0.038560826, w: 0.9992459}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint4
+      parentName: Rig:Left_Ring_Finger_Joint3
+      position: {x: -0.017070567, y: 0, z: 1.0658141e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint1
+      parentName: Rig:joint6
+      position: {x: -0.08171397, y: -0.04628121, z: -0.012682546}
+      rotation: {x: -0.32935086, y: 0.000605598, z: 0.085775405, w: 0.9403032}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint2
+      parentName: Rig:Left_Pinky_Finger_Joint1
+      position: {x: -0.05103304, y: -4.7040774e-14, z: 8.7563285e-15}
+      rotation: {x: -0.01766878, y: 0.026596446, z: -0.030330524, w: 0.99902976}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint3
+      parentName: Rig:Left_Pinky_Finger_Joint2
+      position: {x: -0.02455923, y: -8.242528e-15, z: -9.663519e-15}
+      rotation: {x: 0.0005883477, y: -0.003569321, z: 0.038163908, w: 0.99926496}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint4
+      parentName: Rig:Left_Pinky_Finger_Joint3
+      position: {x: -0.01386313, y: -1.4210854e-16, z: -7.105427e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint10
+      parentName: Rig:Center_Chest_Joint1
+      position: {x: 0.023800842, y: -0.096239, z: -0.022726456}
+      rotation: {x: -0.13280211, y: 0.13526241, z: -0.7006293, w: 0.68788546}
+      scale: {x: -1, y: -1, z: -1}
+    - name: Rig:transform23
+      parentName: Rig:joint10
+      position: {x: 0.09420606, y: -1.589379, z: 0.039312337}
+      rotation: {x: 6.123234e-17, y: 1, z: -6.123234e-17, w: 3.713526e-15}
+      scale: {x: 1, y: 1, z: -1}
+    - name: Rig:joint7
+      parentName: Rig:transform23
+      position: {x: 0.15866, y: 1.63094, z: -0.054893997}
+      rotation: {x: 0.9720598, y: -0.11316611, z: -0.07252947, w: -0.1924386}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint8
+      parentName: Rig:joint7
+      position: {x: 0.32641527, y: 0.00000047221982, z: -0.000000029937098}
+      rotation: {x: 0.43135884, y: 0.018654447, z: -0.019928837, w: 0.90176743}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:joint9
+      parentName: Rig:joint8
+      position: {x: 0.3755677, y: 0.0025789302, z: 0.014263153}
+      rotation: {x: -0.45279703, y: 0.041478634, z: -0.32452217, w: 0.8294214}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint5
+      parentName: Rig:joint9
+      position: {x: 0.09674812, y: -0.014129129, z: -0.030650195}
+      rotation: {x: -0.38247168, y: 0.13093472, z: 0.016170297, w: 0.9144999}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint6
+      parentName: Rig:Left_Index_Finger_Joint5
+      position: {x: 0.07034283, y: 0.00000004077606, z: -0.0000007522049}
+      rotation: {x: 0.014120604, y: -0.014432648, z: 0.032804076, w: 0.99925786}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint7
+      parentName: Rig:Left_Index_Finger_Joint6
+      position: {x: 0.042343877, y: -0.00000027595235, z: 0.00000063688157}
+      rotation: {x: 0.0013378627, y: -0.026535667, z: 0.030604633, w: 0.99917847}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Index_Finger_Joint8
+      parentName: Rig:Left_Index_Finger_Joint7
+      position: {x: 0.02212808, y: 0.00000030950562, z: 0.0000000625941}
+      rotation: {x: -2.783867e-17, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint5
+      parentName: Rig:joint9
+      position: {x: 0.10584615, y: -0.0019169772, z: -0.010659995}
+      rotation: {x: -0.36171103, y: 0.05777248, z: -0.004061245, w: 0.93048966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint6
+      parentName: Rig:Left_Middle_Finger_Joint5
+      position: {x: 0.052756794, y: 0.0000007257792, z: 0.0000000071025985}
+      rotation: {x: 0.007780103, y: -0.0050306157, z: 0.033385262, w: 0.99939966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint7
+      parentName: Rig:Left_Middle_Finger_Joint6
+      position: {x: 0.047634896, y: 0.000000049220546, z: 0.00000039952948}
+      rotation: {x: 0.0014613785, y: -0.03326509, z: 0.021670846, w: 0.99921054}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Middle_Finger_Joint8
+      parentName: Rig:Left_Middle_Finger_Joint7
+      position: {x: 0.026137168, y: -0.0000003067795, z: -0.00000024026343}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint5
+      parentName: Rig:joint9
+      position: {x: 0.023805985, y: -0.0011713057, z: -0.039426956}
+      rotation: {x: -0.4120678, y: 0.47397414, z: 0.020799078, w: 0.77789205}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint6
+      parentName: Rig:Left_Thumb_Joint5
+      position: {x: 0.036829174, y: 0.00000026237464, z: 0.000000011506027}
+      rotation: {x: 0.025784805, y: -0.02943407, z: -0.00887906, w: 0.99919474}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint7
+      parentName: Rig:Left_Thumb_Joint6
+      position: {x: 0.03714662, y: -0.00000066003156, z: 0.0000005730756}
+      rotation: {x: 0.026348649, y: -0.032544345, z: 0.007630502, w: 0.99909383}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thumb_Joint8
+      parentName: Rig:Left_Thumb_Joint7
+      position: {x: 0.033116363, y: 0.00000037395435, z: -0.00000042583244}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint5
+      parentName: Rig:joint9
+      position: {x: 0.1019345, y: 0.014631167, z: 0.009658715}
+      rotation: {x: -0.32465023, y: -0.025258448, z: -0.005873701, w: 0.94547856}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint6
+      parentName: Rig:Left_Ring_Finger_Joint5
+      position: {x: 0.047557447, y: 0.0000004999767, z: -0.00000017802944}
+      rotation: {x: 0.0011993045, y: -0.00056865223, z: 0.032010335, w: 0.9994867}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint7
+      parentName: Rig:Left_Ring_Finger_Joint6
+      position: {x: 0.042828172, y: -0.00000034226613, z: 0.000000029507197}
+      rotation: {x: -0.00013515998, y: 0.010705508, z: 0.04003065, w: 0.9991411}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Ring_Finger_Joint8
+      parentName: Rig:Left_Ring_Finger_Joint7
+      position: {x: 0.017070567, y: 0.000000007062298, z: 0.000000014569908}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint5
+      parentName: Rig:joint9
+      position: {x: 0.08573547, y: 0.031154286, z: 0.025665078}
+      rotation: {x: -0.2634544, y: -0.013086987, z: 0.04459444, w: 0.9635517}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint6
+      parentName: Rig:Left_Pinky_Finger_Joint5
+      position: {x: 0.05103253, y: -0.000000351302, z: -0.00000003463574}
+      rotation: {x: -0.011664829, y: 0.018015971, z: 0.034291003, w: 0.9991814}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint7
+      parentName: Rig:Left_Pinky_Finger_Joint6
+      position: {x: 0.024559654, y: 0.000000044110784, z: 0.00000004794551}
+      rotation: {x: -0.00077173824, y: -0.0012968046, z: 0.031315, w: 0.9995085}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Pinky_Finger_Joint8
+      parentName: Rig:Left_Pinky_Finger_Joint7
+      position: {x: 0.013862865, y: 0.0000006541811, z: -0.00000007417565}
+      rotation: {x: -1.36284954e-17, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Thigh_Joint1
+      parentName: Rig:Hip_Joint1
+      position: {x: 0.0069596395, y: 0.105642214, z: 0.00684844}
+      rotation: {x: -0.07428446, y: 0.9275929, z: 0.3658941, w: 0.0132245775}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Knee_Joint1
+      parentName: Rig:Left_Thigh_Joint1
+      position: {x: -0.42803574, y: 1.4432899e-16, z: 1.0658141e-16}
+      rotation: {x: 0.024414524, y: -0.325474, z: 0.00041802967, w: 0.9452357}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Foot_Joint1
+      parentName: Rig:Left_Knee_Joint1
+      position: {x: -0.6914437, y: -2.8199664e-16, z: 2.0428103e-16}
+      rotation: {x: 0.05760629, y: 0.7810447, z: 0.03873245, w: 0.6206049}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Foot_Joint2
+      parentName: Rig:Left_Foot_Joint1
+      position: {x: -0.10877814, y: 0, z: 3.5527136e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Left_Foot_Joint3
+      parentName: Rig:Left_Foot_Joint2
+      position: {x: -0.07948739, y: -0.0000007572662, z: -0.00000003578277}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Thigh_Joint1
+      parentName: Rig:Hip_Joint1
+      position: {x: 0.009347673, y: -0.105457716, z: 0.0068490575}
+      rotation: {x: -0.09999755, y: -0.9541608, z: 0.28181025, w: 0.01267308}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Knee_Joint1
+      parentName: Rig:Right_Thigh_Joint1
+      position: {x: -0.42803794, y: 5.7731595e-17, z: 2.4868996e-16}
+      rotation: {x: -0.057841256, y: -0.29149583, z: 0.03323659, w: 0.9542431}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Foot_Joint1
+      parentName: Rig:Right_Knee_Joint1
+      position: {x: -0.6914436, y: 3.330669e-17, z: 9.325873e-16}
+      rotation: {x: -0.05492479, y: 0.8484846, z: -0.22728755, w: 0.47476065}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Foot_Joint2
+      parentName: Rig:Right_Foot_Joint1
+      position: {x: -0.10877809, y: -1.7763568e-17, z: -1.7763568e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rig:Right_Foot_Joint3
+      parentName: Rig:Right_Foot_Joint2
+      position: {x: -0.07948739, y: 0.00000061441534, z: -0.00000004225997}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
