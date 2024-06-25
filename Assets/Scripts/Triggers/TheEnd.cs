@@ -24,4 +24,6 @@ public class TheEnd : MonoBehaviour, IEventListener
         EventBus.Instance.Register(this);
         RideProgression.Instance.AddThreshold(trigger);
     }
+
+
 }
