@@ -1,14 +1,11 @@
-using FMOD.Studio;
 using FMODUnity;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightSound : MonoBehaviour
 {
     private bool isSoundPlaying = false;
     private StudioEventEmitter lightChargeEmitter;
-    private Dictionary<EventReference, bool> soundInstances = new Dictionary<EventReference, bool>();
 
     private LightBehaviour LightBehaviour;
 
@@ -26,12 +23,10 @@ public class LightSound : MonoBehaviour
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
-        lightChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
         lightChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.LightCharge, gameObject);
-        lightChargeEmitter.PlayEvent = EmitterGameEvent.None;
-        lightChargeEmitter.StopEvent = EmitterGameEvent.None;
-
+        Debug.Log("asd");
         lightChargeEmitter.Play(); // Start playing the emitter but keep it paused initially
+        lightChargeEmitter.EventInstance.release();
         lightChargeEmitter.EventInstance.setPaused(true);
     }
 

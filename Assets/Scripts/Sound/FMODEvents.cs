@@ -22,6 +22,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference WheelRotation { get; private set; }
     [field: SerializeField] public EventReference WheelFull { get; private set; }
     [field: SerializeField] public EventReference WheelNull { get; private set; }
+    [field: SerializeField] public EventReference WheelStart { get; private set; }
     [field: SerializeField] public EventReference Grab { get; private set; }
     [field: SerializeField] public EventReference Backspin { get; private set; }
     [field: SerializeField] public EventReference Bats { get; private set; }
@@ -30,6 +31,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Brake { get; private set; }
     [field: SerializeField] public EventReference EngineHeat { get; private set; }
     [field: SerializeField] public EventReference LeverEnds { get; private set; }
+    [field: SerializeField] public EventReference VOStart { get; private set; }
+    [field: SerializeField] public EventReference VOEnd { get; private set; }
     public static FMODEvents instance {get; private set;}
 
   

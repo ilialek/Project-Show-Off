@@ -84,5 +84,10 @@ public class CartBehaviour : MonoBehaviour
     {
         // do it here
     }
+
+    public Vector3 GetSpeed()
+    {
+        return rb.velocity;
+    }
 }
 

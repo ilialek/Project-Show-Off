@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,7 +27,9 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance { get; private set; }
 
-    private EventInstance ambienceEventInstance;
+    public EventInstance ambienceEventInstance;
+
+    private GameObject playerCart;
 
     void Awake()
     {
@@ -53,6 +55,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitializeAmbience(FMODEvents.instance.Ambience1);
+        playerCart = GameObject.Find("CART");
     }
 
     private void Update()
@@ -61,6 +64,18 @@ public class AudioManager : MonoBehaviour
         CartSFXBus.setVolume(CartSFXVolume);
         ambienceBus.setVolume(ambienceVolume);
         sfxBus.setVolume(SFXVolume);
+
+
+        // Ensure playerCart is valid and set 3D attributes accordingly
+        if (playerCart != null)
+        {
+            ambienceEventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, playerCart.GetComponent<Rigidbody>()));
+        }
+        else
+        {
+            Debug.LogWarning("PlayerCart GameObject not found or is null.");
+        }
+
 
         //List<FMOD.Channel> activeChannels = GetAllActiveChannels();
     }
@@ -106,11 +121,16 @@ public class AudioManager : MonoBehaviour
         return playingChannels;
     }
     */
+    private void FixedUpdate()
+    {
+
+    }
 
     private void InitializeAmbience(EventReference ambienceEventReference)
     {
         ambienceEventInstance = CreateInstance(ambienceEventReference);
         ambienceEventInstance.start();
+        ambienceEventInstance.release();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
