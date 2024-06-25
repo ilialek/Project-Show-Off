@@ -20,7 +20,7 @@ public class RadioSound : MonoBehaviour
         VOStart = AudioManager.instance.CreateInstance(FMODEvents.instance.VOStart);
         VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
         VOStart.start();
-        VOStart.release();  // Release the instance
+        VOStart.release();
     }
 
     // Update is called once per frame
@@ -28,20 +28,20 @@ public class RadioSound : MonoBehaviour
     {
         VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
 
-        if (playerProgression.GetProgression() < 28 && !isStartPlaying)
+        if (playerProgression.GetProgression() < 30 && !isStartPlaying)
         {
             
-            isStartPlaying = true;  // Mark as started
+            isStartPlaying = true;
 
         }
-        else if (playerProgression.GetProgression() >= 28 && !isEndPlaying)
+        else if (playerProgression.GetProgression() >= 30 && !isEndPlaying)
         {
             if (!VOEnd.isValid())
             {
                 VOEnd = AudioManager.instance.CreateInstance(FMODEvents.instance.VOEnd);
                 
                 VOEnd.start();
-                VOEnd.release();  // Release the instance
+                VOEnd.release();
                 isEndPlaying = true;
             }
         }

@@ -37,7 +37,6 @@ public class WheelSound : MonoBehaviour
         wheelChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.WheelRotation, gameObject);
 
         Wheel = GameObject.Find("Part To Rotate");
-        
 
         XRKnob = FindObjectOfType<XRKnob>();
         wheelChargeEmitter.Play();
@@ -59,7 +58,6 @@ public class WheelSound : MonoBehaviour
         isUserInteracting = XRKnob.GetUserState();
 
         HandleSoundLogic();
- 
     }
 
     void WheelVelocity()
@@ -86,7 +84,7 @@ public class WheelSound : MonoBehaviour
             smoothedRateOfChange = Mathf.Clamp(smoothedRateOfChange, 0f, 1f);
         }
 
-        //AudioManager.instance.SetEmitterParameter(wheelChargeEmitter, "WheelForce", smoothedRateOfChange);
+        AudioManager.instance.SetEmitterParameter(wheelChargeEmitter, "WheelForce", smoothedRateOfChange);
 
         previousValue = currentValue;
         previousTime = currentTime;

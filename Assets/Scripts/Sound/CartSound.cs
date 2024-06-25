@@ -29,10 +29,8 @@ public class CartSound : MonoBehaviour
 
     void FixedUpdate()
     {
-
         cartEmitter.EventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, playerCart.GetComponent<Rigidbody>()));
         UpdateSoundLogic();
-
     }
 
     private void InitializeComponents()
@@ -60,9 +58,6 @@ public class CartSound : MonoBehaviour
         Rigidbody cartRigidbody = CartBehaviour.GetComponent<Rigidbody>();
         speed = cartRigidbody.velocity.magnitude *0.3f;
         speed = Mathf.Clamp01(speed);
-        //Debug.Log(speed);
-
-
 
         UpdateCartMovementSound();
         //UpdateEngineHeatSound();

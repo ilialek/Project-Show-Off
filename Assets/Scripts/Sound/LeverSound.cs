@@ -25,26 +25,20 @@ public class LeverSound : MonoBehaviour
             Debug.LogError("XRLever not found");
             return;
         }
-
         previousValue = xrLever.GetLeverValue();
         leverEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.Lever, gameObject);
 
         Lever = GameObject.Find("PIVOT");
-
-        
-
     }
 
     void FixedUpdate()
     {
         leverEmitter.EventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, Lever.GetComponent<Rigidbody>()));
-
         UpdateSoundLogic();
     }
 
     private void UpdateSoundLogic()
-    {
-        
+    {    
         bool isUserInteracting = xrLever.GetLeverInteracting();
         leverPosition = xrLever.GetLeverValue();
         rotationStrength = GetRotationStrength(leverPosition, previousValue);

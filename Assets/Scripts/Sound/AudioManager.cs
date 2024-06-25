@@ -65,8 +65,6 @@ public class AudioManager : MonoBehaviour
         ambienceBus.setVolume(ambienceVolume);
         sfxBus.setVolume(SFXVolume);
 
-
-        // Ensure playerCart is valid and set 3D attributes accordingly
         if (playerCart != null)
         {
             ambienceEventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, playerCart.GetComponent<Rigidbody>()));
@@ -75,55 +73,6 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning("PlayerCart GameObject not found or is null.");
         }
-
-
-        //List<FMOD.Channel> activeChannels = GetAllActiveChannels();
-    }
-
-
-    /*
-    public List<FMOD.Channel> GetAllActiveChannels()
-    {
-        List<FMOD.Channel> playingChannels = new List<FMOD.Channel>();
-
-        FMOD.System coreSystem = RuntimeManager.CoreSystem;
-        if (coreSystem == null)
-        {
-            Debug.LogError("FMOD CoreSystem is not valid.");
-            return playingChannels;
-        }
-
-        int numChannels;
-        FMOD.RESULT result = coreSystem.getChannelsPlaying(out numChannels);
-
-        if (result == FMOD.RESULT.OK)
-        {
-            for (int i = 0; i < numChannels; i++)
-            {
-                FMOD.Channel channel;
-                result = coreSystem.getChannel(i, out channel);
-                if (result == FMOD.RESULT.OK && channel.hasHandle())
-                {
-                    bool isPlaying;
-                    result = channel.isPlaying(out isPlaying);
-                    if (result == FMOD.RESULT.OK && isPlaying)
-                    {
-                        playingChannels.Add(channel);
-                    }
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError($"FMOD error getting number of playing channels: {result}");
-        }
-
-        return playingChannels;
-    }
-    */
-    private void FixedUpdate()
-    {
-
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)

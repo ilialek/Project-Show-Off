@@ -19,15 +19,19 @@ public class LightSound : MonoBehaviour
 
     private bool isOn;
 
+    private GameObject Generator;
+
     // Start is called before the first frame update
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
         lightChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.LightCharge, gameObject);
         Debug.Log("asd");
-        lightChargeEmitter.Play(); // Start playing the emitter but keep it paused initially
+        lightChargeEmitter.Play(); 
         lightChargeEmitter.EventInstance.release();
         lightChargeEmitter.EventInstance.setPaused(true);
+
+        Generator = GameObject.Find("Generator");
     }
 
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class LightSound : MonoBehaviour
 
         if (!lightIsSet)
         {
+            lightChargeEmitter.EventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, Generator.GetComponent<Rigidbody>()));
             if (knobValue > 0 && knobValue < 1)
             {
                 BlinkingBehaviour();
