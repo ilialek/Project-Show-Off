@@ -14,6 +14,8 @@ public class LeverSound : MonoBehaviour
 
     private GameObject Lever;
 
+    public bool hasPlayerMoved = false;
+
     [SerializeField, Range(0.001f, 1f)] private float threshold = 0.001f;
     [SerializeField] private float deadzone = 0.01f;
 
@@ -33,7 +35,7 @@ public class LeverSound : MonoBehaviour
 
     void FixedUpdate()
     {
-        leverEmitter.EventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, Lever.GetComponent<Rigidbody>()));
+
         UpdateSoundLogic();
     }
 
@@ -47,6 +49,8 @@ public class LeverSound : MonoBehaviour
         if (isUserInteracting)
         {
             HandleLeverInteraction();
+            leverEmitter.EventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, Lever.GetComponent<Rigidbody>()));
+            hasPlayerMoved = true;
         }
         else
         {

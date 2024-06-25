@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using FMODUnity;
 using System.Collections;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class LightSound : MonoBehaviour
 {
     private bool isSoundPlaying = false;
-    private StudioEventEmitter lightChargeEmitter;
+    private EventInstance lightChargeInstance;
 
     private LightBehaviour LightBehaviour;
 
@@ -25,13 +26,14 @@ public class LightSound : MonoBehaviour
     private void Start()
     {
         LightBehaviour = FindObjectOfType<LightBehaviour>();
-        lightChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.LightCharge, gameObject);
-        Debug.Log("asd");
-        lightChargeEmitter.Play(); 
-        lightChargeEmitter.EventInstance.release();
-        lightChargeEmitter.EventInstance.setPaused(true);
 
+        // Create the instance of the sound event
+        lightChargeInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.LightCharge);
+        lightChargeInstance.start(); lightChargeInstance.release();
+        lightChargeInstance.setPaused(true); // Initially paused
         Generator = GameObject.Find("Generator");
+        lightChargeInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, Generator.GetComponent<Rigidbody>()));
+
     }
 
     // Update is called once per frame
@@ -46,24 +48,20 @@ public class LightSound : MonoBehaviour
 
         if (!lightIsSet)
         {
-            lightChargeEmitter.EventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, Generator.GetComponent<Rigidbody>()));
             if (knobValue > 0 && knobValue < 1)
             {
                 BlinkingBehaviour();
-                lightChargeEmitter.EventInstance.setPaused(false);
+                lightChargeInstance.setPaused(false);
             }
             else if (knobValue == 0)
             {
-                AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
-                AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
-                lightChargeEmitter.EventInstance.setPaused(true);
+                lightChargeInstance.setPaused(true);
             }
         }
         else
         {
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
-            lightChargeEmitter.EventInstance.setPaused(true);
+            lightChargeInstance.setPaused(true);
+
             if (!coroutineStarted)
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.LightOn, transform.position);
@@ -96,19 +94,40 @@ public class LightSound : MonoBehaviour
             totalTime += blinkInterval;
         }
     }
-
+    [SerializeField, Range(0.1f, 10f)] private float blinktresh;
     private void BlinkingBehaviour()
     {
-        isOn = LightBehaviour.GetOnState();
-        if (blinkInterval < 0.1f)
+        if (Generator != null)
         {
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 0);
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 1);
+            Rigidbody generatorRigidbody = Generator.GetComponent<Rigidbody>();
+            if (generatorRigidbody != null)
+            {
+                lightChargeInstance.set3DAttributes(RuntimeUtils.To3DAttributes(Generator.transform, generatorRigidbody));
+            }
+            else
+            {
+                lightChargeInstance.set3DAttributes(RuntimeUtils.To3DAttributes(Generator.transform));
+            }
         }
-        else if (blinkInterval >= 0.1f)
+
+        isOn = LightBehaviour.GetOnState();
+
+        if (blinkInterval < 0.2f)
         {
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightChargeLoop", 0);
-            AudioManager.instance.SetEmitterParameter(lightChargeEmitter, "LightLoop", 1);
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "Lightloop", 0f);
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 1f);
+            //Debug.Log("fastblink");
+        }
+        else if (blinkInterval >= 0.2f)
+        {
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0f);
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "Lightloop", 1f);
+            //Debug.Log("slowblink");
+        } else if (blinkInterval >= 0.8f)
+        {
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "LightChargeLoop", 0f);
+            AudioManager.instance.SetInstanceParameter(lightChargeInstance, "Lightloop", 0f);
+            //Debug.Log("blinkfadeout");
         }
 
         isSoundPlaying = blinkInterval < 1;
@@ -116,7 +135,12 @@ public class LightSound : MonoBehaviour
 
         if (shouldPlayBlinkSound)
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.Blink, transform.position);
+
+            float blinkSound = blinkInterval * blinktresh;
+            blinkSound = Mathf.Clamp01(blinkSound);
+            //Debug.Log($"Playing Blink sound with BlinkIntensity: {blinkSound}");
+            // Use the custom utility method to play the Blink sound with parameters
+            AudioManager.PlayOneShotWithParameters(FMODEvents.instance.Blink, Generator.transform.position, ("BlinkCharge", blinkSound));
             hasPlayedBlinkSound = true;
         }
         else if (isOn || blinkInterval >= 1)

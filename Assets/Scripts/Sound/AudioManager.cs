@@ -133,6 +133,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static void PlayOneShotWithParameters(EventReference eventReference, Vector3 position, params (string, float)[] parameters)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+
+        foreach (var parameter in parameters)
+        {
+            eventInstance.setParameterByName(parameter.Item1, parameter.Item2);
+        }
+
+        eventInstance.start();
+        eventInstance.release();
+    }
+
+
     private void OnDestroy()
     {
         CleanUp();

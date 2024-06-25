@@ -8,7 +8,7 @@ public class CartSound : MonoBehaviour
     private float speed;
     private float rattle;
 
-    [SerializeField] private EngineTemperature engineHeat;
+    private EngineTemperature engineHeat;
     private PlayerProgression playerProgression;
     private StudioEventEmitter cartEmitter;
     private EventInstance engineHeatInstance;
@@ -39,6 +39,7 @@ public class CartSound : MonoBehaviour
         playerProgression = FindObjectOfType<PlayerProgression>();
         XRLever = FindObjectOfType<XRLever>();
         CartBehaviour = FindObjectOfType<CartBehaviour>();
+        engineHeat = FindObjectOfType<EngineTemperature>();
 
         playerCart = GameObject.Find("CART");
     }
@@ -60,7 +61,7 @@ public class CartSound : MonoBehaviour
         speed = Mathf.Clamp01(speed);
 
         UpdateCartMovementSound();
-        //UpdateEngineHeatSound();
+        UpdateEngineHeatSound();
     }
 
     private void UpdateBrakeSound()

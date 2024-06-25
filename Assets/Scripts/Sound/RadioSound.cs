@@ -5,6 +5,7 @@ using UnityEngine;
 public class RadioSound : MonoBehaviour
 {
     private PlayerProgression playerProgression;
+    private LeverSound LeverSound;
     private EventInstance VOStart;
     private EventInstance VOEnd;
     private GameObject RadioObject;
@@ -16,11 +17,11 @@ public class RadioSound : MonoBehaviour
     void Start()
     {
         playerProgression = FindObjectOfType<PlayerProgression>();
+        LeverSound = FindObjectOfType<LeverSound>();
         RadioObject = GameObject.Find("Radio");
         VOStart = AudioManager.instance.CreateInstance(FMODEvents.instance.VOStart);
         VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
-        VOStart.start();
-        VOStart.release();
+
     }
 
     // Update is called once per frame
@@ -28,13 +29,14 @@ public class RadioSound : MonoBehaviour
     {
         VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
 
-        if (playerProgression.GetProgression() < 30 && !isStartPlaying)
+        if (playerProgression.GetProgression() < 28 && !isStartPlaying && LeverSound.hasPlayerMoved)
         {
-            
+            VOStart.start();
+            VOStart.release();
             isStartPlaying = true;
 
         }
-        else if (playerProgression.GetProgression() >= 30 && !isEndPlaying)
+        else if (playerProgression.GetProgression() >= 28 && !isEndPlaying)
         {
             if (!VOEnd.isValid())
             {
