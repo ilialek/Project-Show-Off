@@ -126,14 +126,14 @@ public class LightBehaviour : MonoBehaviour
             Vector3 directionToTarget = hitCollider.transform.position - transform.position;
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
-            if (angleToTarget < lightComponent.spotAngle / 2)
+            if (angleToTarget < lightComponent.spotAngle / 2 && lightComponent.enabled)
             {
                 // Object is within the spotlight's cone
 
                 textMeshPro.text = "Detected";
                 Debug.Log("Detected object: " + hitCollider.name);
 
-                hitCollider.GetComponent<Animator>().SetBool("Highlighted", true);
+                hitCollider.GetComponent<Monster>().SetState(MonsterState.Highlighted);
                 // Add your custom logic here (e.g., triggering events, applying effects, etc.)
             }
             

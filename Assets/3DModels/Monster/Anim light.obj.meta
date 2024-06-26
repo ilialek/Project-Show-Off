@@ -8,47 +8,42 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Body_low_Monster_Monster_low1Mat
-    second: {fileID: 2100000, guid: 576bce21ff805734f95673c3f61bdb7c, type: 2}
+    second: {fileID: 2100000, guid: 0e234580809ae404ab24600312944e73, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Cornea_low_Monster_Eyes_lowMat
-    second: {fileID: 2100000, guid: f63d756214447c94aa9c125a82036b68, type: 2}
+    second: {fileID: 2100000, guid: a2efc7cfe7bf4154a884ba34ca090f34, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Eyes_low_Monster_Cornea_low_Monster_LeftEyeMat
-    second: {fileID: 2100000, guid: c724aa8d6777d084ca62dd9afe267d7b, type: 2}
+    second: {fileID: 2100000, guid: 5e19e625bc6435f4db4d03e8e0817508, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Eyes_low_Monster_LeftEye_Monster_Sclera_lowMat
-    second: {fileID: 2100000, guid: f8ceab7e715997841ba1e3a6608bf5bc, type: 2}
+    second: {fileID: 2100000, guid: dce59f0a1f9963b49ad6e5555614f642, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Eyes_low_Monster_Sclera_lowMat
-    second: {fileID: 2100000, guid: 9f2f297772c8d054a9a8a3d91a2bf908, type: 2}
+    second: {fileID: 2100000, guid: 7b75a41256671b042a418dfb2026e959, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Fangs_lowMat
-    second: {fileID: 2100000, guid: 47c5bbd7300879546abb37f789e66174, type: 2}
+    second: {fileID: 2100000, guid: cadd818aacd2ceb45a17b32b826c30b0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Jawteeth_lowMat
-    second: {fileID: 2100000, guid: 4ddb84610a7769d46b185bef41b8a9a9, type: 2}
+    second: {fileID: 2100000, guid: 4b9c79af196b4c2489cfb7c9587fe03b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Monster_Monster_low1_Monster_Nails_lowMat
-    second: {fileID: 2100000, guid: a60111f46d98c29438f29540386c9452, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Monster_Monster_low1_Monster_polySurface23_Monster_MainJaw_lowMat
-    second: {fileID: 2100000, guid: f44889e384962fb42a11d276c910b6b1, type: 2}
+    second: {fileID: 2100000, guid: d21678ca2d94ae34eaa833cb40cca4d8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
