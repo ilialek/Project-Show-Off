@@ -3574,6 +3574,37 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_Variable: {fileID: 0}
+--- !u!1 &491572381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 491572382}
+  m_Layer: 0
+  m_Name: Final Position
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491572382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491572381}
+  m_LocalRotation: {x: 0, y: -0.84610015, z: 0, w: 0.533024}
+  m_LocalPosition: {x: -132.476, y: 17.2, z: -366.105}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: -115.58, z: 0}
 --- !u!1001 &509864058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9458,15 +9489,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.7
+      value: 1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7
+      value: 1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7
+      value: 1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10168,8 +10199,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionsToBeSet:
   - {fileID: 1708122003}
+  - {fileID: 491572382}
   spline: {fileID: 1377295942}
   speed: 5
+  currentState: 0
+  beenHighlighted: 0
 --- !u!1 &1310201525
 GameObject:
   m_ObjectHideFlags: 0

@@ -119,7 +119,7 @@ public class LightBehaviour : MonoBehaviour
     void DetectObjects()
     {
         // Get all colliders within the spotlight's range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range, detectableLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range * 0.8f, detectableLayer);
 
         foreach (Collider hitCollider in hitColliders)
         {
@@ -131,9 +131,20 @@ public class LightBehaviour : MonoBehaviour
                 // Object is within the spotlight's cone
 
                 textMeshPro.text = "Detected";
-                Debug.Log("Detected object: " + hitCollider.name);
+               // Debug.Log("Detected object: " + hitCollider.name);
 
-                hitCollider.GetComponent<Monster>().SetState(MonsterState.Highlighted);
+                Monster monsterScript = hitCollider.GetComponent<Monster>();
+
+                if (monsterScript.currentState == MonsterState.Idle)
+                {
+                    monsterScript.SetState(MonsterState.Highlighted);
+                }
+
+                if (monsterScript.currentState == MonsterState.End)
+                {
+                    monsterScript.FinalHighlight();
+                }
+
                 // Add your custom logic here (e.g., triggering events, applying effects, etc.)
             }
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Monster : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class Monster : MonoBehaviour
 
     private Animator animator;
 
-    private MonsterState currentState;
+    public MonsterState currentState;
 
     private AnimationClip scareOffClip;
     private AnimationClip crawlingClip;
+
+    public int beenHighlighted = 0;
 
     void Start()
     {
@@ -80,7 +83,9 @@ public class Monster : MonoBehaviour
                 break;
 
             case MonsterState.End:
-                // Handle end state, cleanup or reset
+
+                OnEnd();
+
                 break;
         }
     }
@@ -89,14 +94,17 @@ public class Monster : MonoBehaviour
     {
         yield return new WaitForSeconds(clipDuration);
 
-        transform.position = positionsQueue.Dequeue();
+        animator.SetBool("Highlighted", false);
+
+        //transform.position = positionsQueue.Dequeue();
         currentState = newState;
     }
     void OnHighlighted()
     {
         animator.SetBool("Highlighted", true);
 
-        WaitForAnimationClipToEnd(scareOffClip.length, MonsterState.Crawling);
+        StartCoroutine(WaitForAnimationClipToEnd(scareOffClip.length, MonsterState.Crawling));
+        
     }
 
     void OnCrawling()
@@ -104,6 +112,16 @@ public class Monster : MonoBehaviour
         animator.SetBool("Crawling", true);
 
         FollowThePath();
+    }
+
+    void OnEnd()
+    {
+        transform.position = positionsToBeSet[1].position;
+        transform.rotation = positionsToBeSet[1].rotation;
+
+        animator.SetBool("Idle", true);
+
+        //currentState = MonsterState.Idle;
     }
 
     void FollowThePath()
@@ -134,6 +152,10 @@ public class Monster : MonoBehaviour
         if (distanceToLastPoint <= endReachedDistance)
         {
             Debug.Log("End of path reached!");
+
+            animator.SetBool("Crawling", false);
+
+            currentState = MonsterState.End;
 
             // Perform actions when end is reached, such as changing state or triggering an event
             // For example:
@@ -166,4 +188,19 @@ public class Monster : MonoBehaviour
     {
         currentState = newState;
     }
+
+    public void FinalHighlight()
+    {
+        StartCoroutine(PlayAnimation(scareOffClip.length));
+    }
+
+    IEnumerator PlayAnimation(float clipDuration)
+    {
+        yield return new WaitForSeconds(clipDuration);
+
+        animator.SetBool("Highlighted", false);
+
+        gameObject.SetActive(false);
+    }
+
 }
