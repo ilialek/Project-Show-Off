@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
 
@@ -49,12 +50,23 @@ public class EngineTemperature : MonoBehaviour
     {
         float testLeverValue = leverScript.m_Value;
 
-        newYRotation = testLeverValue == 0 ?
-    GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime :
-    GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * testLeverValue * Time.deltaTime;
+        if (testLeverValue < 0.5f)
+        {
+            if (newYRotation < 0.5f)
+            {
+                newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * (testLeverValue - 0.3f) * Time.deltaTime;
+            }else
+            {
+                newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime;
+            }
+        }
+        else
+        {
+            newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime;
+            newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * (testLeverValue - 0.5f) * Time.deltaTime;
+        }
 
         newYRotation = Mathf.Clamp(newYRotation, minAngle, maxAngle);
-
         transformToRotate.localEulerAngles = new Vector3(0, newYRotation, 0);
     }
 
@@ -81,3 +93,5 @@ public class EngineTemperature : MonoBehaviour
         return rotation;
     }
 }
+
+
