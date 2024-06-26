@@ -9,7 +9,6 @@ public class CartSound : MonoBehaviour
     private float rattle;
 
     private EngineTemperature engineHeat;
-    private PlayerProgression playerProgression;
     private StudioEventEmitter cartEmitter;
     private EventInstance engineHeatInstance;
     private EventInstance brakeInstance;
@@ -19,6 +18,8 @@ public class CartSound : MonoBehaviour
     private CartBehaviour CartBehaviour;
 
     private GameObject playerCart;
+
+    private bool isUnderWaterfall = false;
 
 
     void Start()
@@ -36,7 +37,6 @@ public class CartSound : MonoBehaviour
     private void InitializeComponents()
     {
         cartEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.Cart, gameObject);
-        playerProgression = FindObjectOfType<PlayerProgression>();
         XRLever = FindObjectOfType<XRLever>();
         CartBehaviour = FindObjectOfType<CartBehaviour>();
         engineHeat = FindObjectOfType<EngineTemperature>();
@@ -102,12 +102,13 @@ public class CartSound : MonoBehaviour
 
     private void UpdateCartMovementSound()
     {
-        float progression = playerProgression.GetProgression();
         float speedThreshold = 0.2f;
-        float targetRattle = 0f;
         float waterfallFade = 1f;
+        float targetRattle = 0f;
 
-        if (progression > 12 && progression < 17)
+
+
+        if (isUnderWaterfall)
         {
             targetRattle = 1f;
         }
@@ -136,6 +137,27 @@ public class CartSound : MonoBehaviour
         float normalizedValue = (tempAngle - minValue) / (maxValue - minValue);
 
         AudioManager.instance.SetInstanceParameter(engineHeatInstance, "EngineHeatVal", normalizedValue);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Waterfall")
+        {
+            isUnderWaterfall = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Waterfall")
+        {
+            isUnderWaterfall = false;
+        }
     }
 
     void OnDestroy()
