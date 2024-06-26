@@ -49,12 +49,18 @@ public class EngineTemperature : MonoBehaviour
     {
         float testLeverValue = leverScript.m_Value;
 
-        newYRotation = testLeverValue == 0 ?
-    GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime :
-    GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * testLeverValue * Time.deltaTime;
+        if (testLeverValue < 0.5f)
+        {
+            // Cool down the engine temperature
+            newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) - coolDownMultiplier * Time.deltaTime;
+        }
+        else
+        {
+            // Heat up the engine temperature
+            newYRotation = GetTheRotationInDegrees(transformToRotate.localEulerAngles.y) + heatingMultiplier * (testLeverValue - 0.5f) * Time.deltaTime;
+        }
 
         newYRotation = Mathf.Clamp(newYRotation, minAngle, maxAngle);
-
         transformToRotate.localEulerAngles = new Vector3(0, newYRotation, 0);
     }
 

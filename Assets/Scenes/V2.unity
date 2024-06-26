@@ -2569,7 +2569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &409892329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6109,7 +6109,7 @@ MonoBehaviour:
       Data2: 1081037154
       Data3: -526989664
       Data4: -1715516837
-    Path: event:/Hand
+    Path: event:/SFX/Hand
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -18130,7 +18130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4aeb83e9c3b98547a41706942d0c2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinktresh: 0
+  blinktresh: 2.4
 --- !u!114 &1966700287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18184,11 +18184,11 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.6273585, g: 0.8048868, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.94063133, b: 0.7987421, a: 1}
   m_Intensity: 1200
-  m_Range: 35
-  m_SpotAngle: 42.851746
-  m_InnerSpotAngle: 34.335625
+  m_Range: 45
+  m_SpotAngle: 49.794212
+  m_InnerSpotAngle: 33.178547
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -19308,6 +19308,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2139886127}
+    - targetCorrespondingSourceObject: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2139886128}
   m_SourcePrefab: {fileID: 100100000, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
 --- !u!4 &2139886119 stripped
 Transform:
@@ -19368,7 +19371,7 @@ MonoBehaviour:
       Data2: 1081037154
       Data3: -526989664
       Data4: -1715516837
-    Path: event:/Hand
+    Path: event:/SFX/Hand
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -19400,6 +19403,19 @@ MonoBehaviour:
   inputDeviceCharacteristics: 512
   pullingForce: 5
   rigidBodyToPull: {fileID: 656211721}
+--- !u!114 &2139886128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139886120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5311907b64e7a44a6fb747cd7405b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomXRDirectInteractor: {fileID: 2139886127}
 --- !u!1 &2143538520
 GameObject:
   m_ObjectHideFlags: 0
@@ -22854,10 +22870,26 @@ PrefabInstance:
       propertyPath: Radio
       value: 
       objectReference: {fileID: 806690559}
+    - target: {fileID: 4541093015301498240, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541093015301498240, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 29.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541093015301498240, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 12.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4726994777019302244, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
       propertyPath: Radio
       value: 
       objectReference: {fileID: 806690559}
+    - target: {fileID: 5310684716353344613, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -105.06
+      objectReference: {fileID: 0}
     - target: {fileID: 5575173889126194637, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
       propertyPath: Radio
       value: 
@@ -22866,6 +22898,10 @@ PrefabInstance:
       propertyPath: Radio
       value: 
       objectReference: {fileID: 806690559}
+    - target: {fileID: 7562393695214662284, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8942165690509043991, guid: 5caf4c7eafa9c5c4d82cb3707aea1b36, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -27443,15 +27479,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: SFXVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: CartSFXVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: ambienceVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5640243789068545131, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: m_RootOrder
@@ -28728,7 +28764,6 @@ GameObject:
   m_Component:
   - component: {fileID: 39483446850093070}
   - component: {fileID: 3260137631894893544}
-  - component: {fileID: 3260137631894893545}
   m_Layer: 0
   m_Name: SpeedControl
   m_TagString: Untagged
@@ -28850,37 +28885,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   cartBehaviourScript: {fileID: 919132149542668286}
---- !u!114 &3260137631894893545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3260137631894893543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 371964898
-      Data2: 1280802662
-      Data3: -2072109635
-      Data4: -1997671971
-    Path: event:/Lever
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &3261730499286944801
 GameObject:
   m_ObjectHideFlags: 0
