@@ -39,7 +39,6 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Voiceovers")]
     [field: SerializeField] public EventReference VOStart { get; private set; }
-    [field: SerializeField] public EventReference VOEnd { get; private set; }
     [field: SerializeField] public EventReference VO { get; private set; }
     public static FMODEvents instance {get; private set;}
 

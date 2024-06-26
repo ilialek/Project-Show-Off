@@ -4,75 +4,66 @@ using UnityEngine;
 public class RadioSound : MonoBehaviour
 {
     public EventInstance VO;
+    public EventInstance VOStart;
+
+    public VOTrigger VOTrigger;
+    public bool isReset = true;
 
     void Start()
     {
+        InitializeSound();
+    }
+
+    public void InitializeSound()
+    {
+        VO.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        VO.release();
+        VOStart.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        VOStart.release();
+
         VO = AudioManager.instance.CreateInstance(FMODEvents.instance.VO);
-        VO.start();
+        VOStart = AudioManager.instance.CreateInstance(FMODEvents.instance.VOStart);
+
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(VO, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(VOStart, GetComponent<Transform>(), GetComponent<Rigidbody>());
+
+
+        VO.start(); VO.release();
+        VOStart.start(); VOStart.release();
+        VOTrigger.radioCount = 0;
+
+        isReset = true;
     }
 
     void Update()
     {
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(VO, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(VOStart, GetComponent<Transform>(), GetComponent<Rigidbody>());
 
         FMOD.Studio.PLAYBACK_STATE PbState;
         VO.getPlaybackState(out PbState);
-        if (PbState == FMOD.Studio.PLAYBACK_STATE.SUSTAINING) ;
-            //Debug.Log("voice is currently paused");
+        if (PbState == FMOD.Studio.PLAYBACK_STATE.SUSTAINING)
+        {
+            // Debug.Log("voice is currently paused");
+        }
+
+        int count = VOTrigger.radioCount;
+
+        // Stop VOStart if count is greater than 0
+        if (count > 0 && isReset)
+        {
+            VOStart.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            isReset = false;
+            //Debug.Log("VOStart stopped because count > 0");
+        }
+
+        // Reset logic
+        if (count == 6 || !isReset)
+        {
+            VOStart.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //Debug.Log("Reset triggered: VO and VOStart stopped, radioCount reset.");
+        }
     }
 }
 
-
-    /*
-    private PlayerProgression playerProgression;
-    private LeverSound LeverSound;
-    private EventInstance VOStart;
-    private EventInstance VOEnd;
-    private GameObject RadioObject;
-
-    private bool isStartPlaying = false;
-    private bool isEndPlaying = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerProgression = FindObjectOfType<PlayerProgression>();
-        LeverSound = FindObjectOfType<LeverSound>();
-        RadioObject = GameObject.Find("Radio");
-        VOStart = AudioManager.instance.CreateInstance(FMODEvents.instance.VOStart);
-        VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        VOStart.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
-
-        if (playerProgression.GetProgression() < 28 && !isStartPlaying && LeverSound.hasPlayerMoved)
-        {
-            VOStart.start();
-            VOStart.release();
-            isStartPlaying = true;
-
-        }
-        else if (playerProgression.GetProgression() >= 28 && !isEndPlaying)
-        {
-            if (!VOEnd.isValid())
-            {
-                VOEnd = AudioManager.instance.CreateInstance(FMODEvents.instance.VOEnd);
-                
-                VOEnd.start();
-                VOEnd.release();
-                isEndPlaying = true;
-            }
-        }
-
-        if(VOEnd.isValid())
-        {
-            VOEnd.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(RadioObject.transform));
-        }
-    }
-    }
-    */
 

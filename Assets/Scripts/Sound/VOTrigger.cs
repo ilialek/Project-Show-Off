@@ -6,14 +6,22 @@ public class VOTrigger : MonoBehaviour
     public GameObject Radio;
     private RadioSound radioSound;
 
+    public static int radioCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         radioSound = Radio.GetComponent<RadioSound>();
     }
-    void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        radioSound.VO.keyOff();
-        //Debug.Log("cue");
+        if (other.tag == "Cart")
+        {
+            radioSound.VO.keyOff();
+            radioCount++;
+            Debug.Log(radioCount);
+        }
     }
+
+
 }

@@ -32,7 +32,7 @@ public class WheelSound : MonoBehaviour
     void Start()
     {
         backspinInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Backspin);
-        wheelChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
+        //wheelChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
 
         wheelChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.WheelRotation, gameObject);
 
