@@ -9470,6 +9470,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1309098559}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1309098552}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
       insertIndex: -1
@@ -9477,6 +9480,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1309098555}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1309098558}
   m_SourcePrefab: {fileID: 100100000, guid: 89f473b99930a19409d83308746e6591, type: 3}
 --- !u!1 &1309098550 stripped
 GameObject:
@@ -9537,6 +9543,46 @@ MonoBehaviour:
   speed: 5
   currentState: 0
   beenHighlighted: 0
+--- !u!114 &1309098558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309098550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a85a7d456abeb548b154a5f70094a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Monster: {fileID: 1309098555}
+--- !u!54 &1309098559
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309098550}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1310201525
 GameObject:
   m_ObjectHideFlags: 0
@@ -22749,6 +22795,7 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
+  EngineTemperature: {fileID: 0}
   leverValue: 0
 --- !u!65 &919132149542668287
 BoxCollider:
@@ -27883,6 +27930,10 @@ PrefabInstance:
       value: event:/Light/LightCharging
       objectReference: {fileID: 0}
     - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterIdle>k__BackingField.Path
+      value: event:/Monster/MonsterIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: <LightWarning>k__BackingField.Path
       value: event:/Light/LightWarning
       objectReference: {fileID: 0}
@@ -27891,20 +27942,60 @@ PrefabInstance:
       value: event:/Light/LightOffclick
       objectReference: {fileID: 0}
     - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterScared>k__BackingField.Path
+      value: event:/Monster/MonsterScared
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: <WheelRotation>k__BackingField.Path
       value: event:/Light/WheelRotation
       objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterIdle>k__BackingField.Guid.Data1
+      value: -188431466
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterIdle>k__BackingField.Guid.Data2
+      value: 1262503852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterIdle>k__BackingField.Guid.Data3
+      value: -500550481
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterIdle>k__BackingField.Guid.Data4
+      value: 2065971232
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterScared>k__BackingField.Guid.Data1
+      value: -14164905
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterScared>k__BackingField.Guid.Data2
+      value: 1309388809
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterScared>k__BackingField.Guid.Data3
+      value: 1504240799
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311102999890863792, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: <MonsterScared>k__BackingField.Guid.Data4
+      value: -623284051
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
+      propertyPath: VOVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: SFXVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: CartSFXVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1612832664716951931, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: ambienceVolume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5640243789068545131, guid: 26326dd89e2cc79498ad4101259a4fa0, type: 3}
       propertyPath: m_RootOrder
@@ -40753,6 +40844,7 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
+  EngineTemperature: {fileID: 0}
   leverValue: 0
 --- !u!114 &6835908547699515254
 MonoBehaviour:

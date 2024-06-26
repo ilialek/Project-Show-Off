@@ -24,6 +24,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Lever { get; private set; }
     [field: SerializeField] public EventReference EngineHeat { get; private set; }
 
+    [field: Header("Monster")]
+    [field: SerializeField] public EventReference MonsterIdle { get; private set; }
+    [field: SerializeField] public EventReference MonsterScared { get; private set; }
+
     [field: Header("Light related")]
     [field: SerializeField] public EventReference LightOff { get; private set; }
     [field: SerializeField] public EventReference LightOffclick { get; private set; }
