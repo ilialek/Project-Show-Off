@@ -34,6 +34,7 @@ public class Restart : MonoBehaviour
         canvas.gameObject.SetActive(true);
         creditsDisplayed = true;
         StartCoroutine(DelayedRestart());
+        canvas.GetComponent<EndOverlay>().RollCredits();
     }
 
     private IEnumerator DelayedRestart()

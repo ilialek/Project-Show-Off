@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class EndOverlay : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private RectTransform rectTransform;
+
+    [SerializeField]
+    private float targetHeight = 600f;
+
+    [SerializeField]
+    private float duration = 20f;
+
+    public void RollCredits()
     {
-        
+        StartCoroutine(RollCreditsCoroutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator RollCreditsCoroutine()
     {
-        
+        float elapsedTime = 0f;
+        float startHeight = rectTransform.sizeDelta.y;
+
+        while (elapsedTime < duration)
+        {
+            float height = Mathf.Lerp(startHeight, targetHeight, elapsedTime / duration);
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, height);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, targetHeight);
     }
 }
