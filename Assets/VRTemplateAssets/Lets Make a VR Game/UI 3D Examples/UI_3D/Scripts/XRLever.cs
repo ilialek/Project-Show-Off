@@ -245,7 +245,7 @@ namespace UnityEngine.XR.Content.Interaction
             float fullRange = maxAngle - minAngle;
             float differenceFromMinAngle = _currentRotation - minAngle;
             float value = differenceFromMinAngle / fullRange;
-            m_Value = value;
+            m_Value = Mathf.Clamp(value, 0, 1);
         }
 
         private void Update()

@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3824870393093317841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8599103900125986869}
+  - component: {fileID: 1311102999890863792}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8599103900125986869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3824870393093317841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5640243789068545131}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1311102999890863792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3824870393093317841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981be6e492df69441a20399b1c4759d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Ambience1>k__BackingField:
+    Guid:
+      Data1: -1882094340
+      Data2: 1167488714
+      Data3: 1477436836
+      Data4: 232865289
+    Path: event:/Ambience_cave
+  <Scary>k__BackingField:
+    Guid:
+      Data1: 1066004106
+      Data2: 1276986928
+      Data3: 1914496941
+      Data4: -137321466
+    Path: event:/Scary
+  <Test>k__BackingField:
+    Guid:
+      Data1: 252866003
+      Data2: 1082710724
+      Data3: 1555344806
+      Data4: -1738280614
+    Path: event:/Test
+  <Grab>k__BackingField:
+    Guid:
+      Data1: 1498323769
+      Data2: 1248604886
+      Data3: 452342419
+      Data4: 1559425306
+    Path: event:/Grab
+  <Hand>k__BackingField:
+    Guid:
+      Data1: 1918902040
+      Data2: 1081037154
+      Data3: -526989664
+      Data4: -1715516837
+    Path: event:/Hand
+  <Bats>k__BackingField:
+    Guid:
+      Data1: 1572099568
+      Data2: 1202558559
+      Data3: 1513816462
+      Data4: 407690120
+    Path: event:/Bats
+  <Cart>k__BackingField:
+    Guid:
+      Data1: 1937923348
+      Data2: 1293243145
+      Data3: -23447635
+      Data4: 994830250
+    Path: event:/Cart
+  <LeverEnds>k__BackingField:
+    Guid:
+      Data1: -1891904409
+      Data2: 1265283173
+      Data3: -894093683
+      Data4: 1587151536
+    Path: event:/LeverEnds
+  <Brake>k__BackingField:
+    Guid:
+      Data1: -1703345575
+      Data2: 1327062326
+      Data3: -570973512
+      Data4: -220436675
+    Path: event:/Brake
+  <Lever>k__BackingField:
+    Guid:
+      Data1: 371964898
+      Data2: 1280802662
+      Data3: -2072109635
+      Data4: -1997671971
+    Path: event:/Lever
+  <EngineHeat>k__BackingField:
+    Guid:
+      Data1: 917669726
+      Data2: 1182169616
+      Data3: -1589292393
+      Data4: -431922285
+    Path: event:/EngineHeat
+  <LightOff>k__BackingField:
+    Guid:
+      Data1: 470804169
+      Data2: 1328361173
+      Data3: -1919240775
+      Data4: 169178233
+    Path: event:/LightOff
+  <LightOffclick>k__BackingField:
+    Guid:
+      Data1: -1361519216
+      Data2: 1215299465
+      Data3: 1148850102
+      Data4: 1309453612
+    Path: event:/LightOffclick
+  <LightWarning>k__BackingField:
+    Guid:
+      Data1: -1642714621
+      Data2: 1263723545
+      Data3: -2029005165
+      Data4: 1816937231
+    Path: event:/LightWarning
+  <LightCharge>k__BackingField:
+    Guid:
+      Data1: 752826423
+      Data2: 1274556945
+      Data3: 1812961170
+      Data4: 671765471
+    Path: event:/LightCharging
+  <LightOn>k__BackingField:
+    Guid:
+      Data1: -928506327
+      Data2: 1229548686
+      Data3: 1076464780
+      Data4: 1636647774
+    Path: event:/LightOn
+  <WheelRotation>k__BackingField:
+    Guid:
+      Data1: -2021817901
+      Data2: 1075567744
+      Data3: 2081400739
+      Data4: 491501956
+    Path: event:/WheelRotation
+  <WheelFull>k__BackingField:
+    Guid:
+      Data1: -147330391
+      Data2: 1189637284
+      Data3: 1942560916
+      Data4: 1970391904
+    Path: event:/WheelFull
+  <WheelNull>k__BackingField:
+    Guid:
+      Data1: -799873818
+      Data2: 1308934919
+      Data3: -34598230
+      Data4: -450024446
+    Path: event:/WheelNull
+  <WheelStart>k__BackingField:
+    Guid:
+      Data1: -1672707022
+      Data2: 1136879946
+      Data3: -2057783631
+      Data4: 1545824077
+    Path: event:/WheelStart
+  <Backspin>k__BackingField:
+    Guid:
+      Data1: 1883207143
+      Data2: 1291340743
+      Data3: 1843821984
+      Data4: 69769719
+    Path: event:/Backspin
+  <Blink>k__BackingField:
+    Guid:
+      Data1: 137952993
+      Data2: 1280185920
+      Data3: 885464738
+      Data4: -1534707032
+    Path: event:/Blink
+  <VOStart>k__BackingField:
+    Guid:
+      Data1: 499653474
+      Data2: 1215169099
+      Data3: 1888608401
+      Data4: 1457554567
+    Path: event:/VOStart
+  <VOEnd>k__BackingField:
+    Guid:
+      Data1: 1719157641
+      Data2: 1207355187
+      Data3: 757391771
+      Data4: -2064692703
+    Path: event:/VOEnd
+--- !u!1 &8033166446527792779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5640243789068545131}
+  - component: {fileID: 1612832664716951931}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5640243789068545131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033166446527792779}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -139.5449, y: 17.033566, z: -511.99823}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8599103900125986869}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612832664716951931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033166446527792779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25c14420ee37104db4f467ca2485152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 1
+  CartSFXVolume: 1
+  ambienceVolume: 1
+  SFXVolume: 1

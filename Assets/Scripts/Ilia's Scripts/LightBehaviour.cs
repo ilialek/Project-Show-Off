@@ -26,8 +26,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
 
     private float knobValue = 0;
 
-    public TextMeshPro textMeshPro;
-
     private bool isAwaitingLight = false;
 
     void Start()
@@ -42,7 +40,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     {
         SetTheRotation();
 
-        textMeshPro.text = "Not";
         DetectObjects();
         if (!lightIsSet)
         {
@@ -122,20 +119,30 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     void DetectObjects()
     {
         // Get all colliders within the spotlight's range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range, detectableLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range * 0.8f, detectableLayer);
 
         foreach (Collider hitCollider in hitColliders)
         {
             Vector3 directionToTarget = hitCollider.transform.position - transform.position;
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
-            if (angleToTarget < lightComponent.spotAngle / 2 && lightIsSet)
+            if (angleToTarget < lightComponent.spotAngle / 2 && lightComponent.enabled)
             {
                 // Object is within the spotlight's cone
 
-                textMeshPro.text = "Detected";
-                Debug.Log("Detected object: " + hitCollider.name);
-                // Add your custom logic here (e.g., triggering events, applying effects, etc.)
+               // Debug.Log("Detected object: " + hitCollider.name);
+
+                Monster monsterScript = hitCollider.GetComponent<Monster>();
+
+                if (monsterScript.currentState == MonsterState.Idle)
+                {
+                    monsterScript.SetState(MonsterState.Highlighted);
+                }
+
+                if (monsterScript.currentState == MonsterState.End)
+                {
+                    monsterScript.FinalHighlight();
+                }
 
                 if (isAwaitingLight)
                 {

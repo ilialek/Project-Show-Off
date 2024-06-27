@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Anchor
   - Waterfall
+  - Cart
   layers:
   - Default
   - TransparentFX

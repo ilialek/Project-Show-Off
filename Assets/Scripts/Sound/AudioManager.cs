@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,11 +15,14 @@ public class AudioManager : MonoBehaviour
     public float ambienceVolume = 1;
     [Range(0, 1)]
     public float SFXVolume = 1;
+    [Range(0, 1)]
+    public float VOVolume = 1;
 
     private Bus masterBus;
     private Bus CartSFXBus;
     private Bus ambienceBus;
     private Bus sfxBus;
+    private Bus VOBus;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -27,7 +30,9 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance { get; private set; }
 
-    private EventInstance ambienceEventInstance;
+    public EventInstance ambienceEventInstance;
+
+    private GameObject playerCart;
 
     void Awake()
     {
@@ -48,11 +53,13 @@ public class AudioManager : MonoBehaviour
         CartSFXBus = RuntimeManager.GetBus("bus:/CartSFX");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        VOBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
     {
         InitializeAmbience(FMODEvents.instance.Ambience1);
+        playerCart = GameObject.Find("Cart");
     }
 
     private void Update()
@@ -61,56 +68,23 @@ public class AudioManager : MonoBehaviour
         CartSFXBus.setVolume(CartSFXVolume);
         ambienceBus.setVolume(ambienceVolume);
         sfxBus.setVolume(SFXVolume);
+        VOBus.setVolume(VOVolume);
 
-        //List<FMOD.Channel> activeChannels = GetAllActiveChannels();
-    }
-
-
-    /*
-    public List<FMOD.Channel> GetAllActiveChannels()
-    {
-        List<FMOD.Channel> playingChannels = new List<FMOD.Channel>();
-
-        FMOD.System coreSystem = RuntimeManager.CoreSystem;
-        if (coreSystem == null)
+        if (playerCart != null)
         {
-            Debug.LogError("FMOD CoreSystem is not valid.");
-            return playingChannels;
-        }
-
-        int numChannels;
-        FMOD.RESULT result = coreSystem.getChannelsPlaying(out numChannels);
-
-        if (result == FMOD.RESULT.OK)
-        {
-            for (int i = 0; i < numChannels; i++)
-            {
-                FMOD.Channel channel;
-                result = coreSystem.getChannel(i, out channel);
-                if (result == FMOD.RESULT.OK && channel.hasHandle())
-                {
-                    bool isPlaying;
-                    result = channel.isPlaying(out isPlaying);
-                    if (result == FMOD.RESULT.OK && isPlaying)
-                    {
-                        playingChannels.Add(channel);
-                    }
-                }
-            }
+            ambienceEventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform, playerCart.GetComponent<Rigidbody>()));
         }
         else
         {
-            Debug.LogError($"FMOD error getting number of playing channels: {result}");
+            Debug.LogWarning("PlayerCart GameObject not found or is null.");
         }
-
-        return playingChannels;
     }
-    */
 
     private void InitializeAmbience(EventReference ambienceEventReference)
     {
         ambienceEventInstance = CreateInstance(ambienceEventReference);
         ambienceEventInstance.start();
+        ambienceEventInstance.release();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
@@ -163,6 +137,21 @@ public class AudioManager : MonoBehaviour
             emitter.EventInstance.setParameterByName(parameterName, parameterValue);
         }
     }
+
+    public static void PlayOneShotWithParameters(EventReference eventReference, Vector3 position, params (string, float)[] parameters)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+
+        foreach (var parameter in parameters)
+        {
+            eventInstance.setParameterByName(parameter.Item1, parameter.Item2);
+        }
+
+        eventInstance.start();
+        eventInstance.release();
+    }
+
 
     private void OnDestroy()
     {

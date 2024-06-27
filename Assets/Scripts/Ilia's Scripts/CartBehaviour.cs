@@ -15,6 +15,8 @@ public class CartBehaviour : MonoBehaviour
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem particleSystem;
 
+    private EngineTemperature EngineTemperature;
+
     bool workonce = false;
     public float leverValue = 0;
 
@@ -33,11 +35,12 @@ public class CartBehaviour : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        EngineTemperature = FindObjectOfType<EngineTemperature>();
     }
 
     private void Update()
     {
-     
+
         if (transform.position.z > -496)
         {
             if (particleSystem != null)
@@ -60,13 +63,14 @@ public class CartBehaviour : MonoBehaviour
         {
             transform.Translate(Vector3.back * 50 * Time.deltaTime);
         }
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.forward * force * leverValue);
+        float overheat = EngineTemperature.GetOverheatState() ? 0f : 1f;
+        rb.AddForce(Vector3.forward * force * leverValue * overheat);
     }
 
     public void OnGameOver()
@@ -84,5 +88,9 @@ public class CartBehaviour : MonoBehaviour
     {
         // do it here
     }
-}
 
+    public Vector3 GetSpeed()
+    {
+        return rb.velocity;
+    }
+}

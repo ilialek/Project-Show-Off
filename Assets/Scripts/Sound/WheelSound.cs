@@ -22,22 +22,25 @@ public class WheelSound : MonoBehaviour
 
     private float previousValue;
     private float previousTime;
-    public float rateOfChange;
-    private float smoothedRateOfChange;
+    private float rateOfChange;
+    public float smoothedRateOfChange;
 
     private XRKnob XRKnob;
+
+    private GameObject Wheel;
 
     void Start()
     {
         backspinInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.Backspin);
-        wheelChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
+        //wheelChargeEmitter = gameObject.AddComponent<StudioEventEmitter>();
 
         wheelChargeEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.WheelRotation, gameObject);
-        wheelChargeEmitter.PlayEvent = EmitterGameEvent.None;
-        wheelChargeEmitter.StopEvent = EmitterGameEvent.None;
+
+        Wheel = GameObject.Find("Part To Rotate");
 
         XRKnob = FindObjectOfType<XRKnob>();
-        wheelChargeEmitter.Play(); // Start playing the emitter but keep it paused initially
+        wheelChargeEmitter.Play();
+        wheelChargeEmitter.EventInstance.release();
         wheelChargeEmitter.EventInstance.setPaused(true);
 
         backspinInstance.start();
@@ -50,9 +53,11 @@ public class WheelSound : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         rotation = XRKnob.GetTheYRotationInDegrees();
+        isUserInteracting = XRKnob.GetUserState();
+
         HandleSoundLogic();
-        WheelVelocity();
     }
 
     void WheelVelocity()
@@ -64,30 +69,43 @@ public class WheelSound : MonoBehaviour
         float deltaValue = currentValue - previousValue;
         float deltaTime = currentTime - previousTime;
 
+        // Wrap-around correction for the rotation values
+        if (deltaValue > 0.5f) deltaValue -= 1.0f;
+        if (deltaValue < -0.5f) deltaValue += 1.0f;
+
         if (deltaTime > 0)
         {
             rateOfChange = deltaValue / deltaTime;
         }
 
-        smoothedRateOfChange = Mathf.Lerp(smoothedRateOfChange, rateOfChange, 0.1f);
-        smoothedRateOfChange = Mathf.Clamp(smoothedRateOfChange, 0f, 1f);
+        if (Mathf.Abs(rateOfChange) > 0.01f) // Apply smoothing only if rateOfChange is significant
+        {
+            smoothedRateOfChange = Mathf.Lerp(smoothedRateOfChange, rateOfChange, 0.1f);
+            smoothedRateOfChange = Mathf.Clamp(smoothedRateOfChange, 0f, 1f);
+        }
+
+        AudioManager.instance.SetEmitterParameter(wheelChargeEmitter, "WheelForce", smoothedRateOfChange);
+
         previousValue = currentValue;
         previousTime = currentTime;
 
-        AudioManager.instance.SetEmitterParameter(wheelChargeEmitter, "WheelForce", smoothedRateOfChange);
+        // Debug log for tracing values
+        //Debug.Log($"WheelVelocity - currentValue: {currentValue}, deltaValue: {deltaValue}, rateOfChange: {rateOfChange}, smoothedRateOfChange: {smoothedRateOfChange}");
     }
 
     private float NormalizeRotation(float rotation)
     {
-        return Mathf.InverseLerp(0f, 360f, rotation);
+        return Mathf.InverseLerp(0f, 1080f, rotation);
     }
 
     private void PlayWheelChargeSound()
     {
         if (!isWheelChargePlaying && wheelChargeEmitter.EventInstance.isValid())
         {
+            WheelVelocity();
             wheelChargeEmitter.EventInstance.setPaused(false);
             isWheelChargePlaying = true;
+            //Debug.Log("Unpause");
         }
     }
 
@@ -97,6 +115,7 @@ public class WheelSound : MonoBehaviour
         {
             backspinInstance.setPaused(false);
             isBackspinPlaying = true;
+            backspinInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, Wheel.GetComponent<Rigidbody>()));
         }
     }
 
@@ -120,19 +139,23 @@ public class WheelSound : MonoBehaviour
 
     private void HandleSoundLogic()
     {
-        isUserInteracting = XRKnob.GetUserState();
         isRotationChanging = Mathf.Abs(rotation - previousRotation) > RotationThreshold;
-        //Debug.Log($"Radical Change! Current: {rotation}, Previous: {previousRotation}, Difference: {Math.Abs(rotation - previousRotation)}");
 
         if (isUserInteracting && rotation > 0.1f && isRotationChanging)
         {
-            PlayWheelChargeSound();
+            if (!isWheelChargePlaying)
+            {
+                PlayWheelChargeSound();
+            }
             StopAndReleaseBackspinSound();
             hasPlayedWheelNull = false;
         }
         else if (rotation > 0.1f && isRotationChanging)
         {
-            PlayBackspinSound();
+            if (!isBackspinPlaying)
+            {
+                PlayBackspinSound();
+            }
             StopAndReleaseWheelChargeSound();
             hasPlayedWheelNull = false;
         }
