@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitializeAmbience(FMODEvents.instance.Ambience1);
-        playerCart = GameObject.Find("CART");
+        playerCart = GameObject.Find("Cart");
     }
 
     private void Update()

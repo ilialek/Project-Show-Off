@@ -30,7 +30,7 @@ public class LeverSound : MonoBehaviour
         previousValue = xrLever.GetLeverValue();
         leverEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.Lever, gameObject);
 
-        Lever = GameObject.Find("PIVOT");
+        Lever = GameObject.Find("Handle");
     }
 
     void FixedUpdate()

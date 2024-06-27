@@ -28,7 +28,7 @@ public class CartSound : MonoBehaviour
         InitializeAudioInstances();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         cartEmitter.EventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform, playerCart.GetComponent<Rigidbody>()));
         UpdateSoundLogic();
@@ -41,7 +41,7 @@ public class CartSound : MonoBehaviour
         CartBehaviour = FindObjectOfType<CartBehaviour>();
         engineHeat = FindObjectOfType<EngineTemperature>();
 
-        playerCart = GameObject.Find("CART");
+        playerCart = GameObject.Find("Cart");
     }
 
     private void InitializeAudioInstances()

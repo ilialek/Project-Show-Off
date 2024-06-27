@@ -130,8 +130,6 @@ namespace UnityEngine.XR.Content.Interaction
 
         float m_BaseKnobRotation = 0.0f;
 
-        public TextMeshPro textMeshPro;
-
         private float cumulativeYRotation = 0f;
         private float previousYRotation = 0f;
 
@@ -305,7 +303,7 @@ namespace UnityEngine.XR.Content.Interaction
                     lightBehaviour.ReceiveTheRotationValue(knobValue);
                 }
             }
-            textMeshPro.text = GetTheYRotationInDegrees().ToString();
+
         }
         
 

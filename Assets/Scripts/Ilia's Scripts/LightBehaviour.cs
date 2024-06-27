@@ -26,8 +26,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
 
     private float knobValue = 0;
 
-    public TextMeshPro textMeshPro;
-
     private bool isAwaitingLight = false;
 
     void Start()
@@ -42,7 +40,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     {
         SetTheRotation();
 
-        textMeshPro.text = "Not";
         DetectObjects();
         if (!lightIsSet)
         {
@@ -133,7 +130,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
             {
                 // Object is within the spotlight's cone
 
-                textMeshPro.text = "Detected";
                // Debug.Log("Detected object: " + hitCollider.name);
 
                 Monster monsterScript = hitCollider.GetComponent<Monster>();
@@ -147,8 +143,6 @@ public class LightBehaviour : MonoBehaviour, IEventListener
                 {
                     monsterScript.FinalHighlight();
                 }
-
-                // Add your custom logic here (e.g., triggering events, applying effects, etc.)
 
                 if (isAwaitingLight)
                 {
