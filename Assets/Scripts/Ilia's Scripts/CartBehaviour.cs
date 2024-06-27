@@ -82,6 +82,7 @@ public class CartBehaviour : MonoBehaviour
     public void OnTheEnd()
     {
         force = 0;
+        GetComponent<Rigidbody>().velocity = Vector3.forward*.2f;
     }
 
     public void PlayBreakAnimation()
