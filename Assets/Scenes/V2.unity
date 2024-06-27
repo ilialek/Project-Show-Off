@@ -501,6 +501,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+--- !u!1 &270476362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270476363}
+  m_Layer: 0
+  m_Name: Screamer Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270476363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270476362}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -2.15, z: 1.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 543450652903461169}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &274572688
 GameObject:
   m_ObjectHideFlags: 0
@@ -15471,6 +15502,7 @@ Transform:
   - {fileID: 1563405567}
   - {fileID: 763022881}
   - {fileID: 1176156601}
+  - {fileID: 270476363}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16307,6 +16339,8 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
+  monster: {fileID: 1309098550}
+  screamerTransform: {fileID: 270476363}
   leverValue: 0
 --- !u!65 &919132148918881167
 BoxCollider:
@@ -16437,6 +16471,8 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
+  monster: {fileID: 0}
+  screamerTransform: {fileID: 0}
   leverValue: 0
 --- !u!65 &919132149542668287
 BoxCollider:

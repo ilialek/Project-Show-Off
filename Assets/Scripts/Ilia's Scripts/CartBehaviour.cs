@@ -15,6 +15,12 @@ public class CartBehaviour : MonoBehaviour
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem particleSystem;
 
+    [SerializeField]
+    private GameObject monster;
+    [SerializeField]
+    private Transform screamerTransform;
+
+
     private EngineTemperature EngineTemperature;
 
     bool workonce = false;
@@ -40,6 +46,17 @@ public class CartBehaviour : MonoBehaviour
 
     private void Update()
     {
+
+        if (transform.position.z > monster.transform.position.z && monster.GetComponent<Monster>().currentState == MonsterState.Idle)
+        {
+            
+
+            monster.transform.parent = this.transform;
+            monster.transform.localPosition = screamerTransform.localPosition;
+            monster.transform.localRotation = screamerTransform.localRotation;
+
+            monster.GetComponent<Animator>().SetBool("ToScream", true);
+        }
 
         if (transform.position.z > -496)
         {
