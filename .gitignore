@@ -46,6 +46,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*\V2\LightingData.asset
 
 # Unity3D generated meta files
 *.pidb.meta
