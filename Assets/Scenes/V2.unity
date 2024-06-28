@@ -1813,7 +1813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270476362}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -2.15, z: 1.9}
+  m_LocalPosition: {x: 0, y: 1.6917644, z: 1.8200134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19106,15 +19106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -140.6895
+      value: -150.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.03
+      value: 13.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -518.06
+      value: -418.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19490,7 +19490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 978993332741938533, guid: 89f473b99930a19409d83308746e6591, type: 3}
       propertyPath: m_Layer
@@ -23866,7 +23866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148918881163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -140.6895, y: 15.308236, z: -493.6}
+  m_LocalPosition: {x: -140.6895, y: 15.308236, z: -519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24712,7 +24712,7 @@ MonoBehaviour:
   cartEndPoint: {x: 2, y: 3, z: 4}
   force: 3
   particleSystem: {fileID: 1507770614}
-  monster: {fileID: 1309098550}
+  monster: {fileID: 843907962}
   screamerTransform: {fileID: 270476363}
   leverValue: 0
 --- !u!65 &919132148918881167

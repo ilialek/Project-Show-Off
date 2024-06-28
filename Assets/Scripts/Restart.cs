@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Content.Interaction;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -21,20 +16,45 @@ public class Restart : MonoBehaviour
     private void Start()
     {
         button = GetComponent<XRPushButton>();
+        if (button == null)
+        {
+            Debug.LogError("XRPushButton component not found on the GameObject.");
+            return;
+        }
+
         button.onValueChange.AddListener(RollCredits);
     }
 
-    private void RestartLevel()
+    public void RestartLevel()
     {
+        AudioManager.Nullify(); // Clean up AudioManager singleton
+        FMODEvents.Nullify();
+        Debug.Log("Restarting level...");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //AudioManager.instance.InitializeAudio();
     }
 
     private void RollCredits(float arg0)
     {
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas is not assigned.");
+            return;
+        }
+
         canvas.gameObject.SetActive(true);
         creditsDisplayed = true;
         StartCoroutine(DelayedRestart());
-        canvas.GetComponent<EndOverlay>().RollCredits();
+
+        var endOverlay = canvas.GetComponent<EndOverlay>();
+        if (endOverlay != null)
+        {
+            endOverlay.RollCredits();
+        }
+        else
+        {
+            Debug.LogError("EndOverlay component not found on the canvas.");
+        }
     }
 
     private IEnumerator DelayedRestart()
@@ -45,13 +65,24 @@ public class Restart : MonoBehaviour
 
     private void Update()
     {
-        if (creditsDisplayed)
+        if (creditsDisplayed && controllers != null && controllers.Length > 0)
         {
-            if (controllers[0].selectActionValue.action.ReadValue<float>() > 0.5f ||
-                controllers[1].selectActionValue.action.ReadValue<float>() > 0.5f)
+            foreach (var controller in controllers)
             {
-                RestartLevel();
+                if (controller != null && controller.selectActionValue.action.ReadValue<float>() > 0.5f)
+                {
+                    RestartLevel();
+                    break;
+                }
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (button != null)
+        {
+            button.onValueChange.RemoveListener(RollCredits);
         }
     }
 }

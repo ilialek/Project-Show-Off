@@ -21,6 +21,8 @@ public class Monster : MonoBehaviour
 
     private Animator animator;
 
+    private CartBehaviour Cart;
+
     public MonsterState currentState;
 
     private AnimationClip scareOffClip;
@@ -48,6 +50,8 @@ public class Monster : MonoBehaviour
            .FirstOrDefault(clip => clip.name == "Crawling");
 
         currentState = MonsterState.Idle;
+
+        Cart = FindObjectOfType<CartBehaviour>();
     }
 
     // Update is called once per frame
@@ -72,8 +76,7 @@ public class Monster : MonoBehaviour
                 break;
 
             case MonsterState.MovingToPosition:
-                // Handle moving to a certain position
-                // Set destination and handle movement
+                OnDeath();
                 break;
 
             case MonsterState.Crawling:
@@ -104,7 +107,11 @@ public class Monster : MonoBehaviour
         animator.SetBool("Highlighted", true);
 
         StartCoroutine(WaitForAnimationClipToEnd(scareOffClip.length, MonsterState.Crawling));
-        
+    }
+
+    void OnDeath()
+    {
+
     }
 
     void OnCrawling()

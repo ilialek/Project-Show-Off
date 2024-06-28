@@ -27,7 +27,6 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
 
-
     public static AudioManager instance { get; private set; }
 
     public EventInstance ambienceEventInstance;
@@ -59,7 +58,13 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitializeAmbience(FMODEvents.instance.Ambience1);
+        InitializeAudio();
+    }
+
+    public void InitializeAudio()
+    {
         playerCart = GameObject.Find("Cart");
+        InitializeAmbience(FMODEvents.instance.Ambience1);
     }
 
     private void Update()
@@ -77,6 +82,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             Debug.LogWarning("PlayerCart GameObject not found or is null.");
+            InitializeAudio();
         }
     }
 
@@ -102,21 +108,63 @@ public class AudioManager : MonoBehaviour
 
     private void CleanUp()
     {
-        foreach (EventInstance eventInstance in eventInstances)
+        Debug.Log("Starting cleanup of event instances and emitters.");
+
+        if (eventInstances == null)
         {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            eventInstance.release();
+            Debug.LogError("eventInstances list is null.");
+            return;
         }
 
+        if (eventEmitters == null)
+        {
+            Debug.LogError("eventEmitters list is null.");
+            return;
+        }
+
+        // Clean up event instances
+        foreach (EventInstance eventInstance in eventInstances)
+        {
+            if (eventInstance.isValid())
+            {
+                Debug.Log("Stopping and releasing event instance.");
+                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                eventInstance.release();
+            }
+            else
+            {
+                Debug.LogWarning("Encountered an invalid event instance.");
+            }
+        }
+
+        // Clean up event emitters
         foreach (StudioEventEmitter emitter in eventEmitters)
         {
-            emitter.Stop();
+            if (emitter != null)
+            {
+                Debug.Log("Stopping emitter.");
+                emitter.Stop();
+            }
+            else
+            {
+                Debug.LogWarning("Encountered a null emitter.");
+            }
         }
+
+        Debug.Log("Cleanup complete.");
     }
 
     public EventInstance CreateInstance(EventReference eventReference)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        if (eventInstance.isValid())
+        {
+            eventInstances.Add(eventInstance);
+        }
+        else
+        {
+            Debug.LogWarning("Failed to create a valid event instance.");
+        }
         return eventInstance;
     }
 
@@ -127,7 +175,14 @@ public class AudioManager : MonoBehaviour
 
     public void SetInstanceParameter(EventInstance eventInstance, string parameterName, float parameterValue)
     {
-        eventInstance.setParameterByName(parameterName, parameterValue);
+        if (eventInstance.isValid())
+        {
+            eventInstance.setParameterByName(parameterName, parameterValue);
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to set a parameter on an invalid event instance.");
+        }
     }
 
     public void SetEmitterParameter(StudioEventEmitter emitter, string parameterName, float parameterValue)
@@ -135,6 +190,10 @@ public class AudioManager : MonoBehaviour
         if (emitter != null)
         {
             emitter.EventInstance.setParameterByName(parameterName, parameterValue);
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to set a parameter on a null emitter.");
         }
     }
 
@@ -152,9 +211,19 @@ public class AudioManager : MonoBehaviour
         eventInstance.release();
     }
 
-
-    private void OnDestroy()
+    public static void Nullify()
     {
-        CleanUp();
+        instance = null;
+    }
+
+        private void OnDestroy()
+    {
+        AudioManager.instance = null;
+        if (instance == this)
+        {
+            instance = null; // Nullify the instance on destruction
+        }
+
+        CleanUp(); // Perform any necessary cleanup
     }
 }
