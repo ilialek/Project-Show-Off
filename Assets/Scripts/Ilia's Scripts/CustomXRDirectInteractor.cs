@@ -76,7 +76,7 @@ public class CustomXRDirectInteractor : MonoBehaviour
         Vector3 ropeDirection = collider.transform.up;
         float deviceVelocityAlongRope = -Vector3.Dot(deviceSpeed, ropeDirection);
         Vector3 forceToAdd = ropeDirection * deviceVelocityAlongRope * pullingForce;
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.Hand, transform.position);
         rigidBodyToPull.AddForce(forceToAdd, ForceMode.Force);
     }
 

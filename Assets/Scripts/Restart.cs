@@ -34,7 +34,7 @@ public class Restart : MonoBehaviour
         //AudioManager.instance.InitializeAudio();
     }
 
-    private void RollCredits(float arg0)
+    public void RollCredits(float arg0)
     {
         if (canvas == null)
         {

@@ -50,9 +50,12 @@ public class CartBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z > monster.transform.position.z && monster.GetComponent<Monster>().currentState == MonsterState.Idle)
+
+        Monster monsterComponent = monster.GetComponent<Monster>();
+        if (transform.position.z > monster.transform.position.z && (monsterComponent.currentState == MonsterState.Idle || monsterComponent.currentState == MonsterState.End))
         {
             Debug.Log("KUIRAVa");
+
             monster.GetComponent<Animator>().SetBool("ToScream", true);
             force = 0;
             isGameOver = true;
@@ -93,6 +96,7 @@ public class CartBehaviour : MonoBehaviour
         if (isGameOver && rb.velocity.magnitude < 0.01f && !isMonsterAttached)
         {
             AttachMonster();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.DeadSound, transform.position);
         }
     }
 
@@ -102,10 +106,10 @@ public class CartBehaviour : MonoBehaviour
         monster.transform.SetParent(this.transform, true); // Keep world position
 
         // Preserve the current y coordinate
-        Vector3 newLocalPosition = screamerTransform.localPosition;
-        newLocalPosition.y = monster.transform.localPosition.y;
+        //Vector3 newLocalPosition = screamerTransform.localPosition;
+        //newLocalPosition.y = monster.transform.localPosition.y;
 
-        monster.transform.localPosition = newLocalPosition;
+        monster.transform.localPosition = screamerTransform.localPosition;
         monster.transform.localRotation = screamerTransform.localRotation;
         isMonsterAttached = true;
         Debug.Log("Monster attached at position: " + monster.transform.localPosition);

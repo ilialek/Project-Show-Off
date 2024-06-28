@@ -20,6 +20,7 @@ public class RocksFalling : MonoBehaviour, IEventListener
                 {
                     rock.GetComponent<Rigidbody>().isKinematic = false;
                     rock.GetComponent<Rigidbody>().AddExplosionForce(2500, explosionPoint.position, 5);
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.Rocks, transform.position);
                 }
             }
         }

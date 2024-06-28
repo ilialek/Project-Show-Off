@@ -57,6 +57,7 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(currentState);
         switch (currentState)
         {
             case MonsterState.Idle:
@@ -88,6 +89,11 @@ public class Monster : MonoBehaviour
             case MonsterState.End:
 
                 OnEnd();
+
+                break;
+
+            case MonsterState.Defeated:
+
 
                 break;
         }
@@ -123,8 +129,7 @@ public class Monster : MonoBehaviour
 
     void OnEnd()
     {
-        transform.position = positionsToBeSet[1].position;
-        transform.rotation = positionsToBeSet[1].rotation;
+
 
         animator.SetBool("Idle", true);
 
@@ -162,6 +167,9 @@ public class Monster : MonoBehaviour
 
             animator.SetBool("Crawling", false);
 
+            transform.position = positionsToBeSet[1].position;
+            transform.rotation = positionsToBeSet[1].rotation;
+
             currentState = MonsterState.End;
 
             // Perform actions when end is reached, such as changing state or triggering an event
@@ -198,16 +206,18 @@ public class Monster : MonoBehaviour
 
     public void FinalHighlight()
     {
+
         StartCoroutine(PlayAnimation(scareOffClip.length));
+        
     }
 
     IEnumerator PlayAnimation(float clipDuration)
     {
+        animator.SetBool("Highlighted", true);
+        currentState = MonsterState.Defeated;
         yield return new WaitForSeconds(clipDuration);
-
-        animator.SetBool("Highlighted", false);
-
         gameObject.SetActive(false);
+
     }
 
 }

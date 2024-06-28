@@ -108,50 +108,16 @@ public class AudioManager : MonoBehaviour
 
     private void CleanUp()
     {
-        Debug.Log("Starting cleanup of event instances and emitters.");
-
-        if (eventInstances == null)
-        {
-            Debug.LogError("eventInstances list is null.");
-            return;
-        }
-
-        if (eventEmitters == null)
-        {
-            Debug.LogError("eventEmitters list is null.");
-            return;
-        }
-
-        // Clean up event instances
         foreach (EventInstance eventInstance in eventInstances)
         {
-            if (eventInstance.isValid())
-            {
-                Debug.Log("Stopping and releasing event instance.");
-                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                eventInstance.release();
-            }
-            else
-            {
-                Debug.LogWarning("Encountered an invalid event instance.");
-            }
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
         }
 
-        // Clean up event emitters
         foreach (StudioEventEmitter emitter in eventEmitters)
         {
-            if (emitter != null)
-            {
-                Debug.Log("Stopping emitter.");
-                emitter.Stop();
-            }
-            else
-            {
-                Debug.LogWarning("Encountered a null emitter.");
-            }
+            emitter.Stop();
         }
-
-        Debug.Log("Cleanup complete.");
     }
 
     public EventInstance CreateInstance(EventReference eventReference)

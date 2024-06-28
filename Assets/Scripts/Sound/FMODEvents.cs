@@ -8,12 +8,14 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Cave Ambience")]
     [field: SerializeField] public EventReference Ambience1 { get; private set; }
     [field: SerializeField] public EventReference Scary { get; private set; }
+    [field: SerializeField] public EventReference Rocks { get; private set; }
 
 
     [field: Header("SFX")]
     [field: SerializeField] public EventReference Test { get; private set; }
     [field: SerializeField] public EventReference Grab { get; private set; }
     [field: SerializeField] public EventReference Hand { get; private set; }
+    [field: SerializeField] public EventReference Cat { get; private set; }
 
     [field: SerializeField] public EventReference Bats { get; private set; }
 
@@ -30,6 +32,7 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Monster")]
     [field: SerializeField] public EventReference MonsterIdle { get; private set; }
     [field: SerializeField] public EventReference MonsterScared { get; private set; }
+    [field: SerializeField] public EventReference DeadSound { get; private set; }
 
     [field: Header("Light related")]
     [field: SerializeField] public EventReference LightOff { get; private set; }

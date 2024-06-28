@@ -5,6 +5,6 @@ public enum MonsterState
     FollowingPath,
     MovingToPosition,
     Crawling,
-
-    End
+    End,
+    Defeated
 }

@@ -19,6 +19,7 @@ public class Cat : MonoBehaviour
     {
         // Code to execute once the object is released
         print("Cat has been released");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.Cat, transform.position);
         snapPoint.SoftSnap(this);
     
     }

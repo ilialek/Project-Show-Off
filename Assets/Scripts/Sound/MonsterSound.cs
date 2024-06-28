@@ -43,12 +43,16 @@ public class MonsterSound : MonoBehaviour
 
             case MonsterState.Crawling:
 
-                Debug.Log("Crawling");
+                //Debug.Log("Crawling");
                 break;
 
             case MonsterState.End:
 
-                Debug.Log("End");
+                //Debug.Log("End");
+                break;
+
+            case MonsterState.Defeated:
+                FinalHighlight();
                 break;
         }
     }
@@ -61,7 +65,7 @@ public class MonsterSound : MonoBehaviour
             FMODUnity.RuntimeManager.AttachInstanceToGameObject(IdleInstance, GetComponent<Transform>(), GetComponent<Rigidbody>());
             IdleInstance.start();
             IdleInstance.release();
-            Debug.Log("Idle");
+            //Debug.Log("Idle");
         }
     }
 
@@ -74,7 +78,20 @@ public class MonsterSound : MonoBehaviour
             FMODUnity.RuntimeManager.AttachInstanceToGameObject(ScaredInstance, GetComponent<Transform>(), GetComponent<Rigidbody>());
             ScaredInstance.start();
             ScaredInstance.release();
-            Debug.Log("Scared");
+            //Debug.Log("Scared");
+        }
+    }
+
+    void FinalHighlight()
+    {
+        if (!ScaredInstance.isValid())
+        {
+            IdleInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            ScaredInstance = AudioManager.instance.CreateInstance(FMODEvents.instance.MonsterScared);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(ScaredInstance, GetComponent<Transform>(), GetComponent<Rigidbody>());
+            ScaredInstance.start();
+            ScaredInstance.release();
+            //Debug.Log("Scared");
         }
     }
 }
