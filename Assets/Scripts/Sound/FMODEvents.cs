@@ -60,14 +60,4 @@ public class FMODEvents : MonoBehaviour
         }
         instance = this;
     }
-
-    private void OnDestroy()
-    {
-        instance = null; // Nullify the instance on destruction
-    }
-
-    public static void Nullify()
-    {
-        instance = null;
-    }
 }

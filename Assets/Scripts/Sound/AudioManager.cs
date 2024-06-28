@@ -3,6 +3,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
 
+    private string sceneName;
+    public bool useDebug;
+
     public static AudioManager instance { get; private set; }
 
     public EventInstance ambienceEventInstance;
@@ -35,9 +39,13 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null && instance != this)
+        sceneName = SceneManager.GetActiveScene().name;
+
+        if (instance != null)
         {
-            Debug.LogError("Found more than one Audio Manager in the scene.");
+            if (useDebug)
+                Debug.LogError("Found more than one Audio Manager in the scene.");
+
             Destroy(gameObject);
             return;
         }
@@ -55,10 +63,29 @@ public class AudioManager : MonoBehaviour
         VOBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
+
     private void Start()
     {
+        CheckIfSceneChange();
         InitializeAmbience(FMODEvents.instance.Ambience1);
         InitializeAudio();
+
+    }
+
+    public void CheckIfSceneChange()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "V2" && eventInstances.Count > 0)
+        {
+            CleanUp();
+            InitializeAudio();
+        }
+
     }
 
     public void InitializeAudio()
@@ -114,10 +141,12 @@ public class AudioManager : MonoBehaviour
             eventInstance.release();
         }
 
-        foreach (StudioEventEmitter emitter in eventEmitters)
-        {
-            emitter.Stop();
-        }
+       eventInstances.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        CleanUp();
     }
 
     public EventInstance CreateInstance(EventReference eventReference)
@@ -180,16 +209,5 @@ public class AudioManager : MonoBehaviour
     public static void Nullify()
     {
         instance = null;
-    }
-
-        private void OnDestroy()
-    {
-        AudioManager.instance = null;
-        if (instance == this)
-        {
-            instance = null; // Nullify the instance on destruction
-        }
-
-        CleanUp(); // Perform any necessary cleanup
     }
 }

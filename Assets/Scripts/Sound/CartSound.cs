@@ -160,9 +160,5 @@ public class CartSound : MonoBehaviour
         }
     }
 
-    void OnDestroy()
-    {
-        cartEmitter.Stop();
-        engineHeatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-    }
+
 }

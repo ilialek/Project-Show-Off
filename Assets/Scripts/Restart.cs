@@ -28,7 +28,7 @@ public class Restart : MonoBehaviour
     public void RestartLevel()
     {
         AudioManager.Nullify(); // Clean up AudioManager singleton
-        FMODEvents.Nullify();
+
         Debug.Log("Restarting level...");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //AudioManager.instance.InitializeAudio();
@@ -71,7 +71,7 @@ public class Restart : MonoBehaviour
             {
                 if (controller != null && controller.selectActionValue.action.ReadValue<float>() > 0.5f)
                 {
-                    RestartLevel();
+                    RollCredits(15f);
                     break;
                 }
             }

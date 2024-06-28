@@ -20,7 +20,8 @@ public class CartBehaviour : MonoBehaviour
     private bool workonce = false;
     public float leverValue = 0;
 
-    private bool isGameOver = false;
+    public bool isGameOver = false;
+    public bool isPlayerWinning = false;
     private bool isMonsterAttached = false;
 
     public Vector3 CartStartPoint => cartStartPoint;
@@ -54,10 +55,11 @@ public class CartBehaviour : MonoBehaviour
         Monster monsterComponent = monster.GetComponent<Monster>();
         if (transform.position.z > monster.transform.position.z && (monsterComponent.currentState == MonsterState.Idle || monsterComponent.currentState == MonsterState.End))
         {
+            force = 0;
             Debug.Log("KUIRAVa");
 
             monster.GetComponent<Animator>().SetBool("ToScream", true);
-            force = 0;
+
             isGameOver = true;
             StartCoroutine(WaitForMonster());
         }
@@ -87,16 +89,20 @@ public class CartBehaviour : MonoBehaviour
             transform.Translate(Vector3.back * 50 * Time.deltaTime);
         }
     }
-
+    private bool hasDeathSoundPlayed = false;
     void FixedUpdate()
     {
         float overheat = EngineTemperature.GetOverheatState() ? 0f : 1f;
         rb.AddForce(Vector3.forward * force * leverValue * overheat);
         //Debug.Log(rb.velocity.magnitude);
-        if (isGameOver && rb.velocity.magnitude < 0.01f && !isMonsterAttached)
+        if (isGameOver && rb.velocity.magnitude < 0.1f && !isMonsterAttached)
         {
             AttachMonster();
+        }
+        if (isGameOver && !hasDeathSoundPlayed)
+        {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.DeadSound, transform.position);
+            hasDeathSoundPlayed = true;
         }
     }
 
@@ -125,6 +131,7 @@ public class CartBehaviour : MonoBehaviour
     {
         force = 0;
         GetComponent<Rigidbody>().velocity = Vector3.forward * 0.2f;
+        isPlayerWinning = true;
     }
 
     public void PlayBreakAnimation()

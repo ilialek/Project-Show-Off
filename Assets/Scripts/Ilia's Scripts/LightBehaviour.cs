@@ -119,7 +119,7 @@ public class LightBehaviour : MonoBehaviour, IEventListener
     void DetectObjects()
     {
         // Get all colliders within the spotlight's range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range * 0.8f, detectableLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, lightComponent.range * 0.6f, detectableLayer);
 
         foreach (Collider hitCollider in hitColliders)
         {

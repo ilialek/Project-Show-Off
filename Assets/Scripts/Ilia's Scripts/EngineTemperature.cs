@@ -33,18 +33,24 @@ public class EngineTemperature : MonoBehaviour
 
     private bool isOverheated = false;
     private bool isCoroutineRunning = false;
+
+    private CartBehaviour Cart;
     void Start()
     {
         transformToRotate.localRotation = Quaternion.Euler(0, minAngle, 0);
+        Cart = FindObjectOfType<CartBehaviour>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(GetTheRotationInDegrees(transformToRotate.localEulerAngles.y));
+        if (!Cart.isGameOver || !Cart.isPlayerWinning)
+        {
+            ManageTheRotation();
+            CalculateOverHeat();
+        }
 
-        ManageTheRotation();
-        CalculateOverHeat();
     }
     private float newYRotation;
 
